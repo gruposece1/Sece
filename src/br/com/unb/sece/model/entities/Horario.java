@@ -11,6 +11,7 @@ public class Horario {
 	@GeneratedValue
 	private Long idHorario;
 	private TimeZone hrInicial;
+	private String teste;
 
 	public Long getIdHorario() {
 		return idHorario;
@@ -26,6 +27,14 @@ public class Horario {
 
 	public void setHrInicial(TimeZone hrInicial) {
 		this.hrInicial = hrInicial;
+	}
+
+	public String getTeste() {
+		return teste;
+	}
+
+	public void setTeste(String teste) {
+		this.teste = teste;
 	}
 
 }

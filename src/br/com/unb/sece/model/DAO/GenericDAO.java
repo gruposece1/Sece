@@ -8,8 +8,9 @@ import java.util.List;
 
 public interface GenericDAO<T, I extends Serializable> {
 
-	public T save(T entity);
+	public void save(T entity);
 	public void remove(T entity);
-	public T getById(Class<T> classe, I pk);
+	public void update(T entity);
+	public T findById(Class<T> classe, I pk);
 	public List<T> listAll(Class<T> classe);
 }
