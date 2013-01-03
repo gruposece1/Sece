@@ -31,6 +31,9 @@ import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JList;
+
+import Control.CLogin;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -43,35 +46,15 @@ public class TelaPadrao extends JFrame
 	private JTextField textField_2;
 	static public ArrayList lista = new ArrayList();
 	
-	public static Collection lista()
-	{
-		
-		
-		Teste t1 = new Teste("Lucas", "Gama");
-		Teste t2 = new Teste("Gustavo", "Gama");
-		
-		lista.add(t1);
-		lista.add(t2);
-		
-		return lista;
-	}
-
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 			
 		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaPadrao frame = new TelaPadrao(lista());
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		
+		
 	}
 
 	/**
@@ -109,46 +92,6 @@ public class TelaPadrao extends JFrame
 		btnExcluir.setBounds(472, 351, 89, 23);
 		contentPane.add(btnExcluir);
 		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(20, 32, 46, 14);
-		contentPane.add(lblNome);
-		
-		textField = new JTextField();
-		textField.setBounds(73, 29, 115, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblEndereco = new JLabel("Endere\u00E7o:");
-		lblEndereco.setToolTipText("");
-		lblEndereco.setBounds(20, 70, 49, 14);
-		contentPane.add(lblEndereco);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(73, 67, 115, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblCep = new JLabel("CEP: ");
-		lblCep.setBounds(20, 106, 46, 14);
-		contentPane.add(lblCep);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(73, 103, 115, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
-		
-		JLabel lblSexo = new JLabel("Sexo: ");
-		lblSexo.setBounds(282, 32, 46, 14);
-		contentPane.add(lblSexo);
-		
-		JRadioButton rdbtnMasculino = new JRadioButton("M");
-		rdbtnMasculino.setBounds(324, 28, 49, 23);
-		contentPane.add(rdbtnMasculino);
-		
-		JRadioButton rdbtnFeminino = new JRadioButton("F");
-		rdbtnFeminino.setBounds(372, 28, 46, 23);
-		contentPane.add(rdbtnFeminino);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 320, 443, 216);
 		contentPane.add(scrollPane);
@@ -161,6 +104,14 @@ public class TelaPadrao extends JFrame
 		list.setSelectionModel(select);
 		scrollPane.setViewportView(list);
 		
+		VCadMatricula vcadMatricula = new VCadMatricula();
+		
+		JPanel panel = new JPanel();
+		panel = vcadMatricula;
+		panel.setBounds(20, 11, 522, 234);
+		
+		contentPane.add(panel);
+		
 		list.addListSelectionListener(new ListSelectionListener()
 		{
 				
@@ -171,12 +122,13 @@ public class TelaPadrao extends JFrame
 					String obj = (String) list.getSelectedValue();
 					Teste teste = (Teste)itemSelecionado(obj);
 					
-					textField.setText(teste.getLocal());
+					//textField.setText(teste.getLocal());
 				}	
 				
 			}
 			
 		});
+		
 		
 		
 		
