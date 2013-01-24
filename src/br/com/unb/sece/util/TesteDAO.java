@@ -1,11 +1,12 @@
 package br.com.unb.sece.util;
 
 import br.com.unb.sece.model.DAO.HorarioDAO;
-import br.com.unb.sece.model.entities.Horario;
+import Model.Horario;;
 
 public class TesteDAO {
 
 	public static void main(String[] args) {
+		/*
 		Horario h = new Horario();
 		h.setTeste("testando aqui");
 		//Cria o DAO
@@ -20,5 +21,6 @@ public class TesteDAO {
 		h2.setTeste("teste");
 		//atualiza no banco.
 		dao.update(h2);
+		*/
 	}
 }

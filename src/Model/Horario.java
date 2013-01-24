@@ -2,20 +2,88 @@ package Model;
 
 import java.util.Calendar;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.TemporalType;
+
+import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import exceptions.AtributoNuloException;
+
+import javax.persistence.Temporal;
+
+import br.com.unb.sece.model.DAO.HorarioDAO;
+import br.com.unb.sece.util.HibernateUtil;
 
 
+@Entity
 public class Horario {
 	
-	private int idHorario;
+	public static final String SEGUNDA = "Segunda-feira";
+	public static final String TERCA = "Terça-feira";
+	public static final String QUARTA = "Quarta-feira";
+	public static final String QUINTA = "Quinta-feira";
+	public static final String SEXTA = "Sexta-feira";
+	public static final String SABADO = "Sábado";
+	public static final String DOMINGO = "Domingo";
+	
+	public static final int SEGUNDA_BANCO = 0;
+	public static final int TERCA_BANCO = 1;
+	public static final int QUARTA_BANCO = 2;
+	public static final int QUINTA_BANCO = 3;
+	public static final int SEXTA_BANCO = 4;
+	public static final int SABADO_BANCO = 5;
+	public static final int DOMINGO_BANCO = 6;
+	
+	
+	@Id
+	@GeneratedValue
+	private Long idHorario;
 	
 	private Calendar hrInicial, hrFinal;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idProfessor", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
+	private Professor professor;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idDisciplina", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
+	private Disciplina disciplina;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idTurma", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
+	private Turma turma;
 
-	public int getIdHorario() {
+	private int diaSemana;
+	
+	public Long getIdHorario() {
 		return idHorario;
 	}
 
-	public void setIdHorario(int idHorario) {
+	public void setIdHorario(Long idHorario) {
 		this.idHorario = idHorario;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}
 
 	public Calendar getHrInicial() {
@@ -33,7 +101,107 @@ public class Horario {
 	public void setHrFinal(Calendar hrFinal) {
 		this.hrFinal = hrFinal;
 	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
 	
+	public void salvar() throws AtributoNuloException{
+		HorarioDAO hr = new HorarioDAO();
+		this.verificar();
+		hr.save(this);
+	}
+	 
+	public void verificar() throws AtributoNuloException{
+		if(this.disciplina == null){
+			throw new AtributoNuloException("Disciplina");
+		}
+		if(this.professor == null){
+			throw new AtributoNuloException("Professor");
+		}
+	}
+	public void salvar(Session session) throws AtributoNuloException{
+		HorarioDAO hr = new HorarioDAO(session);
+		//hr.close();
+		if(this.disciplina != null){
+			System.out.println("O id Disciplina: " + this.disciplina.getId());
+		}
+		this.verificar();
+		hr.save(this,session);
+	}
+	
+	public Horario  horarioAtualTurma(Turma turma) {
+		HorarioDAO hr = new HorarioDAO();
+		return hr.horarioAtualTurma(Horario.class,turma);
+	}
+
+	public int getDiaSemana() {
+		return diaSemana;
+	}
+	
+	
+
+	public void setDiaSemana(int diaSemana) {
+		this.diaSemana = diaSemana;
+	}
+	
+	public String getDiaSemanaString(){
+		
+		switch(this.diaSemana){
+			case Horario.DOMINGO_BANCO:
+				return Horario.DOMINGO;
+			case Horario.QUARTA_BANCO:
+				return Horario.QUARTA;
+			case Horario.SEGUNDA_BANCO:
+				return Horario.SEGUNDA;
+			case Horario.TERCA_BANCO:
+				return Horario.TERCA;
+			case Horario.QUINTA_BANCO:
+				return Horario.QUINTA;
+			case Horario.SEXTA_BANCO:
+				return Horario.SEXTA;
+			case Horario.SABADO_BANCO:
+				return Horario.SABADO;
+		}
+		
+		return " ";
+		
+	}
+	
+	public static String getDiaSemanaString(int diaDaSemana){
+		assert(diaDaSemana >= 0 && diaDaSemana <= 6);
+		switch(diaDaSemana){
+			case Horario.DOMINGO_BANCO:
+				return Horario.DOMINGO;
+			case Horario.QUARTA_BANCO:
+				return Horario.QUARTA;
+			case Horario.SEGUNDA_BANCO:
+				return Horario.SEGUNDA;
+			case Horario.TERCA_BANCO:
+				return Horario.TERCA;
+			case Horario.QUINTA_BANCO:
+				return Horario.QUINTA;
+			case Horario.SEXTA_BANCO:
+				return Horario.SEXTA;
+			case Horario.SABADO_BANCO:
+				return Horario.SABADO;
+		}
+		
+		return " ";
+		
+	}
 	
 	
 	

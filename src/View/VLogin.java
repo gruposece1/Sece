@@ -16,19 +16,19 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Collection;
+import javax.swing.JPasswordField;
 
 public class VLogin extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField txtNome;
-	private JTextField txtSenha;
 	public CLogin login;
-	Collection lista;
+	private JPasswordField txtSenha;
 	
 
-	public VLogin(Collection list) {
+	public VLogin() {
 		
-		lista = list;
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 370, 178);
@@ -50,11 +50,6 @@ public class VLogin extends JFrame implements ActionListener {
 		lblSenha.setBounds(10, 72, 46, 14);
 		contentPane.add(lblSenha);
 		
-		txtSenha = new JTextField();
-		txtSenha.setBounds(66, 69, 145, 20);
-		contentPane.add(txtSenha);
-		txtSenha.setColumns(10);
-		
 		
 		
 		
@@ -63,6 +58,10 @@ public class VLogin extends JFrame implements ActionListener {
 			
 		btnEntrar.setBounds(255, 106, 89, 23);
 		contentPane.add(btnEntrar);
+		
+		txtSenha = new JPasswordField();
+		txtSenha.setBounds(66, 69, 145, 20);
+		contentPane.add(txtSenha);
 		
 		
 		
@@ -85,14 +84,15 @@ public class VLogin extends JFrame implements ActionListener {
 		else
 		{
 			
-			TelaPadrao frame = new TelaPadrao(lista);
-			frame.setVisible(true);
+			try{
+				VPrincipal frame = new VPrincipal();
+				frame.setVisible(true);
+			}catch(Exception ex){
+				JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
+			}
 			this.dispose();
 		}
 		
 		
 	}	
-
-	
-	
 }

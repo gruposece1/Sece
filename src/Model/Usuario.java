@@ -28,7 +28,7 @@ public class Usuario {
 	
 	public boolean verificarLogin()
 	{
-		if(nome.equals("Lucas") && senha.equals("123"))
+		if(nome.equals("Sece") && senha.equals("1"))
 			return true;
 		
 		else

@@ -1,6 +1,22 @@
 package Model;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import br.com.unb.sece.model.DAO.SerieDao;
+import br.com.unb.sece.util.HibernateUtil;
+
+import teste.Colecoes;
+
+@Entity
 public class Serie {
+	
+	@Id
+	@GeneratedValue
+	private Long idSerie;
 	
 	String nome;
 	int qtdeHorarios, qtdeDias;
@@ -38,7 +54,36 @@ public class Serie {
 	public void setQtdeDias(int qtdeDias) {
 		this.qtdeDias = qtdeDias;
 	}
+
+
+
 	
+	
+	public Long getIdSerie() {
+		return idSerie;
+	}
+
+
+
+	public void setIdSerie(Long idSerie) {
+		this.idSerie = idSerie;
+	}
+
+
+
+	public List getAll(){
+
+		//Colecoes colecao = new Colecoes();
+		SerieDao dao = new SerieDao();
+		
+		return dao.listAll(Serie.class);
+
+	}
+	
+	public void salvar(){
+		SerieDao dao = new SerieDao();
+		dao.save(this);
+	}
 	
 	
 	

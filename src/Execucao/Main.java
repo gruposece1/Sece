@@ -1,42 +1,50 @@
 package Execucao;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
 
-import View.Teste;
+
+import org.hibernate.cfg.Configuration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
+
+import br.com.unb.sece.util.Serializacao;
+
+
+import Model.Aluno;
+import Model.Disciplina;
+import Model.Funcionario;
+import Model.Horario;
+import Model.Pessoa;
+import Model.Professor;
+import Model.Responsavel;
+import Model.Serie;
+import Model.Turno;
+import Model.Turma;
 import View.VLogin;
 
 public class Main {
 	
-static public ArrayList lista = new ArrayList();
-	
 
-	public static ArrayList lista()
-	{
-		
-		
-		Teste t1 = new Teste("Lucas", "Gama");
-		Teste t2 = new Teste("Gustavo", "Gama");
-		
-		lista.add(t1);
-		lista.add(t2);
-		
-		return lista;
-	}
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-			
+		
+		
+		boolean exportacao = true;
+		Object ob;
+		
+		//Serializacao.serializar(ob,"verificacao.txt");
+		
+		
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 				
-			
 					
-					VLogin login = new VLogin(lista());	
+					//CDisciplina nome = new CDisciplina();
+					VLogin login = new VLogin();	
 					login.setVisible(true);
 						
 						
@@ -46,6 +54,68 @@ static public ArrayList lista = new ArrayList();
 				}
 			}
 		});
+	}
+	
+	public static void gerarInserts(){
+		
+		Configuration cfg = new Configuration();
+		cfg.addAnnotatedClass(Pessoa.class);
+		cfg.addAnnotatedClass(Professor.class);
+		cfg.addAnnotatedClass(Funcionario.class);
+		cfg.addAnnotatedClass(Responsavel.class);
+		cfg.addAnnotatedClass(Aluno.class);
+		cfg.addAnnotatedClass(Horario.class);
+		cfg.addAnnotatedClass(Disciplina.class);
+		cfg.addAnnotatedClass(Turno.class);
+		cfg.addAnnotatedClass(Serie.class);
+		cfg.addAnnotatedClass(Turma.class);
+		
+		SchemaExport se = new SchemaExport(cfg);
+		se.create(true, true);
+		gerarInserts();
+		
+		Disciplina d = new Disciplina();
+		d.setNome("Matemática");
+		d.salvar();
+		Disciplina d1 = new Disciplina();
+		d1.setNome("Física");
+		d1.salvar();
+		Disciplina d2 = new Disciplina();
+		d2.setNome("História");
+		d2.salvar();
+		Disciplina d3 = new Disciplina();
+		d3.setNome("Geografia");
+		d3.salvar();
+		
+		Turno t = new Turno(7, 12, Turno.MANHA);
+		t.salvar();
+		Turno t1 = new Turno(14, 18, Turno.TARDE);
+		t1.salvar();
+		 
+		Serie s = new Serie("8ª", 6, 5);
+		s.salvar();
+		Serie s1 = new Serie("7ª", 4, 5);
+		s1.salvar();
+		
+		Professor professor1 = new Professor();
+		professor1.setNome("Pedro");
+		professor1.setSexo(Pessoa.MASCULINO);
+		professor1.salvar();
+		
+		Professor professor2 = new Professor();
+		professor2.setNome("João");
+		professor2.setSexo(Pessoa.MASCULINO);
+		professor2.salvar();
+		
+		Professor professor3 = new Professor();
+		professor3.setNome("Alberto");
+		professor3.setSexo(Pessoa.MASCULINO);
+		professor3.salvar();
+		
+		Professor professor4 = new Professor();
+		professor4.setNome("Messias");
+		professor4.setSexo(Pessoa.MASCULINO);
+		professor4.salvar();
 	}
 
 

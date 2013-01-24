@@ -18,17 +18,17 @@ public class Colecoes {
 		
 		Turno t = new Turno(7, 12, Turno.MANHA);
 		Turno t1 = new Turno(14, 18, Turno.TARDE);
-		Turno t2 = new Turno(8, 13, Turno.MANHA);
 		
-		Serie s = new Serie("8", 5, 5);
+		Serie s = new Serie("8", 6, 5);
 		Serie s1 = new Serie("7", 4, 5);
 		
 		turno.add(t);
 		turno.add(t1);
-		turno.add(t2);
 		
 		serie.add(s);
 		serie.add(s1);
+		serie = (ArrayList) s.getAll();
+		turno = (ArrayList) t.getAll();
 	}
 	
 	public ArrayList nomeSerie()
