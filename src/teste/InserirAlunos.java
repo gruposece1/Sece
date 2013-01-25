@@ -1,6 +1,6 @@
 package teste;
 
-import Model.Aluno;
+import br.unb.sece.model.Aluno;
 
 public class InserirAlunos {
 

@@ -3,8 +3,9 @@ package teste;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import Model.Serie;
-import Model.Turno;
+import br.unb.sece.model.Serie;
+import br.unb.sece.model.Turno;
+
 
 public class Colecoes {
 	
