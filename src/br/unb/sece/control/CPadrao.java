@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import br.unb.sece.model.Serie;
 import br.unb.sece.util.ICadastroPadrao;
+import br.unb.sece.util.crudpadrao.ModeloDeTabela;
 import br.unb.sece.view.VDisciplina;
 import br.unb.sece.view.VPadrao;
 
@@ -86,6 +87,11 @@ public class CPadrao implements ICadastroPadrao   {
 		} 
 		
 		
+	}
+	
+	public ModeloDeTabela getDefaultTableModel(){
+		
+		return new ModeloDeTabela(this.classeModel, this.titulos, this.metodos);
 	}
 	
 	public Object[] getTitulos(){

@@ -115,7 +115,8 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new ModeloDeTabela(this.controle.getDados(),this.controle.getTitulos()));
+		//new ModeloDeTabela(this.controle.getDados(),this.controle.getTitulos())
+		table.setModel(this.controle.getDefaultTableModel());
 		table.setCellSelectionEnabled(false);
 
 		
