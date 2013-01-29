@@ -131,17 +131,22 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 	
 	 public void actionPerformed(ActionEvent e) {
 		 if(e.getSource().equals(this.btnCadastrar)){
-			 System.out.println(e.getSource());
 			 if(this.btnCadastrar.getText().equals("Cadastrar")){
 				try{
 					this.passarDados();
+					
 					this.salvar();
-					this.controle.construirTabela();
-					table.setModel(new DefaultTableModel(this.controle.getDados(),this.controle.getTitulos()));
+					
+					table.setModel(this.controle.getDefaultTableModel());
+					
 					JOptionPane.showMessageDialog(null, "Dados Cadastrados", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+				
 				}catch(AtributoNuloException ex){
+					
 					JOptionPane.showMessageDialog(null, "Algum campo esta em branco", "Atenção", JOptionPane.ERROR_MESSAGE);
+				
 				}catch(Exception ex){
+					
 					JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
 				}
 			 }else if(this.btnCadastrar.getText().equals("Alterar")){
@@ -152,21 +157,19 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 			 
 		 }else if(e.getSource().equals(btnAlterar)){
 			 this.popularInterface();
+			 
 			 this.btnCadastrar.setText("Alterar");
-			 System.out.println(e.getID());
+			 
 		 }else if(e.getSource().equals(this.btnExcluir)){
-			System.out.println("Passou aqui");
-			this.controle.excluir(this.retonarObjetoGrade());
-			this.controle.construirTabela();
-			table.setModel(new DefaultTableModel(this.controle.getDados(),this.controle.getTitulos()));
-			JOptionPane.showMessageDialog(null, "Dados Excluidos", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+			
+			this.actionDelete();
 		 }
          
 	 }
 	 
-	public Object retonarObjetoGrade(){
-		Object[][] ob = this.controle.getDados();
-		Object obj = ob[this.table.getSelectedRow()][this.controle.getTitulos().length];
+	public Object retonarObjetoGrade()throws NullPointerException{
+		
+		Object obj = this.controle.getObjetoTabela(this.table.getSelectedRow(),this.controle.getTitulos().length);
 		return obj;
 	}
 	
@@ -175,36 +178,9 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 	public abstract void criarPainel();
 	
 	
-	public String[] criarLista(Collection lista)
-	{
-		
-		Teste t[] = new Teste[lista.size()];
-		String entry[] = new String[lista.size()];
 	
-		for (Iterator iter = lista.iterator(); iter. hasNext(); )
-		{	
-			for (int k=0; k<t.length; k++)
-			{
-				t[k] = (Teste) iter.next();
-				entry[k] = t[k].getNome();
-			}
-		}
-		
-		return entry;
-	}
 	
-	public Object itemSelecionado(Object dado)
-	{
-		for (Iterator iter = lista.iterator(); iter. hasNext(); )
-		{	
-			Object obj = iter.next();
-			
-			if(obj.toString().equals(dado))
-				return obj;
-		}
-		
-		return null;
-	}
+	
 	
 	public abstract void popularInterface();
 	
@@ -234,6 +210,28 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
+	}
+	
+	private void actionDelete(){
+		try{
+			int escolhaUsuario = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o registro?","Confirmação",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+			
+			if(escolhaUsuario == JOptionPane.OK_OPTION){
+				Object objDelete = this.retonarObjetoGrade();
+		
+				this.controle.excluir(objDelete);
+		
+				table.setModel(this.controle.getDefaultTableModel());
+		
+				JOptionPane.showMessageDialog(null, "Dados Excluidos", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+		}catch(NullPointerException ex){
+			
+			JOptionPane.showMessageDialog(null, "Nenhum registro selecionado", "Atenção", JOptionPane.ERROR_MESSAGE);
+			
+			ex.printStackTrace();
+		}
 	}
 	
 	

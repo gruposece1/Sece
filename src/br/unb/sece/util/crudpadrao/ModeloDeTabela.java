@@ -130,5 +130,20 @@ public class ModeloDeTabela extends DefaultTableModel {
 		
 	}
 	
+	public Object getObjetoTabela(int row, int column) throws NullPointerException{
+		
+		return this.dados[row][column];
+	}
+
+	public Object[][] getDados() {
+		return dados;
+	}
+
+	public void setDados(Object[][] dados) {
+		this.dados = dados;
+	}
+	
+	
+	
 	
 }

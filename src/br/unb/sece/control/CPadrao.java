@@ -21,14 +21,15 @@ public class CPadrao implements ICadastroPadrao   {
 	private List listaTabela;
 	protected Object titulos[];
 	protected Object[] metodos;
-	private Object[][] dados;
+	private ModeloDeTabela modeloDeTabela;
  
 	
 	public CPadrao (String classeModel){
 		
 		this.classeModel = classeModel;
 		this.definirTitulosEMetodos();
-		this.construirTabela();
+		//this.construirTabela();
+		
 	}
 	
 	public  void definirTitulosEMetodos(){
@@ -41,66 +42,20 @@ public class CPadrao implements ICadastroPadrao   {
 		this.metodos = metodos;
 	}
 	
-	public void construirTabela() {
-		
-		try {
-			Class classe = Class.forName(this.classeModel);
-			Object o = classe.newInstance();
-			List lista = null;
-			Method usar;
-			for(Method m : classe.getMethods()){
-				if(m.getName().equals("getAll")){
-					usar = m;
-					Object argumento = null;
-					lista = (List)m.invoke(o,null);
-				}
-			} 
-			dados = new Object[lista.size()][this.titulos.length+1];
-			int linha = 0;
-			for (Iterator iter = lista.iterator() ; iter. hasNext(); ){
-				Object objetoAtual = iter.next();
-				for (int i = 0; i<this.metodos.length; i++){
-					
-					String nomeMetodo = (String)this.metodos[i];
-					try {
-						Method m = objetoAtual.getClass().getDeclaredMethod(nomeMetodo, null);
-						this.dados[linha][i] = m.invoke(objetoAtual, null);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						this.dados[linha][i] = "";
-					} 
-					
-					this.dados[linha][i+1] = objetoAtual;
-					
-				}
-				
-				linha++;
-				
-			}
-			
-			
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		
+	public Object getObjetoTabela(int row, int column)throws NullPointerException{
+		return this.modeloDeTabela.getObjetoTabela(row, column);
 	}
 	
 	public ModeloDeTabela getDefaultTableModel(){
-		
-		return new ModeloDeTabela(this.classeModel, this.titulos, this.metodos);
+		this.modeloDeTabela = new ModeloDeTabela(this.classeModel, this.titulos, this.metodos);
+		return this.modeloDeTabela;
 	}
 	
 	public Object[] getTitulos(){
 		return this.titulos;
 	}
 	
-	public Object[][] getDados(){
-		return this.dados;
-	}
+	
 
 	@Override
 	public void salvar() {
