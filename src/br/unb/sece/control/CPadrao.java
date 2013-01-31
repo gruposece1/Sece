@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 
 import javax.swing.JPanel;
 
+import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.Serie;
 import br.unb.sece.util.ICadastroPadrao;
 import br.unb.sece.util.crudpadrao.ModeloDeTabela;
@@ -67,7 +68,7 @@ public class CPadrao implements ICadastroPadrao   {
 	}
 
 	@Override
-	public void excluir(Object obj) {
+	public void excluir(Object obj) throws BancoDeDadosException {
 		// TODO Auto-generated method stub
 		
 	}

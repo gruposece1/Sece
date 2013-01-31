@@ -3,7 +3,9 @@ package br.unb.sece.model.DAO;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.exception.ConstraintViolationException;
 
+import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.entities.Horario;
 import br.unb.sece.util.HibernateUtil;
 
@@ -39,9 +41,13 @@ public abstract class Persistencia implements GenericDAO<Object, Long> {
 	@Override
 	public void save(Object entity) {
 		// TODO Auto-generated method stub
-		this.objSession.beginTransaction();
-		this.objSession.save(entity);
-		this.objSession.getTransaction().commit();
+		try{
+			this.objSession.beginTransaction();
+			this.objSession.save(entity);
+			this.objSession.getTransaction().commit();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 		//this.session.close();
 		System.out.println("Fechou sessão");
 		
@@ -58,16 +64,23 @@ public abstract class Persistencia implements GenericDAO<Object, Long> {
 	/**
 	 * Remove um objeto no banco de dados
 	 * @param entity objeto a ser salvo no banco de dados
+	 * @throws BancoDeDadosException 
 	 */
 	
 	@Override
-	public void remove(Object entity) {
+	public void remove(Object entity) throws BancoDeDadosException {
 		// TODO Auto-generated method stub
-		this.objSession.beginTransaction();
-		this.objSession.delete(entity);
-		this.objSession.getTransaction().commit();
-		this.objSession.close();
-		
+		try{
+			this.objSession.beginTransaction();
+			this.objSession.delete(entity);
+			this.objSession.getTransaction().commit();
+		}catch(ConstraintViolationException ex){
+			System.out.println("O programa passou aqui");
+			this.objSession.getTransaction().rollback();
+			HibernateUtil.closeSession();
+			throw new BancoDeDadosException("Violação de chave estrangeira");
+			//ex.printStackTrace();
+		}
 	}
 	
 	/**

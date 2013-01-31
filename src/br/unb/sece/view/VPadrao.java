@@ -37,6 +37,7 @@ import javax.swing.JList;
 import br.unb.sece.control.CLogin;
 import br.unb.sece.control.CPadrao;
 import br.unb.sece.exceptions.AtributoNuloException;
+import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.util.IPadrao;
 import br.unb.sece.util.crudpadrao.ModeloDeTabela;
 
@@ -132,33 +133,16 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 	 public void actionPerformed(ActionEvent e) {
 		 if(e.getSource().equals(this.btnCadastrar)){
 			 if(this.btnCadastrar.getText().equals("Cadastrar")){
-				try{
-					this.passarDados();
-					
-					this.salvar();
-					
-					table.setModel(this.controle.getDefaultTableModel());
-					
-					JOptionPane.showMessageDialog(null, "Dados Cadastrados", "Atenção", JOptionPane.INFORMATION_MESSAGE);
-				
-				}catch(AtributoNuloException ex){
-					
-					JOptionPane.showMessageDialog(null, "Algum campo esta em branco", "Atenção", JOptionPane.ERROR_MESSAGE);
-				
-				}catch(Exception ex){
-					
-					JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
-				}
+				 
+				this.actionInsert();
+			 
 			 }else if(this.btnCadastrar.getText().equals("Alterar")){
 				//this.popularInterface();
 				this.alterar(); 
 			 }
-		
 			 
 		 }else if(e.getSource().equals(btnAlterar)){
-			 this.popularInterface();
 			 
-			 this.btnCadastrar.setText("Alterar");
 			 
 		 }else if(e.getSource().equals(this.btnExcluir)){
 			
@@ -212,6 +196,47 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 		this.panel = panel;
 	}
 	
+	private void actionAlterInsert(){
+		
+	}
+	
+	/**
+	 * Gerenciar o click no botao alterar
+	 */
+	private void actionAlter(){
+		
+		this.popularInterface();
+		 
+		this.btnCadastrar.setText("Alterar");
+	}
+	
+	/**
+	 * Gerenciar o click no botao cadastrar
+	 */
+	private void actionInsert(){
+		try{
+			this.passarDados();
+			
+			this.salvar();
+			
+			table.setModel(this.controle.getDefaultTableModel());
+			
+			JOptionPane.showMessageDialog(null, "Dados Cadastrados", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+		
+		}catch(AtributoNuloException ex){
+			
+			JOptionPane.showMessageDialog(null, "Algum campo esta em branco", "Atenção", JOptionPane.ERROR_MESSAGE);
+		
+		}catch(Exception ex){
+			
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Gerenciar o click no botao excluir
+	 */
 	private void actionDelete(){
 		try{
 			int escolhaUsuario = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o registro?","Confirmação",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
@@ -225,6 +250,9 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 		
 				JOptionPane.showMessageDialog(null, "Dados Excluidos", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 			}
+		}catch(BancoDeDadosException ex){
+			
+			JOptionPane.showMessageDialog(null, "Ocorrecu o seguinte erro: " + ex.getMessage(), "Atenção", JOptionPane.ERROR_MESSAGE);
 			
 		}catch(NullPointerException ex){
 			

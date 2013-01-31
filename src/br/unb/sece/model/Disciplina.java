@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.DAO.DisciplinaDAO;
 import br.unb.sece.model.entities.Horario;
 import br.unb.sece.util.HibernateUtil;
@@ -71,7 +72,7 @@ public class Disciplina {
 		dao.save(this);
 	}
 	
-	public void excluir(){
+	public void excluir() throws BancoDeDadosException{
 		DisciplinaDAO dao = new DisciplinaDAO();
 		dao.remove(this);
 	}

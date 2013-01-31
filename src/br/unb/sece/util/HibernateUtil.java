@@ -45,6 +45,7 @@ public class HibernateUtil {
 	
 	public static Session getSession(){
 		if(session == null){
+			System.out.println("Hibernate Util criando session");
 			Configuration cfg = new Configuration();
 			cfg.addAnnotatedClass(Pessoa.class);
 			cfg.addAnnotatedClass(Professor.class);
@@ -61,5 +62,10 @@ public class HibernateUtil {
 		}
 		
 		return session;
+	}
+	
+	public static void closeSession(){
+		session.close();
+		session = null;
 	}
 }

@@ -3,6 +3,7 @@ package br.unb.sece.control;
 import javax.swing.JPanel;
 
 import br.unb.sece.exceptions.AtributoNuloException;
+import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.view.VDisciplina;
 import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
@@ -44,11 +45,12 @@ public class CDisciplina extends CPadrao {
 	public void salvar() {
 		// TODO Auto-generated method stub
 		this.disciplina.salvar();
+		this.disciplina = new Disciplina();
 		
 	}
 	
 	@Override
-	public void excluir(Object obj) {
+	public void excluir(Object obj) throws BancoDeDadosException {
 		// TODO Auto-generated method stub
 		Disciplina d = (Disciplina)obj;
 		d.excluir();

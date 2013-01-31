@@ -87,6 +87,7 @@ public class VLogin extends JFrame implements ActionListener {
 			
 			try{
 				VPrincipal frame = new VPrincipal();
+				frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				frame.setVisible(true);
 			}catch(Exception ex){
 				JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
