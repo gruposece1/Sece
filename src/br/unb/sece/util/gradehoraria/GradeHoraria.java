@@ -13,6 +13,12 @@ public class GradeHoraria {
 	
 	private Object[][] gradeDeHorarios;
 	
+	public GradeHoraria(Serie serie, Turno turno){
+		
+		this.gerarGrade(serie, turno);
+		
+	}
+	
 	public void gerarGrade(Serie serie, Turno turno)
 	{
 		
@@ -60,6 +66,21 @@ public class GradeHoraria {
 				
 			}
 		}
+	
+	}
+	
+	public Object[][] getGradeDeHorarios() {
+		return gradeDeHorarios;
+	}
+
+	public void setGradeDeHorarios(Object[][] gradeDeHorarios) {
+		this.gradeDeHorarios = gradeDeHorarios;
+	}
+
+	public Horario getHorario (int linha, int coluna) throws NullPointerException {
+		
+		return (Horario)this.gradeDeHorarios[linha][coluna];
+		
 		
 	}
 }

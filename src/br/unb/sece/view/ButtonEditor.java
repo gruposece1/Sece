@@ -32,6 +32,10 @@ public class ButtonEditor extends DefaultCellEditor {
 	  private CTurma turma;
 	  private VHorario VHorario=null;
 	  
+	  private int diaDaSemana; //armazena o dia da semana do botao
+	  
+	  private int horario; //armazena o horario do botao
+	  
 	  private boolean isPushed;
 
 	  public ButtonEditor(JCheckBox checkBox, JTable table, CTurma turma) {
@@ -65,21 +69,16 @@ public class ButtonEditor extends DefaultCellEditor {
 	
 	public Object getCellEditorValue() {
 	    if (isPushed) {
-	      // 
-	      // 
 
 			Horario horario = (Horario)this.turma.getHorario(table.getSelectedRow(), table.getSelectedColumn());
 			VHorario = new VHorario(horario);					
 		
 				
-				VHorario.setVisible(true);				
-				
-				VHorario.setAlwaysOnTop(true);  
-				VHorario.toFront(); 
-				
-			//button.setEnabled(false);
+			VHorario.setVisible(true);				
 			
-	      // System.out.println(label + ": Ouch!");
+			VHorario.setAlwaysOnTop(true);  
+			VHorario.toFront(); 
+		
 	    }
 	    isPushed = false;
 	    return new String(label);
@@ -94,7 +93,23 @@ public class ButtonEditor extends DefaultCellEditor {
 	    super.fireEditingStopped();
 	  }
 
+	public int getDiaDaSemana() {
+		return diaDaSemana;
+	}
 
+	public void setDiaDaSemana(int diaDaSemana) {
+		this.diaDaSemana = diaDaSemana;
+	}
+
+	public int getHorario() {
+		return horario;
+	}
+
+	public void setHorario(int horario) {
+		this.horario = horario;
+	}
+
+	  
 
 	  
 }

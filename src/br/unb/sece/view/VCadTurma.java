@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -44,7 +45,7 @@ public class VCadTurma extends JFrame implements ActionListener {
 	private JComboBox CBTurno;
 	private JComboBox CBSerie;
 	private JButton btnCadastrar;
-	
+	private JButton btnGerarGrade;
 
 	/**
 	 * Launch the application.
@@ -114,57 +115,13 @@ public class VCadTurma extends JFrame implements ActionListener {
 		
 		
 		
-		JButton btnGerarGrade = new JButton("Gerar Grade");
+		btnGerarGrade = new JButton("Gerar Grade");
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
 		
-		btnGerarGrade.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0)
-			{
-				
-				Turno turno;
-				Serie serie;
-				
-				String nome[] = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
-				//String nome[] = {"Segunda", "Terça", "Quarta", "Quinta"};
-				
-				String itemTurno = CBTurno.getSelectedItem().toString(); 
-				String itemSerie = CBSerie.getSelectedItem().toString(); 
-				
-				
-				turno = CTurma.guardaTurno(itemTurno);
-				serie = CTurma.guardaSerie(itemSerie);
-				
-				if(turno != null)
-					System.out.println("ok\n");
-				if(serie != null)
-					System.out.println("ok2\n");
-				
-				
-				
-				table.setModel(CTurma.gerarLabel(serie));
-				CTurma.gerarGrade(serie, turno);
-				//table.setModel(new DefaultTableModel((c.gerarBotao((Serie)colecao.serie.get(0), (Turno)colecao.turno.get(0))),nome));
-				
-				for(int i =0; i<serie.getQtdeDias(); i++)
-				{
-					
-					table.getColumn(nome[i]).setCellRenderer(new ButtonRenderer());
-					    table.getColumn(nome[i]).setCellEditor(
-					        new ButtonEditor(new JCheckBox(), table, CTurma));
-					    
-				}		
-					
-				
-				
-				
-				//c.gerarGrade((Serie)colecao.serie.get(0), (Turno)colecao.turno.get(0));
-				
-			}
-		});
+		btnGerarGrade.addActionListener(this);
 		
 		
 		btnGerarGrade.setBounds(10, 139, 108, 23);
@@ -222,6 +179,50 @@ public class VCadTurma extends JFrame implements ActionListener {
 			
 		}
 		
+		if(e.getSource().equals(this.btnGerarGrade)){
+			Turno turno;
+			Serie serie;
+			
+			
+			String itemTurno = CBTurno.getSelectedItem().toString(); 
+			String itemSerie = CBSerie.getSelectedItem().toString(); 
+			
+			
+			turno = CTurma.guardaTurno(itemTurno);
+			serie = CTurma.guardaSerie(itemSerie);
+			
+			if(turno != null)
+				System.out.println("ok\n");
+			if(serie != null)
+				System.out.println("ok2\n");
+			
+			
+			
+			table.setModel(CTurma.gerarLabel(serie));
+			CTurma.gerarGrade(serie, turno);
+			this.criarBotoes(serie.getQtdeDias(),serie.getQtdeHorarios());
+		}
+		
+	}
+	
+	private void criarBotoes(int qtdeDias, int qtdeHorarios){
+		String diasDaSemana[] = Serie.getDiasDaSemana();
+		
+		for(int i = 0; i < qtdeDias;i++){
+			for(int j = 0; j < qtdeHorarios; j++){
+				TableModel df = table.getModel();
+			}
+		}
+		
+		/*
+		for(int i =0; i< qtdeDias; i++){
+			table.getColumn(diasDaSemana[i]).setCellRenderer(new ButtonRenderer());
+			ButtonEditor btn = new ButtonEditor(new JCheckBox(), table, CTurma);
+			btn.setDiaDaSemana(i);
+			table.getColumn(diasDaSemana[i]).setCellEditor(btn);
+			    
+		}
+		*/
 	}
 	
 	

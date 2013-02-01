@@ -84,7 +84,14 @@ public class Serie {
 		SerieDao dao = new SerieDao();
 		dao.save(this);
 	}
-	
+	/*
+	 * Padronizar em todo o codigo os nomes dos dias da semana 
+	 */
+	public static String[] getDiasDaSemana(){
+		
+		 String diasDaSemana[] = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
+		 return diasDaSemana;
+	}
 	
 	
 	

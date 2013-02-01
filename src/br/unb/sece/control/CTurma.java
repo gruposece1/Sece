@@ -22,6 +22,7 @@ import br.unb.sece.model.Serie;
 import br.unb.sece.model.Turma;
 import br.unb.sece.model.Turno;
 import br.unb.sece.util.HibernateUtil;
+import br.unb.sece.util.gradehoraria.GradeHoraria;
 import br.unb.sece.view.VCadTurma;
 
 import teste.Colecoes;
@@ -30,8 +31,9 @@ import teste.Colecoes;
 public class CTurma {
 	
 	private Colecoes colecao;
-	private Object[][] grade2;
+	//private Object[][] grade2;
 	private Turma turma;
+	private GradeHoraria gradeHoraria;
 	
 	public CTurma(){
 		colecao = new Colecoes();
@@ -40,64 +42,7 @@ public class CTurma {
 	public void gerarGrade(Serie serie, Turno turno)
 	{
 		
-		assert(serie != null);
-		assert(turno != null);
-		
-		float duracao = (turno.getFim() - turno.getInicio())/serie.getQtdeHorarios();
-		grade2 = new Object[serie.getQtdeHorarios()][serie.getQtdeDias()]; 
-		Date data = new Date();
-	
-		
-		float inicio = turno.getInicio();
-		int init = (int)inicio;		
-		
-		data.setHours(init);
-		
-		inicio = (inicio - (int)inicio)*100;
-		
-		data.setMinutes((int) inicio);
-		
-		GregorianCalendar gc = new GregorianCalendar();  
-		gc.setTime(data);  
-		  
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");  		
-		
-		//System.out.println("Numero de série: " + serie.getQtdeDias());
-		
-		for(int i =0; i<serie.getQtdeDias(); i++)
-		{
-			GregorianCalendar aux = (GregorianCalendar) gc.clone();
-					
-			for(int k=0; k<serie.getQtdeHorarios(); k++)
-			{
-				Horario horario = new Horario();
-				
-				horario.setHrInicial((Calendar) aux.clone());
-				aux.add(Calendar.MINUTE, (int) (duracao*60));
-				horario.setHrFinal((Calendar) aux.clone());
-				horario.setDiaSemana(i);
-				
-				grade2[k][i] = horario;
-				
-				
-				
-			}
-		}
-		
-		
-		/*for(int i =0; i<serie.getQtdeDias(); i++)
-		{
-					
-			for(int k=0; k<serie.getQtdeHorarios(); k++)
-			{
-
-				Horario h = (Horario) grade[i][k];
-				
-				System.out.println(sdf.format(h.getHrInicial().getTime()));  
-				System.out.println(sdf.format(h.getHrFinal().getTime())); 
-				System.out.println();
-			}
-		}*/
+		this.gradeHoraria = new GradeHoraria (serie, turno);
 		
 	}
 	
@@ -113,7 +58,7 @@ public class CTurma {
 		if(this.turma.getNomeTurma().equals("")){
 			throw new AtributoNuloException("Nome Turma");
 		}
-		if(this.grade2 == null){
+		if(this.gradeHoraria.getGradeDeHorarios() == null){
 			throw new GradeNulaException("Grade");
 		}
 		try{
@@ -127,7 +72,7 @@ public class CTurma {
 			{
 				for(int k=0; k<serie.getQtdeDias(); k++)
 				{
-					Horario h = (Horario)this.grade2[i][k];
+					Horario h = this.gradeHoraria.getHorario(i, k);
 					h.setTurma(this.turma);
 					h.salvar(session);
 				}
@@ -152,7 +97,7 @@ public class CTurma {
 		{
 			for(int k=0; k<this.turma.getSerie().getQtdeDias(); k++)
 			{
-				Horario h = (Horario)this.grade2[i][k];
+				Horario h = this.gradeHoraria.getHorario(i, k);
 				try {
 					h.verificar();
 				} catch (AtributoNuloException e) {
@@ -182,30 +127,25 @@ public class CTurma {
 			label[i] = String.valueOf(i);
 		}
 		
-		/*for(i =0; i<serie.getQtdeDias(); i++)
-		{
-					
-			for(int k=0; k<serie.getQtdeHorarios(); k++)
-			{
-				grade[i][k] = new JButton(label[k]);
-			}
-		}	*/
-		
 		
 		return gradeBotao;
 	}
 	
+	/*
+	 * Gerar um DefaultTableModel com os dias da semana da serie
+	 * @param serie usado para definir o tamanho do TableModel
+	 */
 	public DefaultTableModel gerarLabel(Serie serie)
 	{
 		Object[][] grade = new Object[serie.getQtdeHorarios()][serie.getQtdeDias()]; 
-		String nome[] = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
+		String diasDaSemana[] = serie.getDiasDaSemana();
 		
 		DefaultTableModel dm = new DefaultTableModel();
 		
-		String[] nome2 = new String[serie.getQtdeDias()];
+		String[] diasDaSemanaDaSerie = new String[serie.getQtdeDias()];
 		
 		for(int j = 0; j < serie.getQtdeDias(); j++){
-			nome2[j] = nome[j];
+			diasDaSemanaDaSerie[j] = diasDaSemana[j];
 		}
 		
 		for(int i =0; i<serie.getQtdeHorarios(); i++)
@@ -217,7 +157,7 @@ public class CTurma {
 			}
 		}
 		
-		dm.setDataVector(grade, nome2);
+		dm.setDataVector(grade, diasDaSemanaDaSerie);
 		
 		return dm;
 	}
@@ -245,7 +185,7 @@ public class CTurma {
 	
 	public Object getHorario(int linha, int coluna)
 	{
-		return this.grade2[linha][coluna];
+		return this.gradeHoraria.getHorario(linha, coluna);
 	}
 	
 	public  Serie guardaSerie(String itemSerie){
