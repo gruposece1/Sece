@@ -80,8 +80,8 @@ public class VPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try{
-					//VAluno aluno = new VAluno();
-					//aluno.setVisible(true);
+					VAluno aluno = new VAluno();
+					aluno.setVisible(true);
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
 				}

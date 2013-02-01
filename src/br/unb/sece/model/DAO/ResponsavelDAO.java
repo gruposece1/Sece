@@ -33,7 +33,7 @@ public class ResponsavelDAO extends Persistencia {
 	@Override
 	public List<Object> listAll(Class classe) {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Object>) this.objSession.createQuery("select o from " + classe.getSimpleName() + " o").list();
 	}
 	
 }

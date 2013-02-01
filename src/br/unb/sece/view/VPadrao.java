@@ -223,6 +223,8 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 			e.printStackTrace();
 		}
 		
+		this.btnCadastrar.setText("Cadastrar");
+		
 	}
 	
 	/**

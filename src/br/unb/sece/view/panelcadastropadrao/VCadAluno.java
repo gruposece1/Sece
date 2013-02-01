@@ -3,6 +3,7 @@ package br.unb.sece.view.panelcadastropadrao;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -17,6 +18,9 @@ import javax.swing.JScrollPane;
 
 import br.unb.sece.control.CDisciplina;
 import br.unb.sece.view.VLogin;
+import br.unb.sece.model.Responsavel;
+import br.unb.sece.util.ColunaPesquisa;
+import br.unb.sece.util.Pesquisa;
 
 
 public class VCadAluno extends JPanel implements ActionListener{
@@ -40,7 +44,7 @@ public class VCadAluno extends JPanel implements ActionListener{
 	 */
 
 	
-	public VCadAluno() {
+	public VCadAluno()  {
 		setLayout(null);
 		super.setBounds(20,11,522,234);
 		
@@ -108,8 +112,9 @@ public class VCadAluno extends JPanel implements ActionListener{
         add(textField);
         textField.setColumns(10);
         
-        btnNewButton = new JButton("New button");
+        btnNewButton = new JButton();
         btnNewButton.setBounds(210, 112, 24, 23);
+        btnNewButton.addActionListener(this);
         add(btnNewButton);
         
         
@@ -164,8 +169,16 @@ public class VCadAluno extends JPanel implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource().equals(this.btnNewButton)){
+			Responsavel responsavel = new Responsavel();
+			ArrayList camposTabela = new ArrayList();
+			ColunaPesquisa coluna = new ColunaPesquisa("Nome", "getNome");
+			camposTabela.add(coluna);
+			Pesquisa janelaDePesquisa = new Pesquisa(responsavel.getAll(), camposTabela);
+			janelaDePesquisa.setVisible(true);
+		}
 		
 	}
 }
