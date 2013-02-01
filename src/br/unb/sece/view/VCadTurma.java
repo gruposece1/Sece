@@ -21,6 +21,7 @@ import javax.swing.DefaultCellEditor;
 import teste.Colecoes;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -208,11 +209,27 @@ public class VCadTurma extends JFrame implements ActionListener {
 	private void criarBotoes(int qtdeDias, int qtdeHorarios){
 		String diasDaSemana[] = Serie.getDiasDaSemana();
 		
+		DefaultTableModel  df = (DefaultTableModel) table.getModel();
+		Object[][] botoes = new Object[qtdeHorarios][qtdeDias];
+		
 		for(int i = 0; i < qtdeDias;i++){
+			table.getColumn(diasDaSemana[i]).setCellRenderer(new ButtonRenderer());
+			ArrayList botoes2 = new ArrayList();
 			for(int j = 0; j < qtdeHorarios; j++){
-				TableModel df = table.getModel();
+				
+				ButtonEditor btn = new ButtonEditor(new JCheckBox(), table, CTurma);
+				btn.setDiaDaSemana(i);
+				btn.setHorario(j);
+				botoes[i][j] = btn;
+				botoes2.add(btn);
+				
+				
 			}
+			//table.getColumn(diasDaSemana[i]).setCellEditor((Object)botoes2);
 		}
+		
+		df.setDataVector(botoes,this.CTurma.getTitulosGrade(qtdeDias));
+		table.setModel(df);
 		
 		/*
 		for(int i =0; i< qtdeDias; i++){

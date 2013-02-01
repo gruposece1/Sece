@@ -138,15 +138,11 @@ public class CTurma {
 	public DefaultTableModel gerarLabel(Serie serie)
 	{
 		Object[][] grade = new Object[serie.getQtdeHorarios()][serie.getQtdeDias()]; 
-		String diasDaSemana[] = serie.getDiasDaSemana();
 		
 		DefaultTableModel dm = new DefaultTableModel();
 		
-		String[] diasDaSemanaDaSerie = new String[serie.getQtdeDias()];
+		String[] diasDaSemanaDaSerie = this.getTitulosGrade(serie.getQtdeDias());
 		
-		for(int j = 0; j < serie.getQtdeDias(); j++){
-			diasDaSemanaDaSerie[j] = diasDaSemana[j];
-		}
 		
 		for(int i =0; i<serie.getQtdeHorarios(); i++)
 		{
@@ -160,6 +156,17 @@ public class CTurma {
 		dm.setDataVector(grade, diasDaSemanaDaSerie);
 		
 		return dm;
+	}
+	
+	public String[] getTitulosGrade(int qteDias){
+		String diasDaSemana[] = Serie.getDiasDaSemana();
+		String[] diasDaSemanaDaSerie = new String[qteDias];
+		
+		for(int j = 0; j < qteDias; j++){
+			diasDaSemanaDaSerie[j] = diasDaSemana[j];
+		}
+		
+		return diasDaSemanaDaSerie;
 	}
 	
 	public String gerarNumero(int num)
