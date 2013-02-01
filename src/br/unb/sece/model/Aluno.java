@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.DAO.AlunoDAO;
 import br.unb.sece.util.HibernateUtil;
 
@@ -71,7 +72,10 @@ public class Aluno extends Pessoa{
 	
 	}
 
-	
+	public void excluir() throws BancoDeDadosException{
+		AlunoDAO dao = new AlunoDAO();
+		dao.remove(this);
+	}
 
 	
 
