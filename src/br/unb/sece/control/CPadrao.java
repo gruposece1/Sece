@@ -19,11 +19,16 @@ import br.unb.sece.view.VPadrao;
 public class CPadrao implements ICadastroPadrao   {
 	
 	private String classeModel;
+	
 	private List listaTabela;
+	
 	protected Object titulos[];
+	
 	protected Object[] metodos;
+	
 	private ModeloDeTabela modeloDeTabela;
- 
+	
+	protected Object objAlterar;
 	
 	public CPadrao (String classeModel){
 		
@@ -77,9 +82,14 @@ public class CPadrao implements ICadastroPadrao   {
 	public void alterar() {
 		// TODO Auto-generated method stub
 		
+		
 	}
 	
 	public void receberDados(Object obj) throws Exception{
+		
+	}
+	
+	public void receberDados(Object obj,int operacao) throws Exception{
 		
 	}
 	
@@ -102,6 +112,15 @@ public class CPadrao implements ICadastroPadrao   {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void receberObjetoAlterar(Object objeto){
+		this.objAlterar = objeto;
+	}
+	
+	
+	public static final int OPERACAO_INSERIR = 1;
+	
+	public static final int OPERACAO_ALTERAR = 2;
 
 	
 

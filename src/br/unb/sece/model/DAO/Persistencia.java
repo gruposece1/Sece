@@ -75,11 +75,16 @@ public abstract class Persistencia implements GenericDAO<Object, Long> {
 			this.objSession.delete(entity);
 			this.objSession.getTransaction().commit();
 		}catch(ConstraintViolationException ex){
-			System.out.println("O programa passou aqui");
+			ex.printStackTrace();
 			this.objSession.getTransaction().rollback();
 			HibernateUtil.closeSession();
 			throw new BancoDeDadosException("Violação de chave estrangeira");
 			//ex.printStackTrace();
+		}catch(Exception ex){
+			ex.printStackTrace();
+			this.objSession.getTransaction().rollback();
+			HibernateUtil.closeSession();
+			throw new BancoDeDadosException("Erro referente ao banco de dados");
 		}
 	}
 	
@@ -91,15 +96,21 @@ public abstract class Persistencia implements GenericDAO<Object, Long> {
 	@Override
 	public void update(Object entity) {
 		// TODO Auto-generated method stub
-		this.objSession.beginTransaction();
-		this.objSession.update(entity);
-		this.objSession.getTransaction().commit();
-		this.objSession.close();
+		try{
+			this.objSession.beginTransaction();
+			this.objSession.update(entity);
+			this.objSession.getTransaction().commit();
+		}catch(Exception ex){
+			HibernateUtil.closeSession();
+			this.objSession.getTransaction().rollback();
+			HibernateUtil.closeSession();
+			//throw new BancoDeDadosException("Erro referente ao banco de dados");
+			ex.printStackTrace();
+		}
+		
 	}
 	
-	public void close(){
-		this.objSession.close();
-	}
+	
 	
 	/**
 	 * Recupera um objeto pela chave primaria no banco

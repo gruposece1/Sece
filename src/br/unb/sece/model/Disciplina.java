@@ -76,6 +76,11 @@ public class Disciplina {
 		DisciplinaDAO dao = new DisciplinaDAO();
 		dao.remove(this);
 	}
+	
+	public void alterar(){
+		DisciplinaDAO dao = new DisciplinaDAO();
+		dao.update(this);
+	}
 
 	
 }

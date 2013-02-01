@@ -130,6 +130,10 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 	
 	}
 	
+	/**
+	 * Gerencia os eventos de click do mouse
+	 */
+	
 	 public void actionPerformed(ActionEvent e) {
 		 if(e.getSource().equals(this.btnCadastrar)){
 			 if(this.btnCadastrar.getText().equals("Cadastrar")){
@@ -137,12 +141,13 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 				this.actionInsert();
 			 
 			 }else if(this.btnCadastrar.getText().equals("Alterar")){
-				//this.popularInterface();
-				this.alterar(); 
+				
+				 this.actionAlterInsert();
 			 }
 			 
 		 }else if(e.getSource().equals(btnAlterar)){
 			 
+			 this.actionAlter();
 			 
 		 }else if(e.getSource().equals(this.btnExcluir)){
 			
@@ -175,8 +180,7 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 
 
 
-	@Override
-	public abstract void excluir();
+	
 
 
 
@@ -196,7 +200,28 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 		this.panel = panel;
 	}
 	
+	/**
+	 * Gerenciar o click no botao cadastrar com o texto Alterar
+	 */
 	private void actionAlterInsert(){
+		try {
+			int escolhaUsuario = JOptionPane.showConfirmDialog(null, "Deseja realmente alterar o registro?","Confirmação",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+			
+			if(escolhaUsuario == JOptionPane.OK_OPTION){
+				this.controle.receberDados(this, CPadrao.OPERACAO_ALTERAR);
+				
+				this.controle.alterar();
+				
+				table.setModel(this.controle.getDefaultTableModel());
+				
+				JOptionPane.showMessageDialog(null, "Dados Alterados", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+			}else{
+				this.btnCadastrar.setText("Cadastrar");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -215,7 +240,7 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 	 */
 	private void actionInsert(){
 		try{
-			this.passarDados();
+			this.controle.receberDados(this,CPadrao.OPERACAO_INSERIR);
 			
 			this.salvar();
 			
@@ -242,6 +267,7 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 			int escolhaUsuario = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o registro?","Confirmação",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
 			
 			if(escolhaUsuario == JOptionPane.OK_OPTION){
+				
 				Object objDelete = this.retonarObjetoGrade();
 		
 				this.controle.excluir(objDelete);

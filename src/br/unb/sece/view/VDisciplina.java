@@ -37,18 +37,13 @@ public class VDisciplina extends VPadrao {
 
 
 
-	@Override
-	public void excluir() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 
 	@Override
 	public void alterar() {
 		// TODO Auto-generated method stub
-		
 	}
 
 
@@ -68,7 +63,24 @@ public class VDisciplina extends VPadrao {
 		Disciplina d = (Disciplina)this.retonarObjetoGrade();
 		VCadDisciplina vc = (VCadDisciplina)this.panel;
 		vc.getTextField().setText(d.getNome());
+		//falta fazer
+		try {
+			this.controle.receberObjetoAlterar(d);
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+	}
+
+
+
+	@Override
+	public void excluir() {
+		// TODO Auto-generated method stub
 		
 	}
 

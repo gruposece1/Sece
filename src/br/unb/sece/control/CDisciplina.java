@@ -11,7 +11,7 @@ import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
 
 
 public class CDisciplina extends CPadrao {
-	
+
 	private Disciplina disciplina;
 
 	public CDisciplina() {
@@ -24,13 +24,13 @@ public class CDisciplina extends CPadrao {
 	public void definirTitulosEMetodos() {
 		// TODO Auto-generated method stub
 		Object[] titulos = {"Nome"};
-		
+
 		this.titulos = titulos;
-		
+
 		Object [] metodos = {"getNome"};
-		
+
 		this.metodos = metodos;
-		
+
 	}
 
 	public Disciplina getDisciplina() {
@@ -42,37 +42,64 @@ public class CDisciplina extends CPadrao {
 	}
 	
 	@Override
+	public void alterar(){
+		Disciplina d = (Disciplina)this.objAlterar;
+		d.alterar();
+	}
+
+	@Override
 	public void salvar() {
 		// TODO Auto-generated method stub
 		this.disciplina.salvar();
 		this.disciplina = new Disciplina();
-		
+
 	}
-	
+
 	@Override
 	public void excluir(Object obj) throws BancoDeDadosException {
 		// TODO Auto-generated method stub
 		Disciplina d = (Disciplina)obj;
 		d.excluir();
-		
+
 	}
-	
+
 	@Override
 	public void verificarDados() throws Exception{
-		
+
 		if(this.disciplina.getNome().equals("")){
-			System.out.println("Teste");
 			throw new AtributoNuloException();
 		}
 	}
-	
+
 	public void receberDados(Object obj) throws Exception{
 		VCadDisciplina panel = (VCadDisciplina)this.getPanelPadrao(obj);
 		disciplina.setNome(panel.getTextField().getText());
 		this.verificarDados();
 		panel.getTextField().setText("");
-		
-		
+
+
+	}
+
+	public void receberDados(Object obj,int operacao) throws Exception{
+		VCadDisciplina panel = (VCadDisciplina)this.getPanelPadrao(obj);
+		switch(operacao){
+		case CPadrao.OPERACAO_INSERIR:
+			disciplina.setNome(panel.getTextField().getText());
+			this.verificarDados();
+			panel.getTextField().setText("");
+			break;
+
+		case CPadrao.OPERACAO_ALTERAR:
+			Disciplina d = (Disciplina)this.objAlterar;
+			d.setNome(panel.getTextField().getText());
+			//this.verificarDados();
+			panel.getTextField().setText("");
+			
+			break;
+		}
+
+
+
 	}
 
 }
