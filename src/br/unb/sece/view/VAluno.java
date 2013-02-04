@@ -50,7 +50,7 @@ public class VAluno extends VPadrao {
 	@Override
 	public void passarDados() throws Exception {
 		
-		
+		this.controle.receberDados(this);
 	}
 
 }
