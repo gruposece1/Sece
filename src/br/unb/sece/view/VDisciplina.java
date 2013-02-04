@@ -29,15 +29,6 @@ public class VDisciplina extends VPadrao {
 	}
 
 
-
-	
-
-
-
-	
-
-
-
 	@Override
 	public void alterar() {
 		// TODO Auto-generated method stub
@@ -70,6 +61,8 @@ public class VDisciplina extends VPadrao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		
 	}
 
