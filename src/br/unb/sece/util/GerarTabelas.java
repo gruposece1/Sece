@@ -89,6 +89,7 @@ public class GerarTabelas {
 		responsavel.setTelefone("113242");
 		responsavel.setEmail("cahvsdahvd");
 		responsavel.setCEP("kfhdsfsa");
+		responsavel.setCPF("12345");
 		responsavel.salvar();	
 	}
 }

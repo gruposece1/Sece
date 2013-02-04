@@ -12,12 +12,13 @@ import br.unb.sece.model.DAO.ResponsavelDAO;
 public class Responsavel extends Pessoa
 {
 	
-	private String telefone, endereco, CEP, email;
+	private String telefone, endereco, CEP, email, CPF;
 	
 	public Responsavel()
 	{
 		
 	}
+	
 
 	public String getTelefone() {
 		return telefone;
@@ -51,6 +52,18 @@ public class Responsavel extends Pessoa
 		this.email = email;
 	}
 	
+	
+	
+	public String getCPF() {
+		return CPF;
+	}
+
+
+	public void setCPF(String cPF) {
+		CPF = cPF;
+	}
+
+
 	public List getAll(){
 		ResponsavelDAO dao = new ResponsavelDAO();
 		List<Responsavel> lista = new ArrayList(dao.listAll(Responsavel.class));

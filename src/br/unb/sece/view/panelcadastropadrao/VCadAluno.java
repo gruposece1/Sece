@@ -3,6 +3,8 @@ package br.unb.sece.view.panelcadastropadrao;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -16,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
+import br.unb.sece.control.CAluno;
 import br.unb.sece.control.CDisciplina;
 import br.unb.sece.view.VLogin;
 import br.unb.sece.model.Responsavel;
@@ -23,7 +26,7 @@ import br.unb.sece.util.ColunaPesquisa;
 import br.unb.sece.util.Pesquisa;
 
 
-public class VCadAluno extends JPanel implements ActionListener{
+public class VCadAluno extends JPanel implements ActionListener, WindowListener{
 	
 	private JTextField txtNome;
 	private ButtonGroup grpSexo;
@@ -34,8 +37,12 @@ public class VCadAluno extends JPanel implements ActionListener{
 	private JTextField txtMatricula;
 	private JTextField txtNascimento;
 	private JTextField txtMae;
-	private JTextField textField;
-	private JButton btnNewButton;
+	private JTextField txtPai;
+	private JButton btnPesquisarMae;
+	private JButton btnPesquisarPai;
+	private Pesquisa janelaDePesquisa;
+	private int tipoResponsavel;
+	private ArrayList<Responsavel> responsavel;
 
 	/**
 	 * Create the panel.
@@ -47,6 +54,8 @@ public class VCadAluno extends JPanel implements ActionListener{
 	public VCadAluno()  {
 		setLayout(null);
 		super.setBounds(20,11,522,234);
+		
+		responsavel = new ArrayList<Responsavel>();
 		
 		lblNome = new JLabel("Nome: ");
 		lblNome.setBounds(10, 37, 46, 14);
@@ -62,10 +71,10 @@ public class VCadAluno extends JPanel implements ActionListener{
 		add(lblSexo);
 		
 		rdbtMasculino = new JRadioButton("M");
-		rdbtMasculino.setBounds(371, 33, 38, 23);
+		rdbtMasculino.setBounds(379, 33, 38, 23);
 		
 		rdbtFeminino = new JRadioButton("F");
-		rdbtFeminino.setBounds(419, 33, 38, 23);
+		rdbtFeminino.setBounds(442, 33, 38, 23);
 		
 		grpSexo = new ButtonGroup();   
         grpSexo.add(rdbtMasculino);
@@ -88,7 +97,7 @@ public class VCadAluno extends JPanel implements ActionListener{
         add(lblNascimento);
         
         txtNascimento = new JTextField();
-        txtNascimento.setBounds(371, 77, 86, 20);
+        txtNascimento.setBounds(371, 77, 109, 20);
         add(txtNascimento);
         txtNascimento.setColumns(10);
         
@@ -106,16 +115,23 @@ public class VCadAluno extends JPanel implements ActionListener{
         lblPai.setBounds(290, 116, 46, 14);
         add(lblPai);
         
-        textField = new JTextField();
-        textField.setEditable(false);
-        textField.setBounds(371, 113, 86, 20);
-        add(textField);
-        textField.setColumns(10);
+        txtPai = new JTextField();
+        txtPai.setEditable(false);
+        txtPai.setBounds(371, 113, 109, 20);
+        add(txtPai);
+        txtPai.setColumns(10);
         
-        btnNewButton = new JButton();
-        btnNewButton.setBounds(210, 112, 24, 23);
-        btnNewButton.addActionListener(this);
-        add(btnNewButton);
+        btnPesquisarMae = new JButton();
+        btnPesquisarMae.setBounds(210, 112, 24, 23);
+        btnPesquisarMae.addActionListener(this);
+        add(btnPesquisarMae);
+        
+        btnPesquisarPai = new JButton("");
+        btnPesquisarPai.addActionListener(this);
+        btnPesquisarPai.setBounds(488, 112, 24, 23);
+        add(btnPesquisarPai);
+        
+        
         
         
         
@@ -123,6 +139,30 @@ public class VCadAluno extends JPanel implements ActionListener{
 	}
 	
 	
+
+	public JRadioButton getRdbtMasculino() {
+		return rdbtMasculino;
+	}
+
+
+
+	public void setRdbtMasculino(JRadioButton rdbtMasculino) {
+		this.rdbtMasculino = rdbtMasculino;
+	}
+
+
+
+	public JRadioButton getRdbtFeminino() {
+		return rdbtFeminino;
+	}
+
+
+
+	public void setRdbtFeminino(JRadioButton rdbtFeminino) {
+		this.rdbtFeminino = rdbtFeminino;
+	}
+
+
 
 	public JTextField getTxtNome() {
 		return txtNome;
@@ -168,17 +208,131 @@ public class VCadAluno extends JPanel implements ActionListener{
 					
 	}
 
+
+	public ArrayList<Responsavel> getResponsavel() {
+		return responsavel;
+	}
+
+
+
+	public void setResponsavel(ArrayList<Responsavel> responsavel) {
+		this.responsavel = responsavel;
+	}
+
+	
+
+	public JTextField getTxtMae() {
+		return txtMae;
+	}
+
+
+
+	public void setTxtMae(JTextField txtMae) {
+		this.txtMae = txtMae;
+	}
+
+
+
+	public JTextField getTxtPai() {
+		return txtPai;
+	}
+
+
+
+	public void setTxtPai(JTextField txtPai) {
+		this.txtPai = txtPai;
+	}
+
+
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource().equals(this.btnNewButton)){
-			Responsavel responsavel = new Responsavel();
-			ArrayList camposTabela = new ArrayList();
-			ColunaPesquisa coluna = new ColunaPesquisa("Nome", "getNome");
-			camposTabela.add(coluna);
-			Pesquisa janelaDePesquisa = new Pesquisa(responsavel.getAll(), camposTabela);
+
+		CAluno CAluno = new CAluno();
+	
+		if(e.getSource().equals(btnPesquisarMae))
+			tipoResponsavel = 0;
+		else
+			tipoResponsavel = 1;
+		
+		System.out.println(tipoResponsavel);
+		
+		if(e.getSource().equals(this.btnPesquisarMae) || e.getSource().equals(this.btnPesquisarPai)){
+			ArrayList camposTabela = CAluno.gerarNomeColunas();
+			janelaDePesquisa = new Pesquisa(CAluno.getResponsaveis(), camposTabela);
 			janelaDePesquisa.setVisible(true);
+			janelaDePesquisa.addWindowListener(this);			
+				
+			
+			
 		}
+		
+	}
+
+
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		
+		if(e.getSource().equals(this.janelaDePesquisa))
+		{
+			Object obj = janelaDePesquisa.getRetorno();
+			
+			if(tipoResponsavel==0)
+				this.txtMae.setText(((Responsavel) obj).getNome());
+			else
+				this.txtPai.setText(((Responsavel) obj).getNome());
+			
+			responsavel.add((Responsavel) obj);
+		}
+		
+	}
+
+
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

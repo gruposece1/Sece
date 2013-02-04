@@ -29,6 +29,7 @@ public class Pesquisa extends javax.swing.JFrame {
     public final char K_ORDEM_CRESCENTE = 'C';
     //constante para identificar a ordem decrescente
     public final char K_ORDEM_DECRESCENTE = 'D';
+    
     //objeto que sera retornado apos a busca
     private Object retorno;
     //atributo para armazenar a ordem;
@@ -437,6 +438,7 @@ public class Pesquisa extends javax.swing.JFrame {
             Object obj = ob[ob.length-1];
             this.retorno = obj;
             this.setVisible(false);
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(rootPane, "É necessário selecionar uma linha!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }

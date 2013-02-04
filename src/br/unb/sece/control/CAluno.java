@@ -1,9 +1,15 @@
 package br.unb.sece.control;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Disciplina;
+import br.unb.sece.model.Responsavel;
+import br.unb.sece.util.ColunaPesquisa;
 import br.unb.sece.view.panelcadastropadrao.VCadAluno;
 import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
 
@@ -18,7 +24,7 @@ public class CAluno extends CPadrao{
 	}
 	
 	public void definirTitulosEMetodos() {
-		// TODO Auto-generated method stub
+		
 		Object[] titulos = {"Nome", "Sexo", "Matricula", "Ano de Nascimento"};
 		
 		this.titulos = titulos;
@@ -42,6 +48,7 @@ public class CAluno extends CPadrao{
 		
 	}
 	
+	
 	public void excluir(Object obj) throws BancoDeDadosException {
 		Aluno a = (Aluno)obj;
 		a.excluir();
@@ -63,23 +70,69 @@ public class CAluno extends CPadrao{
 		
 		if(this.aluno.getResponsaveis().isEmpty())
 			throw new AtributoNuloException();
+		
+		if(this.aluno.getResponsaveis().size()==0 || this.aluno.getResponsaveis().size()>2)
+			throw new AtributoInvalidoException("Numero de responsaveis invalido");
 	}
 	
-	public void receberDados(Object obj) throws Exception{
+	public void receberDados(Object obj, int operacao) throws Exception{
 		
 		VCadAluno panel = (VCadAluno)this.getPanelPadrao(obj);
-		
-		aluno.setNome(panel.getTxtNome().getText());
-		aluno.setDtNascimento(panel.getTxtNascimento().getText());
-		aluno.setMatricula(panel.getTxtMatricula().getText());
-		aluno.setSexo(panel.getSexo());
-		
-		this.verificarDados();
-		
-		panel.getTxtNome().setText("");
-		panel.getTxtMatricula().setText("");
-		panel.getTxtNascimento().setText("");
+		switch(operacao){
+		case CPadrao.OPERACAO_INSERIR:
+			
+			ArrayList<Responsavel> responsaveis = new ArrayList<Responsavel>();
+			
+			aluno.setNome(panel.getTxtNome().getText());
+			aluno.setMatricula(panel.getTxtMatricula().getText());
+			aluno.setDtNascimento(panel.getTxtNascimento().getText());
+			aluno.setSexo(panel.getSexo());
+			aluno.setResponsaveis(panel.getResponsavel());
+			
+			this.verificarDados();
+			
+			panel.getTxtMatricula().setText("");
+			panel.getTxtNome().setText("");
+			panel.getTxtNascimento().setText("");
+			panel.getTxtMae().setText("");
+			panel.getTxtPai().setText("");
+			
+			break;
+
+		case CPadrao.OPERACAO_ALTERAR:
+			Aluno aluno = (Aluno)this.objAlterar;
+			aluno.setNome(panel.getTxtNome().getText());
+			aluno.setMatricula(panel.getTxtMatricula().getText());
+			aluno.setDtNascimento(panel.getTxtNascimento().getText());
+			aluno.setSexo(panel.getSexo());
+			aluno.setResponsaveis(panel.getResponsavel());
+			//this.verificarDados();
+			
+			panel.getTxtMatricula().setText("");
+			panel.getTxtNome().setText("");
+			panel.getTxtNascimento().setText("");
+			panel.getTxtMae().setText("");
+			panel.getTxtPai().setText("");
+			
+			break;
+		}
 		
 	}
 
+	
+	public ArrayList<ColunaPesquisa> gerarNomeColunas() {
+		ArrayList<ColunaPesquisa> camposTabela = new ArrayList<ColunaPesquisa>();
+		ColunaPesquisa nome = new ColunaPesquisa("Nome", "getNome");
+		ColunaPesquisa cpf = new ColunaPesquisa("CPF", "getCPF");
+		camposTabela.add(nome);
+		camposTabela.add(cpf);
+		return camposTabela;
+	}
+
+
+
+	public List getResponsaveis() {
+		Responsavel responsavel = new Responsavel();
+		return responsavel.getAll();
+	}
 }
