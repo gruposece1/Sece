@@ -7,13 +7,13 @@ import org.hibernate.Session;
 import br.unb.sece.model.Horario;
 
 
-public class SerieDao extends Persistencia {
+public class SerieDAO extends Persistencia {
 
-	public SerieDao(){
+	public SerieDAO(){
 		super();
 	}
 
-	public SerieDao(Session session) {
+	public SerieDAO(Session session) {
 		super(session);
 		// TODO Auto-generated constructor stub
 	}

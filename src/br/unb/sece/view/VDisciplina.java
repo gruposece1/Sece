@@ -11,15 +11,12 @@ public class VDisciplina extends VPadrao {
 		super();
 		this.setTitle("Cadastro de Disciplina");
 	}
-
 	
 
 	@Override
 	public void criarControle() {
 		// TODO Auto-generated method stub
 		this.controle= new CDisciplina();
-		
-		
 		
 	}
 

@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.text.JTextComponent;
 
 public class VCadSerie extends JPanel {
 	
@@ -50,6 +51,51 @@ public class VCadSerie extends JPanel {
 		CBDias.setBounds(83, 98, 54, 20);
 		add(CBDias);
 
+	}
+
+	public JTextField getTxtNome() {
+		return txtNome;
+	}
+
+	public void setTxtNome(JTextField txtNome) {
+		this.txtNome = txtNome;
+	}
+
+	public JComboBox getCBHorario() {
+		return CBHorario;
+	}
+
+	public void setCBHorario(JComboBox cBHorario) {
+		CBHorario = cBHorario;
+	}
+
+	public JComboBox getCBDias() {
+		return CBDias;
+	}
+
+	public void setCBDias(JComboBox cBDias) {
+		CBDias = cBDias;
+	}
+
+	public String[] getNdias() {
+		return Ndias;
+	}
+
+	public void setNdias(String[] ndias) {
+		Ndias = ndias;
+	}
+
+	public String[] getNhorario() {
+		return Nhorario;
+	}
+
+	public void setNhorario(String[] nhorario) {
+		Nhorario = nhorario;
+	}
+
+	public JTextComponent getTextField() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

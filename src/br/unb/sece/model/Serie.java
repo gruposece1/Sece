@@ -1,12 +1,15 @@
 package br.unb.sece.model;
 
+
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import br.unb.sece.model.DAO.SerieDao;
+import br.unb.sece.exceptions.BancoDeDadosException;
+import br.unb.sece.model.DAO.DisciplinaDAO;
+import br.unb.sece.model.DAO.SerieDAO;
 import br.unb.sece.util.HibernateUtil;
 
 import teste.Colecoes;
@@ -60,8 +63,6 @@ public class Serie {
 		return idSerie;
 	}
 
-
-
 	public void setIdSerie(Long idSerie) {
 		this.idSerie = idSerie;
 	}
@@ -71,16 +72,12 @@ public class Serie {
 	public List getAll(){
 
 		//Colecoes colecao = new Colecoes();
-		SerieDao dao = new SerieDao();
+		SerieDAO dao = new SerieDAO();
 		
 		return dao.listAll(Serie.class);
 
 	}
 	
-	public void salvar(){
-		SerieDao dao = new SerieDao();
-		dao.save(this);
-	}
 	/*
 	 * Padronizar em todo o codigo os nomes dos dias da semana 
 	 */
@@ -88,6 +85,21 @@ public class Serie {
 		
 		 String diasDaSemana[] = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta","Sábado"};
 		 return diasDaSemana;
+	}
+	
+	public void salvar(){
+		SerieDAO dao = new SerieDAO();
+		dao.save(this);
+	}
+
+	public void excluir() throws BancoDeDadosException{
+		SerieDAO dao = new SerieDAO();
+		dao.remove(this);
+	}
+	
+	public void alterar(){
+		SerieDAO dao = new SerieDAO();
+		dao.update(this);
 	}
 	
 }
