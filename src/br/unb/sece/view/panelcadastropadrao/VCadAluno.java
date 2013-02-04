@@ -140,6 +140,30 @@ public class VCadAluno extends JPanel implements ActionListener, WindowListener{
 	
 	
 
+	public JRadioButton getRdbtMasculino() {
+		return rdbtMasculino;
+	}
+
+
+
+	public void setRdbtMasculino(JRadioButton rdbtMasculino) {
+		this.rdbtMasculino = rdbtMasculino;
+	}
+
+
+
+	public JRadioButton getRdbtFeminino() {
+		return rdbtFeminino;
+	}
+
+
+
+	public void setRdbtFeminino(JRadioButton rdbtFeminino) {
+		this.rdbtFeminino = rdbtFeminino;
+	}
+
+
+
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
