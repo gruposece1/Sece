@@ -101,7 +101,7 @@ public class ModeloDeTabela extends DefaultTableModel {
 					
 					String nomeMetodo = (String)this.metodos[colunaTabela];
 					try {
-						Method method = objetoAtual.getClass().getDeclaredMethod(nomeMetodo, null);
+						Method method = this.getMetodo(objetoAtual.getClass().getMethods(), nomeMetodo);
 						this.dados[linhaTabela][colunaTabela] = method.invoke(objetoAtual, null);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -142,6 +142,16 @@ public class ModeloDeTabela extends DefaultTableModel {
 	public void setDados(Object[][] dados) {
 		this.dados = dados;
 	}
+	
+	private Method getMetodo(Method[] todosMetodosDaClasse,String metodoBusca){
+   	 Method metodoARetornar = null;
+   	 for(Method metodo : todosMetodosDaClasse){
+   		 if(metodo.getName().equals(metodoBusca)){
+   			 metodoARetornar = metodo;
+   		 }
+   	 }
+   	 return metodoARetornar;
+    }
 	
 	
 	
