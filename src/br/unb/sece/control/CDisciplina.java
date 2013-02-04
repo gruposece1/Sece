@@ -9,7 +9,6 @@ import br.unb.sece.view.VDisciplina;
 import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
 
 
-
 public class CDisciplina extends CPadrao {
 
 	private Disciplina disciplina;

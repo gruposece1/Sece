@@ -37,9 +37,6 @@ public class VPrincipal extends JFrame {
 	 */
 	public static void main(String[] args) {
 		
-		
-		
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -115,7 +112,7 @@ public class VPrincipal extends JFrame {
 		mntmSerie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try{
-					VDisciplina tp = new VDisciplina();
+					VSerie tp = new VSerie();
 				
 					tp.setVisible(true);
 				}catch(Exception ex){

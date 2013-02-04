@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import br.unb.sece.model.DAO.SerieDao;
+import br.unb.sece.model.DAO.SerieDAO;
 import br.unb.sece.model.DAO.TurnoDAO;
 import br.unb.sece.util.HibernateUtil;
 
