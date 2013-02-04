@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
+import br.unb.sece.model.DAO.AlunoDAO;
 import br.unb.sece.model.DAO.ResponsavelDAO;
 
 @Entity
@@ -55,5 +56,10 @@ public class Responsavel extends Pessoa
 		List<Responsavel> lista = new ArrayList(dao.listAll(Responsavel.class));
 		return lista;
 	}
+	
+	public void salvar(){
+		ResponsavelDAO dao = new ResponsavelDAO();
+		dao.save(this);
+	}	
 	
 }

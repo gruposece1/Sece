@@ -81,5 +81,14 @@ public class GerarTabelas {
 		professor4.setNome("Messias");
 		professor4.setSexo(Pessoa.MASCULINO);
 		professor4.salvar();
+		
+		Responsavel responsavel = new Responsavel();
+		responsavel.setNome("Gustavo");
+		responsavel.setEndereco("jkabas");
+		responsavel.setSexo("Masculino");
+		responsavel.setTelefone("113242");
+		responsavel.setEmail("cahvsdahvd");
+		responsavel.setCEP("kfhdsfsa");
+		responsavel.salvar();	
 	}
 }
