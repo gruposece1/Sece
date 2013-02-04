@@ -11,6 +11,7 @@ public class CSerie extends CPadrao {
 	
 	public CSerie() {
 		super("br.unb.sece.model.Serie");
+		this.obSerie = new Serie();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -66,10 +67,10 @@ public class CSerie extends CPadrao {
 				obSerie.setQtdeHorarios(Integer.parseInt(String.valueOf(panel.getCBHorario().getSelectedItem())));
 				obSerie.setQtdeDias(Integer.parseInt(String.valueOf(panel.getCBDias().getSelectedItem())));
 				this.verificarDados();
-			    panel.getTextField().setText("");
+			   // panel.getTextField().setText("");
 			    
 			    //Tem que limpar o JComboBox depois
-			    panel.getTextField().setText("");
+			   // panel.getTextField().setText("");
 				break;
 	
 			case CPadrao.OPERACAO_ALTERAR:

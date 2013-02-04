@@ -29,8 +29,5 @@ public class VSerie extends VPadrao{
 		
 	}
 
-	
-	
-	
 
 }
