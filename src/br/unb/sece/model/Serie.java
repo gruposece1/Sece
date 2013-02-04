@@ -55,9 +55,6 @@ public class Serie {
 		this.qtdeDias = qtdeDias;
 	}
 
-
-
-	
 	
 	public Long getIdSerie() {
 		return idSerie;
@@ -89,14 +86,8 @@ public class Serie {
 	 */
 	public static String[] getDiasDaSemana(){
 		
-		 String diasDaSemana[] = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
+		 String diasDaSemana[] = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta","Sábado"};
 		 return diasDaSemana;
 	}
 	
-	
-	
-	
-	
-	
-
 }

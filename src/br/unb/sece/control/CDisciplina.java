@@ -13,6 +13,7 @@ import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
 public class CDisciplina extends CPadrao {
 
 	private Disciplina disciplina;
+	
 
 	public CDisciplina() {
 		super("br.unb.sece.model.Disciplina");
