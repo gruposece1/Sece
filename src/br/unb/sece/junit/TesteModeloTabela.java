@@ -14,7 +14,6 @@ public class TesteModeloTabela {
 		int row = 9;
 		int column = 10;
 		boolean resultado = mdt.isCellEditable(row, column);
-		System.out.println("O resultado:" + String.valueOf(resultado));
 		assertFalse("Permissao edicao",resultado);
 		//fail("Not yet implemented");
 	}
@@ -39,14 +38,44 @@ public class TesteModeloTabela {
 		//fail("Not yet implemented");
 	}
 	
+	
 	@Test
 	public void testGetObjetoTabelaDadosNulo(){
 		int row = 3;
 		int column = 1;
+		mdt = new ModeloDeTabela();
+		try{
+			Object retorno = mdt.getObjetoTabela(row, column);
+			fail("Deveria retorna uma excecao");
+		}catch(NullPointerException ex){
+			
+		}
 		
-		Object retorno = mdt.getObjetoTabela(row, column);
 		
-		assertNotNull(retorno);
 	}
+	
+	@Test
+	public void testGetObjetoTabelaDadosNotNull(){
+		int row = 2;
+		int column = 1;
+		
+		String classeModel = "br.unb.sece.model.Serie";
+		
+		String titulos[] = {"Nome","Qtde Horários","Qtde Dias"};
+		
+		String metodos[] = {"getNome","getQtdeHorarios","getQteDias"};
+		
+		mdt = new ModeloDeTabela(classeModel, titulos, metodos);
+		try{
+			Object retorno = mdt.getObjetoTabela(row,metodos.length );
+			assertNotNull(retorno);
+		}catch(NullPointerException ex){
+			ex.printStackTrace();
+			fail("Nao deveria retornar excecao");
+		}
+		
+		
+	}
+	
 
 }

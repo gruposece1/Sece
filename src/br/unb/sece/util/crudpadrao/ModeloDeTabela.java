@@ -23,32 +23,6 @@ public class ModeloDeTabela extends DefaultTableModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ModeloDeTabela(int arg0, int arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
-	}
-
-	public ModeloDeTabela(Object[] arg0, int arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
-	}
-
-	public ModeloDeTabela(Object[][] arg0, Object[] arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
-	}
-
-	public ModeloDeTabela(Vector arg0, int arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
-	}
-
-	public ModeloDeTabela(Vector arg0, Vector arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
-	}
-	
-	
 
 	public ModeloDeTabela(String classeModel, Object[] titulos, Object[] metodos) {
 		super();
@@ -82,7 +56,6 @@ public class ModeloDeTabela extends DefaultTableModel {
 			Method usar;
 			for(Method m : classe.getMethods()){
 				if(m.getName().equals("getAll")){
-					usar = m;
 					lista = (List)m.invoke(objDaClasseModel,null);
 				}
 			} 
@@ -97,7 +70,8 @@ public class ModeloDeTabela extends DefaultTableModel {
 			int linhaTabela = 0;
 			for (Iterator iter = lista.iterator() ; iter. hasNext(); ){
 				Object objetoAtual = iter.next();
-				for (int colunaTabela = 0; colunaTabela < this.metodos.length; colunaTabela++){
+				int colunaTabela = 0;
+				for (colunaTabela = 0; colunaTabela < this.metodos.length; colunaTabela++){
 					
 					String nomeMetodo = (String)this.metodos[colunaTabela];
 					try {
@@ -108,9 +82,9 @@ public class ModeloDeTabela extends DefaultTableModel {
 						this.dados[linhaTabela][colunaTabela] = "";
 					} 
 					
-					this.dados[linhaTabela][colunaTabela+1] = objetoAtual;
 					
 				}
+				this.dados[linhaTabela][colunaTabela] = objetoAtual;
 				
 				linhaTabela++;
 				
