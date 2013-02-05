@@ -27,7 +27,7 @@ public class SerieDAO extends Persistencia {
 	@Override
 	public List<Object> listAll(Class classe) {
 		// TODO Auto-generated method stub
-		List<Object> lista = (List<Object>) this.objSession.createQuery("select o from " + classe.getSimpleName() + " o").list();
+		List lista = (List) this.objSession.createQuery("select o from " + classe.getSimpleName() + " o").list();
 		//this.session.close();
 		return lista;
 		
