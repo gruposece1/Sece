@@ -51,4 +51,60 @@ public class VCadTurno extends JPanel
 
 	}
 
+	public JTextField getTxtInicio() {
+		return txtInicio;
+	}
+
+	public void setTxtInicio(JTextField txtInicio) {
+		this.txtInicio = txtInicio;
+	}
+
+	public JTextField getTxtFim() {
+		return txtFim;
+	}
+
+	public void setTxtFim(JTextField txtFim) {
+		this.txtFim = txtFim;
+	}
+
+	public JLabel getLblIncio() {
+		return lblIncio;
+	}
+
+	public void setLblIncio(JLabel lblIncio) {
+		this.lblIncio = lblIncio;
+	}
+
+	public JLabel getLblFim() {
+		return lblFim;
+	}
+
+	public void setLblFim(JLabel lblFim) {
+		this.lblFim = lblFim;
+	}
+
+	public JLabel getLblTipo() {
+		return lblTipo;
+	}
+
+	public void setLblTipo(JLabel lblTipo) {
+		this.lblTipo = lblTipo;
+	}
+
+	public JComboBox getCBTipo() {
+		return CBTipo;
+	}
+
+	public void setCBTipo(JComboBox cBTipo) {
+		CBTipo = cBTipo;
+	}
+
+	public String[] getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String[] tipo) {
+		this.tipo = tipo;
+	}
+
 }

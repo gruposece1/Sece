@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.DAO.SerieDAO;
 import br.unb.sece.model.DAO.TurnoDAO;
 import br.unb.sece.util.HibernateUtil;
@@ -75,6 +76,16 @@ public class Turno {
 	public void salvar(){
 		TurnoDAO dao = new TurnoDAO();
 		dao.save(this);
+	}
+	
+	public void excluir() throws BancoDeDadosException{
+		TurnoDAO dao = new TurnoDAO();
+		dao.remove(this);
+	}
+	
+	public void alterar(){
+		TurnoDAO dao = new TurnoDAO();
+		dao.update(this);
 	}
 	
 }
