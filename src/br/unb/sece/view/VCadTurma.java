@@ -1,6 +1,7 @@
 package br.unb.sece.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -204,42 +205,54 @@ public class VCadTurma extends JFrame implements ActionListener {
 			this.criarBotoes(serie.getQtdeDias(),serie.getQtdeHorarios());
 		}
 		
+		if(e.getSource() instanceof JButtonGradeHorario){
+			JButtonGradeHorario btn = (JButtonGradeHorario)e.getSource();
+			//System.out.println("A coluna: "+btn.getDiaDaSemana()+" horarios: "+btn.getHorario());
+			btn.setText("Professor: Gustavo Coelho\n Disciplina: Português");
+			btn.setBackground(new Color(1));
+		}
+		//System.out.println(e.getSource());
+		
+		
+		
 	}
 	
 	private void criarBotoes(int qtdeDias, int qtdeHorarios){
+		
 		String diasDaSemana[] = Serie.getDiasDaSemana();
+		/*
+		ButtonEditor btn = new ButtonEditor(new JCheckBox(), table, CTurma);
+		table.setCellEditor(btn);
 		
 		DefaultTableModel  df = (DefaultTableModel) table.getModel();
 		Object[][] botoes = new Object[qtdeHorarios][qtdeDias];
 		
 		for(int i = 0; i < qtdeDias;i++){
-			table.getColumn(diasDaSemana[i]).setCellRenderer(new ButtonRenderer());
+			//table.getColumn(diasDaSemana[i]).setCellRenderer(new ButtonRenderer());
 			ArrayList botoes2 = new ArrayList();
 			for(int j = 0; j < qtdeHorarios; j++){
 				
-				ButtonEditor btn = new ButtonEditor(new JCheckBox(), table, CTurma);
 				btn.setDiaDaSemana(i);
 				btn.setHorario(j);
-				botoes[i][j] = btn;
+				botoes[j][i] = btn;
 				botoes2.add(btn);
-				
 				
 			}
 			//table.getColumn(diasDaSemana[i]).setCellEditor((Object)botoes2);
 		}
 		
-		df.setDataVector(botoes,this.CTurma.getTitulosGrade(qtdeDias));
-		table.setModel(df);
+		//df.setDataVector(botoes,this.CTurma.getTitulosGrade(qtdeDias));
+		//table.setModel(df);
 		
-		/*
+		
+		 */
 		for(int i =0; i< qtdeDias; i++){
-			table.getColumn(diasDaSemana[i]).setCellRenderer(new ButtonRenderer());
-			ButtonEditor btn = new ButtonEditor(new JCheckBox(), table, CTurma);
+			table.getColumn(diasDaSemana[i]).setCellRenderer(new JButtonGradeHorario());
+			ButtonEditor btn = new ButtonEditor(new JCheckBox(), table, CTurma,this);
 			btn.setDiaDaSemana(i);
 			table.getColumn(diasDaSemana[i]).setCellEditor(btn);
 			    
 		}
-		*/
 	}
 	
 	

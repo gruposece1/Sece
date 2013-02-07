@@ -3,6 +3,8 @@ package br.unb.sece.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.EventObject;
 
 import javax.swing.DefaultCellEditor;
@@ -23,24 +25,26 @@ import br.unb.sece.model.Horario;
  * Data: 03/01/2013
  * 
  * */
-public class ButtonEditor extends DefaultCellEditor {
+public class ButtonEditor extends DefaultCellEditor implements WindowListener {
 
-	 protected JButton button;
+	 protected JButtonGradeHorario button;
 
 	  private String label;
 	  private JTable table;
 	  private CTurma turma;
-	  private VHorario VHorario=null;
+	  private VHorario VHorario = null;
 	  
 	  private int diaDaSemana; //armazena o dia da semana do botao
 	  
 	  private int horario; //armazena o horario do botao
 	  
 	  private boolean isPushed;
+	  
+	  private Horario obHorario;
 
 	  public ButtonEditor(JCheckBox checkBox, JTable table, CTurma turma) {
 	    super(checkBox);
-	    button = new JButton();
+	    button = new JButtonGradeHorario();
 	    button.setOpaque(true);
 	    this.table = table;
 	    this.turma = turma;
@@ -50,6 +54,23 @@ public class ButtonEditor extends DefaultCellEditor {
 	      }
 	    });
 	  }
+	  
+	  
+	  public ButtonEditor(JCheckBox checkBox, JTable table, CTurma turma, VCadTurma VCadTurma) {
+		    super(checkBox);
+		    button = new JButtonGradeHorario();
+		    button.setOpaque(true);
+		    this.table = table;
+		    this.turma = turma;
+		    this.button.addActionListener(VCadTurma);
+		    /*
+		    button.addActionListener(new ActionListener() {
+		      public void actionPerformed(ActionEvent e) {
+		        fireEditingStopped();
+		      }
+		    });
+		    */
+	   }
 
 	  public Component getTableCellEditorComponent(JTable table, Object value,
 	      boolean isSelected, int row, int column) {
@@ -62,7 +83,9 @@ public class ButtonEditor extends DefaultCellEditor {
 	    }
 	    label = (value == null) ? "" : value.toString();
 	    button.setText(label);
-	    isPushed = true;
+	    this.button.setDiaDaSemana(column);
+	    this.button.setHorario(row);
+	    isPushed = true; 
 	    return button;
 }
 
@@ -70,16 +93,20 @@ public class ButtonEditor extends DefaultCellEditor {
 	public Object getCellEditorValue() {
 	    if (isPushed) {
 
-			Horario horario = (Horario)this.turma.getHorario(table.getSelectedRow(), table.getSelectedColumn());
-			VHorario = new VHorario(horario);					
+			this.obHorario = (Horario)this.turma.getHorario(table.getSelectedRow(), table.getSelectedColumn());
+			this.VHorario = new VHorario(obHorario);					
 		
 				
-			VHorario.setVisible(true);				
+			this.VHorario.setVisible(true);	
+			this.VHorario.addWindowListener(this);
 			
-			VHorario.setAlwaysOnTop(true);  
-			VHorario.toFront(); 
+			this.VHorario.setAlwaysOnTop(true);  
+			this.VHorario.toFront(); 
+			
 		
 	    }
+	    
+	    
 	    isPushed = false;
 	    return new String(label);
 	  }
@@ -107,6 +134,54 @@ public class ButtonEditor extends DefaultCellEditor {
 
 	public void setHorario(int horario) {
 		this.horario = horario;
+	}
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(this.VHorario)){
+			if(this.obHorario != null){
+				if(this.obHorario.getProfessor() != null){
+					this.label = this.obHorario.getProfessor().getNome();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	  
