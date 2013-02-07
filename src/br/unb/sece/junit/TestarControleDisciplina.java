@@ -16,7 +16,7 @@ import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
 public class TestarControleDisciplina {
 
 	private CDisciplina CDisciplina;
-	private Disciplina disciplina;
+	private Disciplina disciplina, disciplina2;
 	private VDisciplina panel;
 	
 	@Before
@@ -125,4 +125,41 @@ public class TestarControleDisciplina {
 			fail("Ocorreu um erro");
 		}
 	}
+	
+	@Test
+	public void testarExclusao(){
+		
+		try {
+			CDisciplina.excluir(disciplina);
+		} catch (Exception e) {
+			fail("Ocorreu erro");
+		}
+	}
+	
+	@Test
+	public void testarSalvar(){
+
+	
+		try {
+			CDisciplina.salvar();
+		} catch (Exception e) {
+			fail("Ocorreu erro");
+		}
+	}
+	
+	@Test
+	public void testarModeloTabela(){
+		
+		try
+		{
+			CDisciplina.getDefaultTableModel();
+		}
+		catch(Exception e) {
+			fail("Ocorreu erro");
+		}
+
+	}	
+	
+	
+	
 }

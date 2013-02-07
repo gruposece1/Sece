@@ -101,7 +101,7 @@ public abstract class Persistencia implements GenericDAO<Object, Long> {
 			this.objSession.update(entity);
 			this.objSession.getTransaction().commit();
 		}catch(Exception ex){
-			HibernateUtil.closeSession();
+			//HibernateUtil.closeSession();
 			this.objSession.getTransaction().rollback();
 			HibernateUtil.closeSession();
 			//throw new BancoDeDadosException("Erro referente ao banco de dados");
