@@ -8,17 +8,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.unb.sece.control.CAluno;
+import br.unb.sece.control.CPadrao;
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Responsavel;
+import br.unb.sece.view.VAluno;
+import br.unb.sece.view.panelcadastropadrao.VCadAluno;
 
 public class TesteControleAluno {
 
 	private CAluno CAluno;
 	private Aluno aluno;
 	private Responsavel responsavel;
-	ArrayList<Responsavel> listaResponsavel;
+	private ArrayList<Responsavel> listaResponsavel;
+	private VAluno panel;
 	
 	@Before
 	public void setUp(){
@@ -41,6 +45,13 @@ public class TesteControleAluno {
 		aluno.setSexo("Masculino");
 		aluno.setResponsaveis(listaResponsavel);
 		
+		panel = new VAluno();
+		panel.criarPainel();
+		((VCadAluno) panel.getPanel()).getTxtNome().setText("Teste");
+		((VCadAluno) panel.getPanel()).getTxtMatricula().setText("Teste");
+		((VCadAluno) panel.getPanel()).getTxtNascimento().setText("Teste");
+		((VCadAluno) panel.getPanel()).setResponsavel(listaResponsavel);
+		
 	}
 	
 	@Test
@@ -55,7 +66,6 @@ public class TesteControleAluno {
 		
 		aluno.setNome("");
 		
-		CAluno = new CAluno();
 		CAluno.setAluno(aluno);
 		
 		CAluno.verificarDados();
@@ -69,7 +79,6 @@ public class TesteControleAluno {
 		
 		aluno.setMatricula("");
 		
-		CAluno = new CAluno();
 		CAluno.setAluno(aluno);
 		
 		CAluno.verificarDados();
@@ -83,7 +92,6 @@ public class TesteControleAluno {
 		
 		aluno.setDtNascimento("");
 		
-		CAluno = new CAluno();
 		CAluno.setAluno(aluno);
 		
 		CAluno.verificarDados();
@@ -102,7 +110,6 @@ public class TesteControleAluno {
 		
 		aluno.setResponsaveis(responsaveis);
 		
-		CAluno = new CAluno();
 		CAluno.setAluno(aluno);
 		
 		CAluno.verificarDados();
@@ -123,7 +130,6 @@ public class TesteControleAluno {
 		
 		aluno.setResponsaveis(responsaveis);
 		
-		CAluno = new CAluno();
 		CAluno.setAluno(aluno);
 		
 		CAluno.verificarDados();
@@ -152,7 +158,7 @@ public class TesteControleAluno {
 	public void testarExclusao(){
 		
 		try {
-			CAluno.excluir();
+			CAluno.excluir(aluno);
 		} catch (Exception e) {
 			fail("Ocorreu erro");
 		}
@@ -179,6 +185,62 @@ public class TesteControleAluno {
 			fail("Ocorreu erro");
 		}
 		
+	}
+	
+	@Test (expected = AtributoInvalidoException.class)
+	public void testarReceberDadosNulo() throws Exception{
+		
+		VCadAluno aluno = null;
+		
+		CAluno.receberDados(aluno, 1);
+		
+	}
+	
+	@Test (expected = AtributoInvalidoException.class)
+	public void testarReceberDadosInvalido() throws Exception{
+		
+		
+		CAluno.receberDados(aluno, 1);
+		
+	}
+	
+	@Test
+	public void testarPanelPadrao()
+	{
+		assertNotNull(CAluno.getPanelPadrao(panel));
+	}
+	
+	@Test
+	public void testarReceberDadosInsercao() throws Exception{
+		
+		
+		
+		try
+		{
+			CAluno.receberDados(panel, CPadrao.OPERACAO_INSERIR);
+		}
+		catch(Exception e)
+		{
+			fail("Ocorreu um erro");
+			//e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testarReceberDadosAlterar() throws Exception{
+		
+		
+		CAluno.receberObjetoAlterar(aluno);
+		
+		try
+		{
+			CAluno.receberDados(panel, CPadrao.OPERACAO_ALTERAR);
+		}
+		catch(Exception e)
+		{
+			fail("Ocorreu um erro");
+			//e.printStackTrace();
+		}
 	}
 	
 }
