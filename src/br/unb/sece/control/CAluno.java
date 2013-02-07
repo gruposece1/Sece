@@ -71,13 +71,26 @@ public class CAluno extends CPadrao{
 		if(this.aluno.getResponsaveis().isEmpty())
 			throw new AtributoNuloException();
 		
-		if(this.aluno.getResponsaveis().size()==0 || this.aluno.getResponsaveis().size()>2)
+		if(this.aluno.getResponsaveis().size()>2)
 			throw new AtributoInvalidoException("Numero de responsaveis invalido");
 	}
 	
 	public void receberDados(Object obj, int operacao) throws Exception{
 		
-		VCadAluno panel = (VCadAluno)this.getPanelPadrao(obj);
+		VCadAluno panel=new VCadAluno();
+		
+		if(obj==null)
+			throw new AtributoInvalidoException();
+	
+		
+		try
+		{
+			panel = (VCadAluno)this.getPanelPadrao(obj);
+		} catch(Exception e)
+		{
+			throw new AtributoInvalidoException();
+		}
+			
 		switch(operacao){
 		case CPadrao.OPERACAO_INSERIR:
 			
