@@ -14,7 +14,7 @@ public class CTurno extends CPadrao {
 	
 	private Turno turno;
 
-	public CTurno(String classeModel) {
+	public CTurno() {
 		super("br.unb.sece.model.Turno");
 		// TODO Auto-generated constructor stub
 		this.turno = new Turno();
@@ -120,5 +120,16 @@ public class CTurno extends CPadrao {
 		
 
 
-	}	
+	}
+	
+	public static String[] getTurnos(){
+		
+		return Turno.getTurnos();
+		
+		
+	}
+	
+	public static int getIndiceTurno(String turno){
+		return Turno.getIndiceTurno(turno);
+	}
 }

@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
+import br.unb.sece.control.CTurno;
+
 public class VCadTurno extends JPanel 
 {
 	private JTextField txtInicio;
@@ -13,7 +15,7 @@ public class VCadTurno extends JPanel
 	private JLabel lblFim;
 	private JLabel lblTipo;
 	private JComboBox CBTipo;
-	private String[] tipo = {"Matutino", "Vespertino", "Noturno"};
+	private String[] tipo = CTurno.getTurnos();
 	
 	/**
 	 * Create the panel.

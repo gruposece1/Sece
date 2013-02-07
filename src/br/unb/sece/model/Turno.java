@@ -88,4 +88,29 @@ public class Turno {
 		dao.update(this);
 	}
 	
-}
+	public static String[] getTurnos(){
+		String[] tipo = {"Matutino", "Vespertino", "Noturno"};
+		return tipo;
+		
+		
+	}
+	
+	public static int getIndiceTurno(String turno){
+		int retorno =0;
+		String[] turnos = Turno.getTurnos();
+		
+		for (int i = 0; i <turnos.length; i++){
+			
+			if (turnos[i].equals(turno)){
+				
+			retorno=i;
+			
+			break;
+			}
+		
+		}
+		return retorno;
+		}
+	}
+	
+
