@@ -1,5 +1,6 @@
 package br.unb.sece.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -75,6 +76,16 @@ public class Professor extends Funcionario {
 			professor.add(professor4);
 		
 			return professor;
-		}
+	}
+	
+	public static List getProfessoresDisponiveis(Horario obHorario,Disciplina obDisciplina){
+		ProfessorDAO obDao = new ProfessorDAO();
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm") ;
+		String hrInicial = formatter.format(obHorario.getHrInicial().getTime());
+		String hrFinal = formatter.format(obHorario.getHrFinal().getTime());
+		System.out.println("A hora inicial: " + hrInicial);
+		System.out.println("A hora final: " + hrFinal);
+		return obDao.getProfessoresDisponiveis(obHorario.getDiaSemana(), obDisciplina.getId(), hrInicial, hrFinal);
+	}
 
 }

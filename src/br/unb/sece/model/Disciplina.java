@@ -67,6 +67,8 @@ public class Disciplina {
 		return dao.getAll() ;
 	}
 	
+	
+	
 	public void salvar(){
 		DisciplinaDAO dao = new DisciplinaDAO();
 		dao.save(this);

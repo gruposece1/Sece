@@ -1,5 +1,6 @@
 package br.unb.sece.view;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.Action;
@@ -58,7 +59,7 @@ public class JButtonGradeHorario extends JButton implements TableCellRenderer {
 
 	 public Component getTableCellRendererComponent(JTable table, Object value,
 		      boolean isSelected, boolean hasFocus, int row, int column) {
-		    
+		//System.out.println("O valor: "+isSelected);    
 		if (isSelected) {
 	      this.setForeground(table.getSelectionForeground());
 	      this.setBackground(table.getSelectionBackground());

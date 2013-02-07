@@ -248,7 +248,7 @@ public class VCadTurma extends JFrame implements ActionListener {
 		 */
 		for(int i =0; i< qtdeDias; i++){
 			table.getColumn(diasDaSemana[i]).setCellRenderer(new JButtonGradeHorario());
-			ButtonEditor btn = new ButtonEditor(new JCheckBox(), table, CTurma,this);
+			ButtonEditor btn = new ButtonEditor(new JCheckBox(), table, CTurma);
 			btn.setDiaDaSemana(i);
 			table.getColumn(diasDaSemana[i]).setCellEditor(btn);
 			    
