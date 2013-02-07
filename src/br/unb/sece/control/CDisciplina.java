@@ -2,6 +2,7 @@ package br.unb.sece.control;
 
 import javax.swing.JPanel;
 
+import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.Disciplina;
@@ -71,17 +72,44 @@ public class CDisciplina extends CPadrao {
 		}
 	}
 
-	public void receberDados(Object obj) throws Exception{
-		VCadDisciplina panel = (VCadDisciplina)this.getPanelPadrao(obj);
+	/*public void receberDados(Object obj) throws Exception{
+		
+		VCadDisciplina panel=null;
+		
+		if(obj==null)
+			throw new AtributoNuloException();
+		try
+		{
+			panel = (VCadDisciplina)this.getPanelPadrao(obj);
+		}
+		catch(Exception e)
+		{
+			throw new AtributoInvalidoException();
+		}
+		
 		disciplina.setNome(panel.getTextField().getText());
 		this.verificarDados();
 		panel.getTextField().setText("");
 
 
-	}
+	}*/
 
 	public void receberDados(Object obj,int operacao) throws Exception{
-		VCadDisciplina panel = (VCadDisciplina)this.getPanelPadrao(obj);
+		
+		VCadDisciplina panel=null;
+		
+		if(obj==null)
+			throw new AtributoNuloException();
+		
+		try
+		{
+			panel = (VCadDisciplina)this.getPanelPadrao(obj);
+		}
+		catch(Exception e)
+		{
+			throw new AtributoInvalidoException();
+		}
+		
 		switch(operacao){
 		case CPadrao.OPERACAO_INSERIR:
 			disciplina.setNome(panel.getTextField().getText());
