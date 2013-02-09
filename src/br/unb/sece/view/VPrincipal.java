@@ -86,6 +86,22 @@ public class VPrincipal extends JFrame {
 		});
 		mnNewMenu.add(mntmAluno);
 		
+		JMenuItem mntmFuncionario = new JMenuItem("Funcionario");
+		mntmFuncionario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+								
+				try{
+					VFuncionario vf = new VFuncionario();
+					vf.setVisible(true);
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
+			}
+		});
+		mnNewMenu.add(mntmFuncionario);
+		
 		JMenuItem mntmProfessor = new JMenuItem("Professor");
 		mnNewMenu.add(mntmProfessor);
 		
