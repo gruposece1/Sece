@@ -48,7 +48,7 @@ public class CSerie extends CPadrao {
 		Serie objSerie = (Serie)obj;
 		objSerie.excluir();
 
-	}
+	 }
 
 	@Override
 	public void verificarDados() throws Exception{

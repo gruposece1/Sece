@@ -19,6 +19,8 @@ public class Pessoa
 	private Long idPessoa;
 	private String nome, sexo;
 	
+	protected String cpf;
+	
 	
 	public Pessoa()
 	{
@@ -55,6 +57,19 @@ public class Pessoa
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+
+
+
+	public String getCpf() {
+		return cpf;
+	}
+
+
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
 	
 
 

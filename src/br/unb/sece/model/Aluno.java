@@ -76,6 +76,10 @@ public class Aluno extends Pessoa{
 		AlunoDAO dao = new AlunoDAO();
 		dao.remove(this);
 	}
+	
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
 	
 

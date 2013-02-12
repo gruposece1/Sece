@@ -26,7 +26,7 @@ public class TesteControleFuncionario {
 		CFuncionario = new CFuncionario();
 		funcionario = new Funcionario();
 		
-		funcionario.setCPF("23453543");
+		funcionario.setCpf("23453543");
 		funcionario.setNome("Funcionario");
 		funcionario.setSenha("Senha");
 		funcionario.setSexo("Sexo");
@@ -64,7 +64,7 @@ public class TesteControleFuncionario {
 	public void testarDadosCPF() throws Exception{
 		
 		
-		funcionario.setCPF("");
+		funcionario.setCpf("");
 		
 		CFuncionario.setFuncionario(funcionario);
 		

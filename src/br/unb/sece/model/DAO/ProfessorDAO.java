@@ -47,9 +47,9 @@ public class ProfessorDAO extends Persistencia {
 					    "and diaSemana = " + diaDaSemana + 
 					    " and idDisciplina = " + disciplina +
 					    ")" ;
-		System.out.println(sql);
+		//System.out.println(sql);
 		List retorno = this.objSession.createSQLQuery(sql).addEntity(Professor.class).list();
 		return retorno;	
-	}
+	} 
 
 }

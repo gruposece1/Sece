@@ -30,10 +30,13 @@ public class CPadrao implements ICadastroPadrao   {
 	
 	protected Object objAlterar;
 	
+	protected String metodoBusca = null;
+	
 	public CPadrao (String classeModel){
 		
 		this.classeModel = classeModel;
 		this.definirTitulosEMetodos();
+		this.definirMetodoBusca();
 		//this.construirTabela();
 		
 	}
@@ -48,12 +51,20 @@ public class CPadrao implements ICadastroPadrao   {
 		this.metodos = metodos;
 	}
 	
+	public void definirMetodoBusca(){
+		
+	}
+	
 	public Object getObjetoTabela(int row, int column)throws NullPointerException{
 		return this.modeloDeTabela.getObjetoTabela(row, column);
 	}
 	
 	public ModeloDeTabela getDefaultTableModel(){
-		this.modeloDeTabela = new ModeloDeTabela(this.classeModel, this.titulos, this.metodos);
+		if(this.metodoBusca != null){
+			this.modeloDeTabela = new ModeloDeTabela(this.classeModel, this.titulos, this.metodos,this.metodoBusca);
+		}else{
+			this.modeloDeTabela = new ModeloDeTabela(this.classeModel, this.titulos, this.metodos);
+		}
 		return this.modeloDeTabela;
 	}
 	

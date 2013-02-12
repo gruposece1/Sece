@@ -1,5 +1,7 @@
 package br.unb.sece.util;
 
+import java.util.ArrayList;
+
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
@@ -50,7 +52,29 @@ public class GerarTabelas {
 		d2.salvar();
 		Disciplina d3 = new Disciplina();
 		d3.setNome("Geografia");
-		d3.salvar();
+		d3.salvar(); 
+		Disciplina d4 = new Disciplina();
+		d4.setNome("Português");
+		d4.salvar(); 
+		Disciplina d5 = new Disciplina();
+		d5.setNome("Inglês");
+		d5.salvar(); 
+		
+		ArrayList obDisciplinasProf1 = new ArrayList();
+		ArrayList obDisciplinasProf2 = new ArrayList();
+		ArrayList obDisciplinasProf3 = new ArrayList();
+		ArrayList obDisciplinasProf4 = new ArrayList();
+		
+		//Adicionando disciplinas as listas
+		obDisciplinasProf1.add(d1);
+		obDisciplinasProf1.add(d2);
+
+		obDisciplinasProf2.add(d2);
+		
+		obDisciplinasProf3.add(d3);
+		
+		obDisciplinasProf4.add(d4);
+		obDisciplinasProf4.add(d5);
 		
 		Turno t = new Turno(7, 12, Turno.MANHA);
 		t.salvar();
@@ -65,21 +89,25 @@ public class GerarTabelas {
 		Professor professor1 = new Professor();
 		professor1.setNome("Pedro");
 		professor1.setSexo(Pessoa.MASCULINO);
+		professor1.setDisciplinas(obDisciplinasProf1);
 		professor1.salvar();
 		
 		Professor professor2 = new Professor();
 		professor2.setNome("João");
 		professor2.setSexo(Pessoa.MASCULINO);
+		professor2.setDisciplinas(obDisciplinasProf2);
 		professor2.salvar();
 		
 		Professor professor3 = new Professor();
 		professor3.setNome("Alberto");
 		professor3.setSexo(Pessoa.MASCULINO);
+		professor3.setDisciplinas(obDisciplinasProf3);
 		professor3.salvar();
 		
 		Professor professor4 = new Professor();
 		professor4.setNome("Messias");
 		professor4.setSexo(Pessoa.MASCULINO);
+		professor4.setDisciplinas(obDisciplinasProf4);
 		professor4.salvar();
 		
 		Responsavel responsavel = new Responsavel();
@@ -89,7 +117,7 @@ public class GerarTabelas {
 		responsavel.setTelefone("113242");
 		responsavel.setEmail("cahvsdahvd");
 		responsavel.setCEP("kfhdsfsa");
-		responsavel.setCPF("12345");
+		responsavel.setCpf("12345");
 		responsavel.salvar();	
 	}
 }

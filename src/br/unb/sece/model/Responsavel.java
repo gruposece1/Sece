@@ -52,21 +52,10 @@ public class Responsavel extends Pessoa
 		this.email = email;
 	}
 	
-	
-	
-	public String getCPF() {
-		return CPF;
-	}
-
-
-	public void setCPF(String cPF) {
-		CPF = cPF;
-	}
-
 
 	public List getAll(){
 		ResponsavelDAO dao = new ResponsavelDAO();
-		List<Responsavel> lista = new ArrayList(dao.listAll(Responsavel.class));
+			List<Responsavel> lista = new ArrayList(dao.listAll(Responsavel.class));
 		return lista;
 	}
 	

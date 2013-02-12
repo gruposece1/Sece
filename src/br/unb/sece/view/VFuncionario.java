@@ -33,7 +33,7 @@ public class VFuncionario extends VPadrao {
 		VCadFuncionario vf = (VCadFuncionario)this.panel;
 		//va.getTextField().setText(a.getNome());
 		vf.getTxtNome().setText(funcionario.getNome());
-		vf.getTxtCPF().setText(funcionario.getCPF());
+		vf.getTxtCPF().setText(funcionario.getCpf());
 		vf.getTxtTelefone().setText(funcionario.getTelefone());
 		vf.getTxtSenha().setText(funcionario.getSenha());
 		

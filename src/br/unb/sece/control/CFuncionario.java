@@ -43,6 +43,7 @@ public class CFuncionario extends CPadrao{
 
 	public void salvar() {
 		this.funcionario.salvar();
+		this.funcionario = new Funcionario();
 		
 	}
 	
@@ -60,7 +61,7 @@ public class CFuncionario extends CPadrao{
 			throw new AtributoNuloException();
 		}
 		
-		if(this.funcionario.getCPF().equals(""))
+		if(this.funcionario.getCpf().equals(""))
 			throw new AtributoNuloException();
 		
 		if(this.funcionario.getSenha().equals(""))
@@ -70,6 +71,11 @@ public class CFuncionario extends CPadrao{
 			throw new AtributoNuloException();
 		}
 		
+	}
+	
+	@Override
+	public void definirMetodoBusca(){
+		this.metodoBusca = "listCordenadoresSecretarias";
 	}
 	
 	public void receberDados(Object obj, int operacao) throws Exception{
@@ -94,7 +100,7 @@ public class CFuncionario extends CPadrao{
 			ArrayList<Responsavel> responsaveis = new ArrayList<Responsavel>();
 			
 			funcionario.setNome(panel.getTxtNome().getText());
-			funcionario.setCPF(panel.getTxtCPF().getText());
+			funcionario.setCpf(panel.getTxtCPF().getText());
 			funcionario.setTelefone(panel.getTxtTelefone().getText());
 			funcionario.setSexo(panel.getSexo());
 			funcionario.setSenha(panel.getTxtSenha().getText());
@@ -114,7 +120,7 @@ public class CFuncionario extends CPadrao{
 			Funcionario funcionario = (Funcionario)this.objAlterar;
 			
 			funcionario.setNome(panel.getTxtNome().getText());
-			funcionario.setCPF(panel.getTxtCPF().getText());
+			funcionario.setCpf(panel.getTxtCPF().getText());
 			funcionario.setTelefone(panel.getTxtTelefone().getText());
 			funcionario.setSexo(panel.getSexo());
 			funcionario.setSenha(panel.getTxtSenha().getText());

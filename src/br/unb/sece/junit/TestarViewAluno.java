@@ -28,7 +28,7 @@ public class TestarViewAluno {
 		listaResponsavel = new ArrayList<Responsavel>();
 		
 		responsavel.setCEP("213453");
-		responsavel.setCPF("123432");
+		responsavel.setCpf("123432");
 		
 		listaResponsavel.add(responsavel);
 		

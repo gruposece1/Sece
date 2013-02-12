@@ -18,6 +18,8 @@ public class ModeloDeTabela extends DefaultTableModel {
 	
 	private Object[][] dados;
 	
+	private String metodoBusca = "getAll";
+	
 	public ModeloDeTabela() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -26,11 +28,21 @@ public class ModeloDeTabela extends DefaultTableModel {
 
 	public ModeloDeTabela(String classeModel, Object[] titulos, Object[] metodos) {
 		super();
+		this.construir(classeModel, titulos, metodos);
+	}
+	
+	private void construir(String classeModel, Object[] titulos, Object[] metodos){
 		this.classeModel = classeModel;
 		this.titulos = titulos;
 		this.metodos = metodos;
 		this.construirTabela();
 		this.setDataVector(this.dados, this.titulos);
+	}
+	
+	public ModeloDeTabela(String classeModel, Object[] titulos, Object[] metodos, String metodoBusca) {
+		super();
+		this.setMetodoBusca(metodoBusca);
+		this.construir(classeModel, titulos, metodos);
 	}
 
 	@Override
@@ -55,7 +67,8 @@ public class ModeloDeTabela extends DefaultTableModel {
 			List lista = null;
 			Method usar;
 			for(Method m : classe.getMethods()){
-				if(m.getName().equals("getAll")){
+				if(m.getName().equals(this.metodoBusca)){
+					System.out.println(this.metodoBusca);
 					lista = (List)m.invoke(objDaClasseModel,null);
 				}
 			} 
@@ -126,6 +139,18 @@ public class ModeloDeTabela extends DefaultTableModel {
    	 }
    	 return metodoARetornar;
     }
+
+
+	public String getMetodoBusca() {
+		return metodoBusca;
+	}
+
+
+	public void setMetodoBusca(String metodoBusca) {
+		this.metodoBusca = metodoBusca;
+	}
+	
+	
 	
 	
 	

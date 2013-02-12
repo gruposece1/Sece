@@ -10,7 +10,7 @@ import br.unb.sece.model.DAO.FuncionarioDAO;
 @Entity
 public class Funcionario extends Pessoa{
 	
-	private String telefone, CPF, senha, tipoFuncionario;
+	private String telefone, senha, tipoFuncionario;
 	
 	public Funcionario()
 	{
@@ -30,13 +30,7 @@ public class Funcionario extends Pessoa{
 		this.telefone = telefone;
 	}
 
-	public String getCPF() {
-		return CPF;
-	}
-
-	public void setCPF(String cPF) {
-		CPF = cPF;
-	}
+	
 
 	public String getSenha() {
 		return senha;
@@ -69,6 +63,12 @@ public class Funcionario extends Pessoa{
 		
 		return dao.listAll(Funcionario.class);
 	
+	}
+	
+	public List<Funcionario> listCordenadoresSecretarias(){
+		FuncionarioDAO dao = new FuncionarioDAO();
+		return dao.listCordenadoresSecretarias();
+		
 	}
 
 }
