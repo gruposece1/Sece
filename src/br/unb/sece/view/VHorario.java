@@ -44,7 +44,7 @@ public class VHorario extends JFrame implements ActionListener{
 		
 		setTitle("Cadastro de Hor\u00E1rio");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 362, 240);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,26 +52,26 @@ public class VHorario extends JFrame implements ActionListener{
 		
 		JLabel lblProfessor = new JLabel("Professor: ");
 		lblProfessor.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblProfessor.setBounds(20, 30, 70, 14);
+		lblProfessor.setBounds(10, 67, 83, 14);
 		contentPane.add(lblProfessor);
 		
 		JLabel lblDisciplina = new JLabel("Disciplina: ");
 		lblDisciplina.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblDisciplina.setBounds(20, 81, 70, 14);
+		lblDisciplina.setBounds(10, 24, 70, 14);
 		contentPane.add(lblDisciplina);
 		
 		comboDisciplina = new JComboBox(CHorario.getModelDisciplinas());
-		comboDisciplina.setBounds(100, 79, 170, 20); 
+		comboDisciplina.setBounds(103, 22, 170, 20); 
 		comboDisciplina.addActionListener(this);
 		contentPane.add(comboDisciplina);
 		
 		comboProfessor = new JComboBox();
-		comboProfessor.setBounds(100, 30, 170, 20);
+		comboProfessor.setBounds(103, 65, 216, 20);
 		contentPane.add(comboProfessor);
 		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(this);
-		btnSalvar.setBounds(179, 203, 89, 23);
+		btnSalvar.setBounds(131, 143, 89, 23);
 		contentPane.add(btnSalvar);
 	}
 

@@ -4,121 +4,70 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-import br.unb.sece.control.CDisciplina;
+import java.util.ArrayList;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import br.unb.sece.control.CAluno;
+import br.unb.sece.control.CPadrao;
 import br.unb.sece.control.CSerie;
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
-import br.unb.sece.model.Disciplina;
+import br.unb.sece.model.Responsavel;
 import br.unb.sece.model.Serie;
-import br.unb.sece.view.VAluno;
-import br.unb.sece.view.VDisciplina;
 import br.unb.sece.view.VSerie;
-import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
+import br.unb.sece.view.panelcadastropadrao.VCadSerie;
 
 
-//nome, horario, dia, cadastrar, alterar, excluir
+
+
 public class TestarCSerie {
 
 	private CSerie CSerie;
-	private Serie serie, serie2;
+	private Serie serie;
 	private VSerie panel;
 	
 	@Before
 	public void setUp(){
+		
 		CSerie = new CSerie();
 		serie = new Serie();
-		serie.setNome("gustavo");
+		
+		serie.setNome("cleiton");
+		serie.setQtdeDias(1);
+		serie.setQtdeHorarios(1);
 		
 		panel = new VSerie();
 		panel.criarPainel();
-		//((VCadCSerie) panel.getPanel()).getTextField().setText("Teste");
-		
+		//setIndex
+		((VCadSerie) panel.getPanel()).getTxtNome().setText("Teste");
+		((VCadSerie) panel.getPanel()).getCBDias().setToolTipText("Teste");
+		((VCadSerie) panel.getPanel()).getCBHorario().setToolTipText("Teste");
+
 	}	
 	
-	
 	@Test
-	public void testarInstancia(){
-		
+	public void testarInstancia() {
+
 		assertNotNull(CSerie);
 	}
 	
-	@Test
-	public void testarDefinirTituloseMetodos() {
-	
-		try
-		{
-			CSerie.definirTitulosEMetodos();	
-		}
-		catch(Exception e)
-		{
-			fail("Ocorreu um erro");
-		}	
-		
-	}
-	
-	@Test (expected= AtributoNuloException.class)
-	public void testarDadosErrado() throws Exception{
-		
-		
-		serie.setNome("");
-		
-		CSerie.setSerie(serie);
-		
-		CSerie.verificarDados();
-		
-	}
 	
 	@Test
 	public void testarDadosValidos(){
 		
 		CSerie.setSerie(serie);
 		
-		try{
-			CSerie.verificarDados();	
-		}
-		catch(Exception e){
-			fail("Ocorreu um erro");
-		}
-	}
-	
-	@Test (expected= AtributoNuloException.class)
-	public void testarRecebarDadosNulo() throws Exception{
-		Object obj = null;
-		
-		CSerie.receberDados(obj, CSerie.OPERACAO_INSERIR);
-	}
-	
-	@Test (expected= AtributoInvalidoException.class)
-	public void testarRecebarDadosInvalido() throws Exception{
-		
-		CSerie.receberDados(serie, CSerie.OPERACAO_INSERIR);
-	}
-	
-	@Test
-	public void testarReceberDadosInsercao()
-	{
-		try{
-			CSerie.receberDados(panel, CSerie.OPERACAO_INSERIR);
-		}
-		catch(Exception e){
-			fail("Ocorreu um erro");
+		try {
+			CSerie.verificarDados();
+		} catch (Exception e) {
+			fail("Ocorreu erro");
 		}
 	}
-	
-	@Test
-	public void testarReceberDadosAlterar(){
-		
-		CSerie.receberObjetoAlterar(serie);
-		
-		try{
-			CSerie.receberDados(panel, CSerie.OPERACAO_ALTERAR);
-		}
-		catch(Exception e){
-			fail("Ocorreu um erro");
-		}
-	}
-	
+
 	@Test
 	public void testarExclusao(){
 		
@@ -131,8 +80,7 @@ public class TestarCSerie {
 	
 	@Test
 	public void testarSalvar(){
-
-	
+		
 		try {
 			CSerie.salvar();
 		} catch (Exception e) {
@@ -149,9 +97,59 @@ public class TestarCSerie {
 		catch(Exception e) {
 			fail("Ocorreu erro");
 		}
+		
+	}
+	
+	@Test (expected = AtributoInvalidoException.class)
+	public void testarReceberDadosNulo() throws Exception{
+		
+		VCadSerie serie = null;
+	
+		CSerie.receberDados(serie,1);
+		
+	}
+	
+	@Test (expected = AtributoInvalidoException.class)
+	public void testarReceberDadosInvalido() throws Exception{
+		
+		CSerie.receberDados(serie,1);	
+	}
+	
+	
+	
+	@Test
+	public void testarPanelPadrao()
+	{
+		assertNotNull(CSerie.getPanelPadrao(panel));
+	}
+	
+	@Test
+	public void testarReceberDadosInsercao() throws Exception{
+		
+		
+		
+		try{
+			CSerie.receberDados(panel, CPadrao.OPERACAO_INSERIR);
+		}
+		catch(Exception e){
+			fail("Ocorreu um erro");
+			//e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testarReceberDadosAlterar() throws Exception{
+		
+		
+		CSerie.receberObjetoAlterar(serie);
+		
+		try{
+			CSerie.receberDados(panel, CPadrao.OPERACAO_ALTERAR);
+		}
+		catch(Exception e){
+			fail("Ocorreu um erro");
+			//e.printStackTrace();
+		}
+	}
 
-	}	
-	
-	
-	
 }
