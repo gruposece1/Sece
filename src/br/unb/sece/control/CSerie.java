@@ -90,6 +90,11 @@ public class CSerie extends CPadrao {
 
 	}
 
+	public void setSerie(Serie serie) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }
