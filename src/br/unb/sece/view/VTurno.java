@@ -71,18 +71,11 @@ public class VTurno extends VPadrao {
 		
 	}
 
-
-
 	@Override
 	public void excluir() {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
-	
-	
 	
 
 }

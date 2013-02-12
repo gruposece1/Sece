@@ -28,7 +28,7 @@ public class CTurno extends CPadrao {
 
 		this.titulos = titulos;
 
-		Object [] metodos = {"getInicio","getFim","getTurno"};
+		Object[] metodos = {"getInicio","getFim","getTurno"};
 
 		this.metodos = metodos;
 
