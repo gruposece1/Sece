@@ -86,15 +86,12 @@ public class CSerie extends CPadrao {
 				break;
 		}
 		
-
-
 	}
 
 	public void setSerie(Serie serie) {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 
 }
