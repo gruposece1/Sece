@@ -23,7 +23,8 @@ public class VCadFuncionario extends JPanel implements ActionListener{
 	private JTextField txtCPF;
 	private JTextField txtTelefone;
 	private JTextField txtSenha;
-	private  JComboBox CBCargo;
+	protected  JComboBox CBCargo;
+	protected JLabel lblCargo;
 
 	/**
 	 * Create the panel.
@@ -90,7 +91,7 @@ public class VCadFuncionario extends JPanel implements ActionListener{
         add(txtSenha);
         txtSenha.setColumns(10);
         
-        JLabel lblCargo = new JLabel("Cargo: ");
+        lblCargo = new JLabel("Cargo: ");
         lblCargo.setBounds(290, 121, 46, 14);
         add(lblCargo);
         

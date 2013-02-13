@@ -1,133 +1,46 @@
 package br.unb.sece.view.panelcadastropadrao;
-
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-import br.unb.sece.control.CDisciplina;
-import br.unb.sece.view.VLogin;
-
-
-public class VCadProfessor extends JPanel implements ActionListener{
+public class VCadProfessor extends VCadFuncionario{
 	
-	private JTextField txtNome;
-	private JTextField txtCPF;
-	private JTextField txtTelefone;
-	private ButtonGroup grpSexo;
-	private JLabel lblNome;
-	private JLabel lblCpf;
-	private JLabel lblTelefone;
-	private JLabel lblSexo;
-	private JLabel lblDisciplina;
-	private JRadioButton rdbtMasculino;
-	private JRadioButton rdbtFeminino; 
-	private JComboBox CBDisciplina;
-	private JButton btnDisciplina;
-	private JList listDisciplina;
-	private DefaultListModel model;
-	private String[] materias= {"Matematica", "Portugues", "Ciencias", "Filosofia"};
-	private JScrollPane scrollPane;
-
-	/**
-	 * Create the panel.
-	 * 
-	 * 
-	 */
-
 	
 	public VCadProfessor() {
-		setLayout(null);
-		super.setBounds(20,11,522,234);
+		super();
 		
-		lblNome = new JLabel("Nome: ");
-		lblNome.setBounds(10, 37, 46, 14);
-		add(lblNome);
+		JLabel lblDisciplinas = new JLabel("Disciplinas:");
+		lblDisciplinas.setBounds(10, 171, 67, 14);
+		add(lblDisciplinas);
 		
-		txtNome = new JTextField();
-		txtNome.setBounds(60, 34, 126, 20);
-		add(txtNome);
-		txtNome.setColumns(10);
+		JList list = new JList();
+		list.setBounds(196, 195, -99, -24);
+		add(list);
 		
-		lblCpf = new JLabel("CPF: ");
-		lblCpf.setBounds(224, 37, 46, 14);
-		add(lblCpf);
+		JList list_1 = new JList();
+		list_1.setBounds(81, 165, 126, 58);
+		add(list_1);
 		
-		txtCPF = new JTextField();
-		txtCPF.setBounds(280, 34, 126, 20);
-		add(txtCPF);
-		txtCPF.setColumns(10);
+		JList list_2 = new JList();
+		list_2.setBounds(290, 165, 126, 58);
+		add(list_2);
 		
-		lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(224, 72, 46, 14);
-		add(lblTelefone);
+		JButton btnNewButton = new JButton(">>");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton.setBounds(217, 167, 55, 23);
+		add(btnNewButton);
 		
-		txtTelefone = new JTextField();
-		txtTelefone.setBounds(280, 69, 126, 20);
-		add(txtTelefone);
-		txtTelefone.setColumns(10);
-		
-		lblSexo = new JLabel("Sexo: ");
-		lblSexo.setBounds(10, 72, 46, 14);
-		add(lblSexo);
-		
-		rdbtMasculino = new JRadioButton("M");
-		rdbtMasculino.setBounds(60, 68, 38, 23);
-		
-		rdbtFeminino = new JRadioButton("F");
-		rdbtFeminino.setBounds(100, 68, 38, 23);
-		
-		grpSexo = new ButtonGroup();   
-        grpSexo.add(rdbtMasculino);
-        grpSexo.add(rdbtFeminino);
-        
-        add(rdbtMasculino);
-        add(rdbtFeminino);
-        
-        lblDisciplina = new JLabel("Discilinas");
-        lblDisciplina.setBounds(10, 108, 46, 14);
-        add(lblDisciplina);
-        
-        CBDisciplina = new JComboBox(materias);
-        CBDisciplina.setBounds(60, 105, 102, 20);
-        add(CBDisciplina);
-        
-        btnDisciplina = new JButton("+");
-        btnDisciplina.setBounds(172, 104, 46, 23);
-        add(btnDisciplina);
-        
-        
-        
-        model = new DefaultListModel();
+		JButton button = new JButton("<<");
+		button.setBounds(217, 200, 55, 23);
+		add(button);
 		
 		
-        btnDisciplina.addActionListener(this);
-        
-        scrollPane = new JScrollPane();
-        scrollPane.setBounds(10, 136, 465, 87);
-        add(scrollPane);
-        listDisciplina = new JList(model);
-        scrollPane.setViewportView(listDisciplina);
-        
-	}
-
-	public void actionPerformed(ActionEvent e)
-	{
-		
-		System.out.println("Teste");
-		String disciplina = CBDisciplina.getName();
-		model.addElement(disciplina);
-		
-		
+		this.remove(this.lblCargo);
+		this.remove(this.CBCargo);
 	}
 }
