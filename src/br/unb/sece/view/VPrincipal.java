@@ -104,6 +104,20 @@ public class VPrincipal extends JFrame {
 		mnNewMenu.add(mntmFuncionario);
 		
 		JMenuItem mntmProfessor = new JMenuItem("Professor");
+		mntmProfessor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try{
+					VProfessor t = new VProfessor();
+					t.setVisible(true);
+				}catch(Exception ex){
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
+			}
+		});
 		mnNewMenu.add(mntmProfessor);
 		
 		JMenuItem mntmTurma = new JMenuItem("Turma");

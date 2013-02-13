@@ -2,6 +2,9 @@ package br.unb.sece.view.panelcadastropadrao;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JButton;
+
+import br.unb.sece.control.CProfessor;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -15,11 +18,9 @@ public class VCadProfessor extends VCadFuncionario{
 		lblDisciplinas.setBounds(10, 171, 67, 14);
 		add(lblDisciplinas);
 		
-		JList list = new JList();
-		list.setBounds(196, 195, -99, -24);
-		add(list);
+	
 		
-		JList list_1 = new JList();
+		JList list_1 = new JList(CProfessor.getListDisciplinas());
 		list_1.setBounds(81, 165, 126, 58);
 		add(list_1);
 		

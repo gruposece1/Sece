@@ -1,22 +1,27 @@
 package br.unb.sece.control;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
+
 
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.BancoDeDadosException;
 
+import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Professor;
 import br.unb.sece.model.Responsavel;
 import br.unb.sece.view.panelcadastropadrao.VCadProfessor;
 
 
-public class CProfessor extends CPadrao{
+public class CProfessor extends CFuncionario{
 
 private Professor professor;
 	
 	public CProfessor() {
-		super("br.unb.sece.model.professor");
+		super("br.unb.sece.model.Professor");
 		
 		this.professor= new Professor();
 	}
@@ -133,6 +138,25 @@ private Professor professor;
 			break;
 		}
 
-}
 
+	}
+	
+	public static DefaultListModel getListDisciplinas(){
+		Disciplina obDisciplina = new Disciplina();
+		List disciplinas = obDisciplina.getAll();
+		
+		DefaultListModel disciplinaListModel = new DefaultListModel();
+		
+		for (int i=0; i<disciplinas.size();i++){
+			
+		Disciplina obDisciplina2 = (Disciplina) disciplinas.get(i);
+		disciplinaListModel.addElement(obDisciplina2.getId()+" "+ obDisciplina2.getNome());
+		 
+			
+		}
+		return disciplinaListModel;
+		
+	}
+	
+	
 }

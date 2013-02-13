@@ -22,7 +22,7 @@ public class VFuncionario extends VPadrao {
 
 	@Override
 	public void criarPainel() {
-		VCadProfessor painel = new VCadProfessor();
+		VCadFuncionario painel = new VCadFuncionario();
 		this.panel = painel;
 		
 	}
