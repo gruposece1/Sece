@@ -34,7 +34,7 @@ public class ProfessorDAO extends Persistencia {
 	
 	public List getProfessoresDisponiveis(int diaDaSemana, Long disciplina, String hrInicial, String hrFinal){
 		String sql =
-			"select p.idPessoa,pe.nome,pe.sexo, f.CPF, f.senha, f.telefone, f.tipoFuncionario from   professor p,   professordisciplina pd,funcionario f, pessoa pe where " +
+			"select p.idPessoa,pe.nome,pe.sexo,pe.cpf, f.senha, f.telefone, f.tipoFuncionario from   professor p,   professordisciplina pd,funcionario f, pessoa pe where " +
 			"  p.idPessoa = pd.idProfessor and "+
 			"  p.idPessoa = f.idPessoa and "+
 			"  f.idPessoa = pe.idPessoa and "+

@@ -8,11 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import br.unb.sece.exceptions.BancoDeDadosException;
-import br.unb.sece.model.DAO.DisciplinaDAO;
 import br.unb.sece.model.DAO.SerieDAO;
-import br.unb.sece.util.HibernateUtil;
 
-import teste.Colecoes;
+
+
 
 @Entity
 public class Serie {

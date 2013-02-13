@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.unb.sece.model.Horario;
-
 
 public class SerieDAO extends Persistencia {
 

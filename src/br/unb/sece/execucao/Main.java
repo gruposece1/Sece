@@ -41,13 +41,8 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-				
-					
-					//CDisciplina nome = new CDisciplina();
 					VLogin login = new VLogin();	
 					login.setVisible(true);
-						
-						
 					
 				} catch (Exception e) {
 					e.printStackTrace();
