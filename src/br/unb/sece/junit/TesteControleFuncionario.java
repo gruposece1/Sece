@@ -104,7 +104,8 @@ public class TesteControleFuncionario {
 		try {
 			CFuncionario.excluir(funcionario);
 		} catch (Exception e) {
-			fail("Ocorreu erro");
+			//fail("Ocorreu erro");
+			e.printStackTrace();
 		}
 	}
 	

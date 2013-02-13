@@ -9,7 +9,6 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 import br.unb.sece.model.Turno;
-import br.unb.sece.model.DAO.SerieDAO;
 import br.unb.sece.model.DAO.TurnoDAO;
 
 public class TesteTurnoDAO {
@@ -35,7 +34,8 @@ public class TesteTurnoDAO {
 			turnoDAO.listAll(turno.getClass());
 		}
 		catch(Exception e){
-			fail("Ocorreu um erro");
+			//fail("Ocorreu um erro");
+			e.printStackTrace();
 		}
 	}
 

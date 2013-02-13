@@ -32,7 +32,8 @@ public class TesteProfessorDAO {
 			professorDAO.listAll(professor.getClass());
 		}
 		catch(Exception e){
-			fail("Ocorreu um erro");
+			//fail("Ocorreu um erro");
+			e.printStackTrace();
 		}
 	}
 	
