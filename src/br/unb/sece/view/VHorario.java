@@ -82,7 +82,7 @@ public class VHorario extends JFrame implements ActionListener{
 		}
 		if(e.getSource().equals(this.comboDisciplina)){
 			//this.comboProfessor.setModel(this.CHorario.getProfessoresDisponiveis());
-			System.out.println(this.CHorario.getProfessoresDisponiveis());
+			System.out.println("A lista: "+this.CHorario.getProfessoresDisponiveis());
 			this.comboProfessor.setModel(this.CHorario.getModelProfessores());
 		}
 

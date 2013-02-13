@@ -65,11 +65,9 @@ public class ModeloDeTabela extends DefaultTableModel {
 			Class classe = Class.forName(this.classeModel);
 			Object objDaClasseModel = classe.newInstance();
 			List lista = null;
-			Method usar;
-			for(Method m : classe.getMethods()){
-				if(m.getName().equals(this.metodoBusca)){
-					System.out.println(this.metodoBusca);
-					lista = (List)m.invoke(objDaClasseModel,null);
+			for(Method metodo : classe.getMethods()){
+				if(metodo.getName().equals(this.metodoBusca)){
+					lista = (List)metodo.invoke(objDaClasseModel,null);
 				}
 			} 
 			

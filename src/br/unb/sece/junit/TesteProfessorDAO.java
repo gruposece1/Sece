@@ -1,39 +1,37 @@
 package br.unb.sece.junit;
-
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.unb.sece.model.Aluno;
-import br.unb.sece.model.DAO.AlunoDAO;
+import br.unb.sece.model.Professor;
+import br.unb.sece.model.DAO.ProfessorDAO;
 
-public class TesteAlunoDAO {
 
-	private AlunoDAO alunoDAO;
-	private Aluno aluno;
+public class TesteProfessorDAO {
+
+	private ProfessorDAO professorDAO;
+	private Professor professor;
 	
 	@Before
 	public void setUp(){
 		
-		alunoDAO = new AlunoDAO();
-		aluno = new Aluno();
+		professorDAO = new ProfessorDAO();
+		professor = new Professor();
 	}
 	
 	@Test
 	public void testarInstancia(){
-		assertNotNull(alunoDAO);
+		assertNotNull(professorDAO);
 	}
 	
 	@Test
 	public void testarGetAll(){
 	
-		try
-		{
-			alunoDAO.listAll(aluno.getClass());
+		try{
+			professorDAO.listAll(professor.getClass());
 		}
-		catch(Exception e)
-		{
+		catch(Exception e){
 			//fail("Ocorreu um erro");
 			e.printStackTrace();
 		}
@@ -44,7 +42,6 @@ public class TesteAlunoDAO {
 	
 		//A fazer...
 	}
-	
 	
 
 }

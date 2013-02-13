@@ -12,19 +12,22 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.unb.sece.control.CAluno;
+import br.unb.sece.control.CPadrao;
+import br.unb.sece.control.CSerie;
 import br.unb.sece.control.CTurno;
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
+import br.unb.sece.model.Serie;
 import br.unb.sece.model.Turno;
+import br.unb.sece.view.VSerie;
 import br.unb.sece.view.VTurno;
 import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
 import br.unb.sece.view.panelcadastropadrao.VCadTurno;
 
-//nome, horario, dia, cadastrar, alterar, excluir
 public class TesteCTurno {
 	
 	private CTurno CTurno;
-	private Turno turno, turno2;
+	private Turno turno;
 	private VTurno panel;
 
 	@Before
@@ -119,7 +122,7 @@ public class TesteCTurno {
 	}
 	
 	@Test
-	public void testarReceberDadosAlterar(){
+	public void testarReceberDadosAlterar() throws Exception{
 		
 		CTurno.receberObjetoAlterar(turno);
 		
@@ -127,17 +130,20 @@ public class TesteCTurno {
 			CTurno.receberDados(panel, CTurno.OPERACAO_ALTERAR);
 		}
 		catch(Exception e){
-			fail("Ocorreu um erro");
+			//fail("Ocorreu um erro");
+			e.printStackTrace();
 		}
 	}
 	
+
 	@Test
 	public void testarExclusao(){
 		
 		try {
 			CTurno.excluir(turno);
 		} catch (Exception e) {
-			fail("Ocorreu erro");
+			//fail("Ocorreu erro");
+			e.printStackTrace();
 		}
 	}
 	
