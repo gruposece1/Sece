@@ -22,11 +22,11 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JLabel lblNada;
-	private CTurma control = new CTurma();
 	private CTurma cturma = new CTurma();
 	private JComboBox comboBox;
 	private Turma turma;
 	private JButton btnSelecionar;
+	private int op;
 	/**
 	 * Launch the application.
 	 */
@@ -34,7 +34,7 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VIdentificaTurma frame = new VIdentificaTurma();
+					VIdentificaTurma frame = new VIdentificaTurma(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +46,8 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public VIdentificaTurma() {
+	public VIdentificaTurma(int op) {
+		this.op=op;
 		//setSize(new Dimension(1024, 1024));
 		setResizable(false);
 		setTitle("SECE - Sistema Escolar de Chamada Eletr\u00F4nica");
@@ -65,7 +66,7 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 		comboBox.setBounds(66, 44, 240, 20);
 		
 		
-		String []turmas = control.getAllTurmas();
+		String []turmas = cturma.getAllTurmas();
 		
 		for(int i=0; i<turmas.length; i++){
 			comboBox.addItem(turmas[i]);
@@ -86,7 +87,7 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		if(arg0.getSource().equals(this.btnSelecionar)){
+		if(arg0.getSource().equals(this.btnSelecionar) && op == 1){
 			String result = comboBox.getSelectedItem().toString();
 			turma = cturma.selectTurma(result);
 			this.setVisible(false);
@@ -103,7 +104,26 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-				}
+				} 
+			});
+		}else if(arg0.getSource().equals(this.btnSelecionar) && op == 2){
+			String result = comboBox.getSelectedItem().toString();
+			turma = cturma.selectTurma(result);
+			this.setVisible(false);
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						cturma.setTurma(turma);
+						VTurmaAluno frame = new VTurmaAluno(cturma);
+						
+						frame.setVisible(true);
+						//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+						
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} 
 			});
 		}
 	}
