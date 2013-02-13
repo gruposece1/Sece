@@ -22,6 +22,7 @@ import br.unb.sece.model.Serie;
 import br.unb.sece.model.Turma;
 import br.unb.sece.model.Turno;
 import br.unb.sece.util.HibernateUtil;
+import br.unb.sece.util.ModelComboBox;
 import br.unb.sece.util.gradehoraria.GradeHoraria;
 import br.unb.sece.view.VCadTurma;
 
@@ -34,6 +35,7 @@ public class CTurma {
 	//private Object[][] grade2;
 	private Turma turma;
 	private GradeHoraria gradeHoraria;
+	private ModelComboBox modelSerie = null;
 	
 	public CTurma(){
 		colecao = new Colecoes();
@@ -210,6 +212,18 @@ public class CTurma {
 		
 		
 		return null;
+	}
+	
+	public ModelComboBox getModelSerie(){
+		
+		if(this.modelSerie == null){
+			
+			Serie serie = new Serie();
+			this.modelSerie = new ModelComboBox(serie.getAll(), "getId", "getNome");
+			
+		}
+		
+		return this.modelSerie;
 	}
 	
 	public  Turno guardaTurno(String itemTurno){

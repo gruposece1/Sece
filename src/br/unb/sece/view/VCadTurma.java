@@ -98,7 +98,7 @@ public class VCadTurma extends JFrame implements ActionListener {
 		lblHorrio.setBounds(10, 100, 46, 14);
 		contentPane.add(lblHorrio);
 		
-		CBSerie = new JComboBox(CTurma.getListaSerie().toArray());
+		CBSerie = new JComboBox(CTurma.getModelSerie());
 		CBSerie.setBounds(60, 97, 86, 20);
 		contentPane.add(CBSerie);
 		
