@@ -1,11 +1,13 @@
 package br.unb.sece.control;
 
 import java.text.SimpleDateFormat;
+import br.unb.sece.util.UtilList;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +18,7 @@ import org.hibernate.Session;
 
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.GradeNulaException;
+import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Horario;
 import br.unb.sece.model.Serie;
@@ -40,6 +43,7 @@ public class CTurma {
 	public CTurma(){
 		colecao = new Colecoes();
 	}
+	
 	
 	public void gerarGrade(Serie serie, Turno turno)
 	{
@@ -243,7 +247,7 @@ public class CTurma {
 		return null;
 	}
 	
-	public ArrayList getAlunos(Turma turma){
+	public ArrayList<Aluno> getAlunos(Turma turma){
 		return (ArrayList)turma.getAluno();
 	}
 	
@@ -292,7 +296,18 @@ public class CTurma {
 		return h.horarioAtualTurma(turma);
 	}
 	
-	
+	public void addAlunos(ArrayList alunos){
+		List todos = Aluno.getAll();
+		ArrayList alunosTurma = new ArrayList();
+		for(int i = 0; i < alunos.size();i++){
+			String matricula = alunos.get(i).toString().split(" ")[0];
+			Aluno aluno = (Aluno) UtilList.getObject(todos, "getMatricula", matricula);
+			alunosTurma.add(aluno);
+		}
+		
+		turma.setAluno(alunosTurma);
+		turma.alterar();
+	}
 	
 	
 

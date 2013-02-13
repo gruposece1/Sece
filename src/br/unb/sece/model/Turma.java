@@ -115,6 +115,12 @@ public class Turma {
 		
 	}
 	
+	public void alterar(){
+		TurmaDAO dao = new TurmaDAO();
+		
+		dao.update(this);
+	}
+	
 	
 	
 	

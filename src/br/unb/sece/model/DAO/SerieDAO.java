@@ -28,8 +28,8 @@ public class SerieDAO extends Persistencia {
 		List lista = (List) this.objSession.createQuery("select o from " + classe.getSimpleName() + " o").list();
 		//this.session.close();
 		return lista;
-		
-		
+
+
 	}
 
 }

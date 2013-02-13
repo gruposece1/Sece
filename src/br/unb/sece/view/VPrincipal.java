@@ -180,7 +180,7 @@ public class VPrincipal extends JFrame {
 		mntmChamada.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					VIdentificaTurma v = new VIdentificaTurma();
+					VIdentificaTurma v = new VIdentificaTurma(1);
 					v.setVisible(true);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
@@ -188,6 +188,20 @@ public class VPrincipal extends JFrame {
 				}
 			}
 		});
+		
+		JMenuItem mntmMatricularAluno = new JMenuItem("Matricular Aluno");
+		mntmMatricularAluno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					VIdentificaTurma v = new VIdentificaTurma(2);
+					v.setVisible(true);
+				} catch (Exception a) {
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
+					a.printStackTrace();
+				}
+			}
+		});
+		mnAdministrao.add(mntmMatricularAluno);
 		mnAdministrao.add(mntmChamada);
 		
 		JMenuItem mntmRelatorios = new JMenuItem("Relatórios Bimestrais");
