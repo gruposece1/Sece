@@ -50,10 +50,6 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	static public ArrayList lista = new ArrayList();
 	private JTable table;
 	protected CPadrao controle;
 	protected Object painel;
@@ -119,15 +115,6 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 		//new ModeloDeTabela(this.controle.getDados(),this.controle.getTitulos())
 		table.setModel(this.controle.getDefaultTableModel());
 		table.setCellSelectionEnabled(false);
-
-		
-		
-		
-		
-		
-		
-		
-	
 	}
 	
 	/**
@@ -156,32 +143,36 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
          
 	 }
 	 
+	/**
+	 *  Recupera um objeto da grade
+	 * @return Object objeto da grade selecionado
+	 * @throws NullPointerException
+	 */
 	public Object retonarObjetoGrade()throws NullPointerException{
 		
 		Object obj = this.controle.getObjetoTabela(this.table.getSelectedRow(),this.controle.getTitulos().length);
 		return obj;
 	}
 	
+	/**
+	 * Método para criar o controle associado a interface
+	 */
 	public abstract  void criarControle();
 	
+	/**
+	 * Método para criar o Panel associado a interface
+	 */
 	public abstract void criarPainel();
 	
-	
-	
-	
-	
-	
+	/**
+	 * Método para colocar os dados na interface
+	 */
 	public abstract void popularInterface();
 	
 	@Override
 	public  void salvar(){
 		this.controle.salvar();
 	}
-
-
-
-	
-
 
 
 	@Override
