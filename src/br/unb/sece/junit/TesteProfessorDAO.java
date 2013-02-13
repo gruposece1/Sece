@@ -37,7 +37,6 @@ public class TesteProfessorDAO {
 		}
 	}
 	
-	
 	public void testarGetAllErro(){
 	
 		//A fazer...
