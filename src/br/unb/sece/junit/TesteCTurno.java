@@ -12,22 +12,19 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.unb.sece.control.CAluno;
-import br.unb.sece.control.CSerie;
 import br.unb.sece.control.CTurno;
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
-import br.unb.sece.model.Aluno;
-import br.unb.sece.model.Responsavel;
 import br.unb.sece.model.Turno;
-import br.unb.sece.view.VAluno;
 import br.unb.sece.view.VTurno;
+import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
 import br.unb.sece.view.panelcadastropadrao.VCadTurno;
 
 //nome, horario, dia, cadastrar, alterar, excluir
 public class TesteCTurno {
 	
 	private CTurno CTurno;
-	private Turno turno;
+	private Turno turno, turno2;
 	private VTurno panel;
 
 	@Before
@@ -36,13 +33,15 @@ public class TesteCTurno {
 		CTurno = new CTurno();
 		
 		turno = new Turno();
-		turno.setInicio(8);
-		turno.setFim(12);
+		turno.setInicio(1);
+		turno.setFim(2);
 		turno.setTurno("Vespertino");
 		
 		panel = new VTurno();
 		panel.criarPainel();
-		
+		((VCadTurno) panel.getPanel()).getTxtInicio().setText("1");
+		((VCadTurno) panel.getPanel()).getTxtFim().setText("2");
+		((VCadTurno) panel.getPanel()).getCBTipo().setSelectedIndex(CTurno.getIndiceTurno(turno.getTurno()));
 		
 		
 	}
@@ -50,7 +49,7 @@ public class TesteCTurno {
 	@Test
 	public void testarInstancia(){
 		
-		assertNotNull(CTurno);
+		assertNotNull(CTurno); // ok!
 	}
 	
 
@@ -58,7 +57,7 @@ public class TesteCTurno {
 	public void testDefinirTitulosEMetodos() {
 		try
 		{
-			CTurno.definirTitulosEMetodos();	
+			CTurno.definirTitulosEMetodos();	// ok ! 
 		}
 		catch(Exception e)
 		{
@@ -67,11 +66,12 @@ public class TesteCTurno {
 	}
 
 	@Test (expected= AtributoNuloException.class)
-	public void testarDadosErrado() throws Exception{
+	public void testarDadosErrado() throws Exception{ // FALTAAAAAAA
 		
 		
 		turno.setInicio(0);
 		turno.setInicio(0);
+		turno.setTurno("");
 		
 		CTurno.setTurno(turno);
 		
@@ -81,7 +81,7 @@ public class TesteCTurno {
 	
 	
 	@Test
-	public void testarDadosValidos(){
+	public void testarDadosValidos(){ // ok! 
 		
 		CTurno.setTurno(turno);
 		
@@ -94,14 +94,15 @@ public class TesteCTurno {
 	}
 	
 	@Test (expected= AtributoNuloException.class)
-	public void testarRecebarDadosNulo() throws Exception{
+	public void testarReceberDadosNulo() throws Exception{ // FAAAAAALTA
 		Object obj = null;
 		
 		CTurno.receberDados(obj, CTurno.OPERACAO_INSERIR);
+		
 	}
 	
 	@Test (expected= AtributoInvalidoException.class)
-	public void testarRecebarDadosInvalido() throws Exception{
+	public void testarReceberDadosInvalido() throws Exception{//FAAAAAAALTA
 		
 		CTurno.receberDados(turno, CTurno.OPERACAO_INSERIR);
 	}
@@ -160,11 +161,7 @@ public class TesteCTurno {
 		catch(Exception e) {
 			fail("Ocorreu erro");
 		}
-
-	}	
-	
-	
-	
+	}		
 }
 
 	

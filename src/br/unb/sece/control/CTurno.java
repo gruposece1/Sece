@@ -44,7 +44,7 @@ public class CTurno extends CPadrao {
 	
 	@Override
 	public void alterar(){
-		Serie d = (Serie)this.objAlterar;
+		Turno d = (Turno)this.objAlterar;
 		d.alterar();
 	}
 
@@ -68,7 +68,7 @@ public class CTurno extends CPadrao {
 	public void verificarDados() throws Exception{
 
 		if(this.turno.getInicio()== 0 || this.turno.getFim()== 0){
-			throw new AtributoInvalidoException("Horarios de Turnos Inválidos!");}
+			throw new AtributoNuloException("Horarios de Turnos Inválidos!");}
 		
 		if (this.turno.getInicio()>= this.turno.getFim()){
 			throw new AtributoInvalidoException("Horarios de Turnos Inválidos!");
@@ -78,22 +78,35 @@ public class CTurno extends CPadrao {
 		
 	}
 	
-	public void receberDados(Object obj) throws Exception{
-		VCadTurno panel = (VCadTurno)this.getPanelPadrao(obj);
-		turno.setInicio(Integer.parseInt(String.valueOf(panel.getTxtInicio().getText())));
-		turno.setFim(Integer.parseInt(String.valueOf(panel.getTxtFim().getText())));
-		turno.setTurno(String.valueOf(panel.getCBTipo().getSelectedItem()));
-		this.verificarDados();
-		panel.getTxtInicio().setText("");
-		panel.getTxtFim().setText("");
+	//public void receberDados(Object obj) throws Exception{
+	//	VCadTurno panel = (VCadTurno)this.getPanelPadrao(obj);
+	//	turno.setInicio(Integer.parseInt(String.valueOf(panel.getTxtInicio().getText())));
+	//	turno.setFim(Integer.parseInt(String.valueOf(panel.getTxtFim().getText())));
+	//	turno.setTurno(String.valueOf(panel.getCBTipo().getSelectedItem()));
+	//	this.verificarDados();
+	//	panel.getTxtInicio().setText("");
+	//	panel.getTxtFim().setText("");
 		
 		
 
 
-	}
+	//}
 	
 	public void receberDados(Object obj,int operacao) throws Exception{
-		VCadTurno panel = (VCadTurno)this.getPanelPadrao(obj);
+		
+		VCadTurno panel = null;
+		
+		if(obj==null)
+			throw new AtributoNuloException();
+		
+		try
+		{
+			panel = (VCadTurno)this.getPanelPadrao(obj);
+		}
+		catch(Exception e)
+		{
+			throw new AtributoInvalidoException();
+		}
 		
 		switch(operacao){
 			case CPadrao.OPERACAO_INSERIR:
