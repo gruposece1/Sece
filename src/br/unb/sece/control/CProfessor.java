@@ -16,7 +16,7 @@ public class CProfessor extends CPadrao{
 private Professor professor;
 	
 	public CProfessor() {
-		super("br.unb.sece.model.professor");
+		super("br.unb.sece.model.Professor");
 		
 		this.professor= new Professor();
 	}
@@ -134,5 +134,10 @@ private Professor professor;
 		}
 
 }
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+		
+	}
 
 }

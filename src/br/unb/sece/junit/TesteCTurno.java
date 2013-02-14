@@ -69,12 +69,48 @@ public class TesteCTurno {
 	}
 
 	@Test (expected= AtributoNuloException.class)
-	public void testarDadosErrado() throws Exception{ // FALTAAAAAAA
+	public void testarDadosInicioErrado() throws Exception{ // FALTAAAAAAA
 		
 		
 		turno.setInicio(0);
-		turno.setInicio(0);
-		turno.setTurno("");
+		
+		CTurno.setTurno(turno);
+		
+		CTurno.verificarDados();
+		
+	}
+	
+	@Test (expected= AtributoNuloException.class)
+	public void testarDadosFimErrado() throws Exception{ // FALTAAAAAAA
+		
+		
+		turno.setFim(0);
+		
+		CTurno.setTurno(turno);
+		
+		CTurno.verificarDados();
+		
+	}
+	
+	@Test (expected= AtributoInvalidoException.class)
+	public void testarDadosFimIgualInicio() throws Exception{ // FALTAAAAAAA
+		
+		
+		turno.setFim(1);
+		turno.setInicio(1);
+		
+		CTurno.setTurno(turno);
+		
+		CTurno.verificarDados();
+		
+	}
+	
+	@Test (expected= AtributoInvalidoException.class)
+	public void testarDadosInicioMaiorFim() throws Exception{ // FALTAAAAAAA
+		
+		
+		turno.setFim(1);
+		turno.setInicio(1);
 		
 		CTurno.setTurno(turno);
 		
@@ -126,12 +162,13 @@ public class TesteCTurno {
 		
 		CTurno.receberObjetoAlterar(turno);
 		
+		
 		try{
 			CTurno.receberDados(panel, CTurno.OPERACAO_ALTERAR);
 		}
 		catch(Exception e){
-			//fail("Ocorreu um erro");
-			e.printStackTrace();
+			fail("Ocorreu um erro");
+			//e.printStackTrace();
 		}
 	}
 	
@@ -142,8 +179,8 @@ public class TesteCTurno {
 		try {
 			CTurno.excluir(turno);
 		} catch (Exception e) {
-			//fail("Ocorreu erro");
-			e.printStackTrace();
+			fail("Ocorreu erro");
+			//e.printStackTrace();
 		}
 	}
 	
@@ -167,7 +204,9 @@ public class TesteCTurno {
 		catch(Exception e) {
 			fail("Ocorreu erro");
 		}
-	}		
+	}
+	
+	
 }
 
 	

@@ -5,19 +5,19 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.unb.sece.control.CFuncionario;
 import br.unb.sece.control.CPadrao;
+import br.unb.sece.control.CProfessor;
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
-import br.unb.sece.model.Funcionario;
-import br.unb.sece.view.VFuncionario;
-import br.unb.sece.view.panelcadastropadrao.VCadFuncionario;
+import br.unb.sece.model.Professor;
+import br.unb.sece.view.VProfessor;
+import br.unb.sece.view.panelcadastropadrao.VCadProfessor;
 
-public class TesteCProfessor {
+public class TestarControleProfessor {
 
-	private CFuncionario CFuncionario;
-	private Funcionario funcionario;
-	private VFuncionario panel;
+	private CProfessor CProfessor;
+	private Professor professor;
+	private VProfessor panel;
 	
 	/*
 	private CProfessor CProfessor;
@@ -28,35 +28,34 @@ public class TesteCProfessor {
 	@Before
 	public void setUp(){
 		
-		CFuncionario = new CFuncionario();
-		funcionario = new Funcionario();
+		CProfessor = new CProfessor();
+		professor = new Professor();
 		
 		/*
 		CProfessor = new CProfessor();
 		professor = new professor(); */
 		
-		funcionario.setCpf("23453543");
-		funcionario.setNome("Funcionario");
-		funcionario.setSenha("Senha");
-		funcionario.setSexo("Sexo");
-		funcionario.setTipoFuncionario("Cargo");
-		funcionario.setTelefone("Telefone");
+		professor.setCpf("23453543");
+		professor.setNome("professor");
+		professor.setSenha("Senha");
+		professor.setSexo("Sexo");
+		professor.setTelefone("Telefone");
 		
 		/*
 		professor.setCpf("23453543");
-		professor.setNome("Funcionario");
+		professor.setNome("professor");
 		professor.setSenha("Senha");
 		professor.setSexo("Sexo");
-		professor.setTipoFuncionario("Cargo");
+		professor.setTipoprofessor("Cargo");
 		professor.setTelefone("Telefone"); */
 	
 		
-		panel = new VFuncionario();
+		panel = new VProfessor();
 		panel.criarPainel();
-		((VCadFuncionario) panel.getPanel()).getTxtNome().setText("Teste");
-		((VCadFuncionario) panel.getPanel()).getTxtTelefone().setText("Teste");
-		((VCadFuncionario) panel.getPanel()).getTxtCPF().setText("Teste");
-		((VCadFuncionario) panel.getPanel()).getTxtSenha().setText("Teste");
+		((VCadProfessor) panel.getPanel()).getTxtNome().setText("Teste");
+		((VCadProfessor) panel.getPanel()).getTxtTelefone().setText("Teste");
+		((VCadProfessor) panel.getPanel()).getTxtCPF().setText("Teste");
+		((VCadProfessor) panel.getPanel()).getTxtSenha().setText("Teste");
 		
 		/*
 		panel = new VProfessor();
@@ -70,7 +69,7 @@ public class TesteCProfessor {
 	@Test
 	public void testarInstancia() {
 
-		assertNotNull(CFuncionario);
+		assertNotNull(CProfessor);
 		//assertNotNull(CProfessor);
 	}
 	
@@ -78,16 +77,16 @@ public class TesteCProfessor {
 	public void testarDadosNome() throws Exception{
 		
 		
-		funcionario.setNome("");
+		professor.setNome("");
 		
-		CFuncionario.setFuncionario(funcionario);
+		CProfessor.setProfessor(professor);
 		
-		CFuncionario.verificarDados();
+		CProfessor.verificarDados();
 		
 		/*
 		professor.setNome("");
 		
-		CProfessor.setFuncionario(funcionario);
+		CProfessor.setprofessor(professor);
 		
 		CProfessor.verificarDados(); */
 		
@@ -98,11 +97,11 @@ public class TesteCProfessor {
 	public void testarDadosCPF() throws Exception{
 		
 		
-		funcionario.setCpf("");
+		professor.setCpf("");
 		
-		CFuncionario.setFuncionario(funcionario);
+		CProfessor.setProfessor(professor);
 		
-		CFuncionario.verificarDados();
+		CProfessor.verificarDados();
 		
 		
 	}
@@ -111,16 +110,16 @@ public class TesteCProfessor {
 	public void testarDadosTelefone() throws Exception{
 		
 		
-		funcionario.setTelefone("");
+		professor.setTelefone("");
 		
-		CFuncionario.setFuncionario(funcionario);
+		CProfessor.setProfessor(professor);
 		
-		CFuncionario.verificarDados();
+		CProfessor.verificarDados();
 		
 		/*
 		professor.setTelefone("");
 		
-		CProfessor.setFuncionario(funcionario);
+		CProfessor.setprofessor(professor);
 		
 		CProfessor.verificarDados();
 		*/
@@ -130,11 +129,11 @@ public class TesteCProfessor {
 	@Test
 	public void testarDadosValidos(){
 		
-		CFuncionario.setFuncionario(funcionario);
+		CProfessor.setProfessor(professor);
 		//CProfessor.setProfessor(professor);
 		
 		try {
-			CFuncionario.verificarDados();
+			CProfessor.verificarDados();
 		} catch (Exception e) {
 			fail("Ocorreu erro");
 		}
@@ -144,7 +143,7 @@ public class TesteCProfessor {
 	public void testarExclusao(){
 		
 		try {
-			CFuncionario.excluir(funcionario);
+			CProfessor.excluir(professor);
 		} catch (Exception e) {
 			//fail("Ocorreu erro");
 			e.printStackTrace();
@@ -164,7 +163,7 @@ public class TesteCProfessor {
 	public void testarSalvar(){
 		
 		try {
-			CFuncionario.salvar();
+			CProfessor.salvar();
 		} catch (Exception e) {
 			fail("Ocorreu erro");
 		}
@@ -185,7 +184,7 @@ public class TesteCProfessor {
 		
 		try
 		{
-			CFuncionario.getDefaultTableModel();
+			CProfessor.getDefaultTableModel();
 		}
 		catch(Exception e) {
 			fail("Ocorreu erro");
@@ -206,9 +205,9 @@ public class TesteCProfessor {
 	@Test (expected = AtributoInvalidoException.class)
 	public void testarReceberDadosNulo() throws Exception{
 		
-		VCadFuncionario funcionario = null;
+		VCadProfessor professor = null;
 		
-		CFuncionario.receberDados(funcionario, 1);
+		CProfessor.receberDados(professor, 1);
 		
 		/*
 		VCadProfessor professor = null;
@@ -222,14 +221,14 @@ public class TesteCProfessor {
 	public void testarReceberDadosInvalido() throws Exception{
 		
 		
-		CFuncionario.receberDados(funcionario, 1);
+		CProfessor.receberDados(professor, 1);
 		//CProfessor.receberDados(professor, 1);
 		
 	}
 	
 	@Test
 	public void testarPanelPadrao(){
-		assertNotNull(CFuncionario.getPanelPadrao(panel));
+		assertNotNull(CProfessor.getPanelPadrao(panel));
 		// assertNotNull(CProfessor.getPanelPadrao(panel));
 	}
 	
@@ -237,7 +236,7 @@ public class TesteCProfessor {
 	public void testarReceberDadosInsercao() throws Exception{
 		
 		try{
-			CFuncionario.receberDados(panel, CPadrao.OPERACAO_INSERIR);
+			CProfessor.receberDados(panel, CPadrao.OPERACAO_INSERIR);
 			//CProfessor.receberDados(panel, CPadrao.OPERACAO_INSERIR);
 		}
 		catch(Exception e){
@@ -250,11 +249,11 @@ public class TesteCProfessor {
 	public void testarReceberDadosAlterar() throws Exception{
 		
 		
-		CFuncionario.receberObjetoAlterar(funcionario);
+		CProfessor.receberObjetoAlterar(professor);
 		//CProfessor.receberObjetoAlterar(professor);
 		
 		try{
-			CFuncionario.receberDados(panel, CPadrao.OPERACAO_ALTERAR);
+			CProfessor.receberDados(panel, CPadrao.OPERACAO_ALTERAR);
 			//CProfessor.receberDados(panel, CPadrao.OPERACAO_ALTERAR);
 		}
 		catch(Exception e){
@@ -264,3 +263,4 @@ public class TesteCProfessor {
 	}
 
 }
+
