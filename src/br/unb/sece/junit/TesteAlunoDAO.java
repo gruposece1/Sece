@@ -34,7 +34,8 @@ public class TesteAlunoDAO {
 		}
 		catch(Exception e)
 		{
-			fail("Ocorreu um erro");
+			//fail("Ocorreu um erro");
+			e.printStackTrace();
 		}
 	}
 	

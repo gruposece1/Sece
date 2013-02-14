@@ -1,28 +1,28 @@
 package br.unb.sece.view;
 
-import java.util.ArrayList;
-
 import br.unb.sece.control.CFuncionario;
+import br.unb.sece.control.CProfessor;
 import br.unb.sece.model.Funcionario;
+import br.unb.sece.model.Professor;
 import br.unb.sece.view.panelcadastropadrao.VCadFuncionario;
 import br.unb.sece.view.panelcadastropadrao.VCadProfessor;
 
-public class VFuncionario extends VPadrao {
-
-	public VFuncionario() {
-		super();
-		this.setTitle("Cadastro de Funcionario");
-	}
+public class VProfessor extends VPadrao {
 	
-	@Override
+	public VProfessor(){
+		super();
+		this.setTitle("Cadastro de Professor");
+		
+	}
+
 	public void criarControle() {
-		this.controle= new CFuncionario();
+		this.controle= new CProfessor();
 		
 	}
 
 	@Override
 	public void criarPainel() {
-		VCadFuncionario painel = new VCadFuncionario();
+		VCadProfessor painel = new VCadProfessor();
 		this.panel = painel;
 		
 	}
@@ -30,24 +30,23 @@ public class VFuncionario extends VPadrao {
 	@Override
 	public void popularInterface() {
 
-		Funcionario funcionario = (Funcionario)this.retonarObjetoGrade();
-		VCadFuncionario vf = (VCadFuncionario)this.panel;
+		Professor professor = (Professor)this.retonarObjetoGrade();
+		VCadProfessor vf = (VCadProfessor)this.panel;
 		//va.getTextField().setText(a.getNome());
-		vf.getTxtNome().setText(funcionario.getNome());
-		vf.getTxtCPF().setText(funcionario.getCpf());
-		vf.getTxtTelefone().setText(funcionario.getTelefone());
-		vf.getTxtSenha().setText(funcionario.getSenha());
+		vf.getTxtNome().setText(professor.getNome());
+		vf.getTxtCPF().setText(professor.getCpf());
+		vf.getTxtTelefone().setText(professor.getTelefone());
+		vf.getTxtSenha().setText(professor.getSenha());
 		
-		if(funcionario.getSexo().equals("Feminino"))
+		if(professor.getSexo().equals("Feminino"))
 			vf.getRdbtFeminino().setSelected(true);
 		else
 			vf.getRdbtMasculino().setSelected(true);
 		
-		vf.getCBCargo().setSelectedItem(funcionario.getTipoFuncionario());
 		
 		//falta fazer
 		try {
-			this.controle.receberObjetoAlterar(funcionario);
+			this.controle.receberObjetoAlterar(professor);
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,4 +74,5 @@ public class VFuncionario extends VPadrao {
 		this.controle.receberDados(this);
 	}
 
+	
 }

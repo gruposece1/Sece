@@ -13,6 +13,11 @@ public class CFuncionario extends CPadrao{
 
 	private Funcionario funcionario;
 	
+	protected CFuncionario(String classeModel){
+		super(classeModel);
+		
+	}
+	
 	public CFuncionario() {
 		super("br.unb.sece.model.Funcionario");
 		
