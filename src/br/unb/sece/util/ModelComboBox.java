@@ -32,9 +32,7 @@ public class ModelComboBox extends AbstractListModel implements ComboBoxModel {
 		this.elements = new ArrayList();
 	} 
 	
-	public ModelComboBox(List elementos,List<ColunaPesquisa> colunas){
-		
-	}
+	
 	
 	public ModelComboBox(List elementos, String metodoId, String metodoDesc){
 		this.metodoId = metodoId;
@@ -53,7 +51,6 @@ public class ModelComboBox extends AbstractListModel implements ComboBoxModel {
 				id = (Long) objeto.getClass().getMethod(metodoId, null).invoke(objeto, null);
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				id = (long) this.elements2.size();
 			} 
