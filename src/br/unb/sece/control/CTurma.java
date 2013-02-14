@@ -305,6 +305,17 @@ public class CTurma {
 		turma.setAluno(alunosTurma);
 		turma.alterar();
 	}
+
+
+	public GradeHoraria getGradeHoraria() {
+		return gradeHoraria;
+	}
+
+
+	public void setGradeHoraria(GradeHoraria gradeHoraria) {
+		this.gradeHoraria = gradeHoraria;
+	}
+	
 	
 	
 
