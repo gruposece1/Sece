@@ -15,11 +15,11 @@ import br.unb.sece.util.ModelComboBox;
 public class CHorario {
 	
 	
-	List disciplinas ;
+	private List disciplinas ;
 	
-	ModelComboBox modelDisciplinas = null;
+	private ModelComboBox modelDisciplinas = null;
 	
-	ModelComboBox modelProfessores = null;
+	private ModelComboBox modelProfessores = null;
 	
 	private Horario obHorario;
 	
@@ -40,7 +40,7 @@ public class CHorario {
 		try{
 			this.modelProfessores = new ModelComboBox(this.getProfessoresDisponiveis(), "getIdPessoa", "getNome");
 		}catch(NullPointerException ex){
-			this.modelProfessores = new ModelComboBox(null,"getIdPessoa", "getNome");
+			this.modelProfessores = new ModelComboBox(new ArrayList(),"getIdPessoa", "getNome");
 			ex.printStackTrace();
 		}
 		return this.modelProfessores;
@@ -97,6 +97,18 @@ public class CHorario {
 
 	public void setObHorario(Horario obHorario) {
 		this.obHorario = obHorario;
+	}
+
+	public void setDisciplinas(List disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
+	public void setModelDisciplinas(ModelComboBox modelDisciplinas) {
+		this.modelDisciplinas = modelDisciplinas;
+	}
+
+	public void setModelProfessores(ModelComboBox modelProfessores) {
+		this.modelProfessores = modelProfessores;
 	}
 	
 	
