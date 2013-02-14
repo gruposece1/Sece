@@ -1,16 +1,17 @@
 package br.unb.sece.model;
 
-import java.util.List;
+
+import br.unb.sece.exceptions.BancoDeDadosException;
+import br.unb.sece.model.DAO.DisciplinaDAO;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import br.unb.sece.exceptions.BancoDeDadosException;
-import br.unb.sece.model.DAO.DisciplinaDAO;
-import br.unb.sece.model.entities.Horario;
-import br.unb.sece.util.HibernateUtil;
+
 
 @Entity
 public class Disciplina {
@@ -23,7 +24,7 @@ public class Disciplina {
 	 
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -31,7 +32,7 @@ public class Disciplina {
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public void setNome(String nome) {
@@ -42,47 +43,43 @@ public class Disciplina {
 	
 	public List getAll(){
 		
-		ArrayList<Disciplina> disciplina = new ArrayList<Disciplina>();
+		final ArrayList<Disciplina> disciplina = new ArrayList<Disciplina>();
 		
-		Disciplina disciplina1 = new Disciplina();
+		final Disciplina disciplina1 = new Disciplina();
 		disciplina1.setNome("Matemática");
 		disciplina.add(disciplina1);
 		
-		Disciplina disciplina2 = new Disciplina();
+		final Disciplina disciplina2 = new Disciplina();
 		disciplina2.setNome("Lingua Portuguesa");
 		disciplina.add(disciplina2);
 		
-		Disciplina disciplina3 = new Disciplina();
+		final Disciplina disciplina3 = new Disciplina();
 		disciplina3.setNome("História");
 		disciplina.add(disciplina3);
 		
-		Disciplina disciplina4 = new Disciplina();
+		final Disciplina disciplina4 = new Disciplina();
 		disciplina4.setNome("Geografia");
 		disciplina.add(disciplina1);
 		
-		DisciplinaDAO dao = new DisciplinaDAO();
-		
-		
+		final DisciplinaDAO dao = new DisciplinaDAO();
 		
 		return dao.getAll() ;
 	}
+		
 	
-	
-	
-	public void salvar(){
-		DisciplinaDAO dao = new DisciplinaDAO();
+	public void salvar() {
+		final DisciplinaDAO dao = new DisciplinaDAO();
 		dao.save(this);
 	}
 	
-	public void excluir() throws BancoDeDadosException{
-		DisciplinaDAO dao = new DisciplinaDAO();
+	public void excluir() throws BancoDeDadosException {
+		final DisciplinaDAO dao = new DisciplinaDAO();
 		dao.remove(this);
 	}
 	
-	public void alterar(){
-		DisciplinaDAO dao = new DisciplinaDAO();
+	public void alterar() {
+		final DisciplinaDAO dao = new DisciplinaDAO();
 		dao.update(this);
 	}
 
-	
 }

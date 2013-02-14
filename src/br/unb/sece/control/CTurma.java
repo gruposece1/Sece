@@ -21,10 +21,12 @@ import br.unb.sece.exceptions.GradeNulaException;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Horario;
+import br.unb.sece.model.Professor;
 import br.unb.sece.model.Serie;
 import br.unb.sece.model.Turma;
 import br.unb.sece.model.Turno;
 import br.unb.sece.util.HibernateUtil;
+import br.unb.sece.util.ModelComboBox;
 import br.unb.sece.util.gradehoraria.GradeHoraria;
 import br.unb.sece.view.VCadTurma;
 
@@ -33,13 +35,14 @@ import teste.Colecoes;
 
 public class CTurma {
 	
-	private Colecoes colecao;
 	//private Object[][] grade2;
 	private Turma turma;
 	private GradeHoraria gradeHoraria;
+	private ModelComboBox modelSerie = null;
+	private ModelComboBox modelTurno = null;
 	
 	public CTurma(){
-		colecao = new Colecoes();
+		
 	}
 	
 	
@@ -52,8 +55,8 @@ public class CTurma {
 	
 	public void receberDados(VCadTurma VTurma) throws Exception{
 		
-		Serie serie = this.guardaSerie(VTurma.getCBSerie().getSelectedItem().toString());
-		Turno t = this.guardaTurno(VTurma.getCBTurno().getSelectedItem().toString());
+		Serie serie = this.getSerieSelected();
+		Turno t = this.getTurnoSelected();
 		
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
@@ -184,54 +187,56 @@ public class CTurma {
 		return label;
 	}
 	
-	public ArrayList getListaTurno()
-	{
-		 return colecao.nomeTurno();
-	}
 	
-	public ArrayList getListaSerie()
-	{
-		 return colecao.nomeSerie();
-	}
+	
 	
 	public Object getHorario(int linha, int coluna)
 	{
 		return this.gradeHoraria.getHorario(linha, coluna);
 	}
 	
-	public  Serie guardaSerie(String itemSerie){
+	
+	
+	public ModelComboBox getModelSerie(){
 		
-		//Colecoes serie = new Colecoes();
-		
-		
-		for (Iterator<Serie> iter = colecao.serie.iterator(); iter.hasNext();)
-		{	
-			Serie s = iter.next();
-			if(s.getNome().equals(itemSerie))
-				return s;
+		if(this.modelSerie == null){
+			
+			Serie serie = new Serie();
+			this.modelSerie = new ModelComboBox(serie.getAll(), "getIdSerie", "getNome");
 			
 		}
 		
-		
-		return null;
+		return this.modelSerie;
 	}
 	
-	public  Turno guardaTurno(String itemTurno){
+	public ModelComboBox getModelTurnos(){
 		
-		//Colecoes turno = new Colecoes();
-		
-		
-		for (Iterator<Turno> iter =colecao.turno.iterator(); iter.hasNext();)
-		{	
-			Turno t = iter.next();
-			if(t.getTurno().equals(itemTurno))
-				return t;
+		if(this.modelTurno == null){
+			
+			Turno turno = new Turno();
+			this.modelTurno = new ModelComboBox(turno.getAll(), "getId", "getTurno");
 			
 		}
 		
-		
-		return null;
+		return this.modelTurno;
 	}
+	
+	public Turno getTurnoSelected() throws NullPointerException{
+		Turno obTurno = (Turno)this.modelTurno.getSelectedItemObject();
+		if(obTurno == null){
+			throw new NullPointerException("Turno");
+		}
+		return obTurno;
+	}
+	
+	public Serie getSerieSelected() throws NullPointerException{
+		Serie obSerie = (Serie)this.modelSerie.getSelectedItemObject();
+		if(obSerie == null){
+			throw new NullPointerException("Serie");
+		}
+		return obSerie;
+	}
+	
 	
 	public ArrayList<Aluno> getAlunos(Turma turma){
 		return (ArrayList)turma.getAluno();
@@ -287,13 +292,30 @@ public class CTurma {
 		ArrayList alunosTurma = new ArrayList();
 		for(int i = 0; i < alunos.size();i++){
 			String matricula = alunos.get(i).toString().split(" ")[0];
-			Aluno aluno = (Aluno) UtilList.getObject(todos, "getMatricula", matricula);
-			alunosTurma.add(aluno);
+			try{
+				Aluno aluno = (Aluno) UtilList.getObject(todos, "getMatricula", matricula);
+				alunosTurma.add(aluno); 
+			}catch(NullPointerException ex){
+				//Não faz nada
+				ex.printStackTrace();
+				
+			}
 		}
 		
 		turma.setAluno(alunosTurma);
 		turma.alterar();
 	}
+
+
+	public GradeHoraria getGradeHoraria() {
+		return gradeHoraria;
+	}
+
+
+	public void setGradeHoraria(GradeHoraria gradeHoraria) {
+		this.gradeHoraria = gradeHoraria;
+	}
+	
 	
 	
 

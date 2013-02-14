@@ -1,5 +1,8 @@
 package br.unb.sece.model;
 
+import br.unb.sece.exceptions.AtributoNuloException;
+import br.unb.sece.model.DAO.HorarioDAO;
+
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -8,20 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.TemporalType;
 
 import org.hibernate.Session;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
-
-import javax.persistence.Temporal;
-
-import br.unb.sece.exceptions.AtributoNuloException;
-import br.unb.sece.model.DAO.HorarioDAO;
-import br.unb.sece.util.HibernateUtil;
 
 
 @Entity
@@ -48,7 +43,8 @@ public class Horario {
 	@GeneratedValue
 	private Long idHorario;
 	
-	private Calendar hrInicial, hrFinal;
+	private Calendar hrInicial;
+	private Calendar hrFinal;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="idProfessor", insertable=true, updatable=true)
@@ -71,7 +67,7 @@ public class Horario {
 	private int diaSemana;
 	
 	public Long getIdHorario() {
-		return idHorario;
+		return this.idHorario;
 	}
 
 	public void setIdHorario(Long idHorario) {
@@ -79,7 +75,7 @@ public class Horario {
 	}
 
 	public Turma getTurma() {
-		return turma;
+		return this.turma;
 	}
 
 	public void setTurma(Turma turma) {
@@ -87,7 +83,7 @@ public class Horario {
 	}
 
 	public Calendar getHrInicial() {
-		return hrInicial;
+		return this.hrInicial;
 	}
 
 	public void setHrInicial(Calendar hrInicial) {
@@ -95,7 +91,7 @@ public class Horario {
 	}
 
 	public Calendar getHrFinal() {
-		return hrFinal;
+		return this.hrFinal;
 	}
 
 	public void setHrFinal(Calendar hrFinal) {
@@ -103,7 +99,7 @@ public class Horario {
 	}
 
 	public Professor getProfessor() {
-		return professor;
+		return this.professor;
 	}
 
 	public void setProfessor(Professor professor) {
@@ -111,7 +107,7 @@ public class Horario {
 	}
 
 	public Disciplina getDisciplina() {
-		return disciplina;
+		return this.disciplina;
 	}
 
 	public void setDisciplina(Disciplina disciplina) {
@@ -119,7 +115,7 @@ public class Horario {
 	}
 	
 	public void salvar() throws AtributoNuloException{
-		HorarioDAO hr = new HorarioDAO();
+		final HorarioDAO hr = new HorarioDAO();
 		this.verificar();
 		hr.save(this);
 	}
@@ -133,22 +129,23 @@ public class Horario {
 		}
 	}
 	public void salvar(Session session) throws AtributoNuloException{
-		HorarioDAO hr = new HorarioDAO(session);
+		final HorarioDAO hr = new HorarioDAO(session);
 		//hr.close();
-		if(this.disciplina != null){
+		
+		if(this.disciplina != null)
 			System.out.println("O id Disciplina: " + this.disciplina.getId());
-		}
+		
 		this.verificar();
-		hr.save(this,session);
+		hr.save(this, session);
 	}
 	
 	public Horario  horarioAtualTurma(Turma turma) {
-		HorarioDAO hr = new HorarioDAO();
-		return hr.horarioAtualTurma(Horario.class,turma);
+		final HorarioDAO hr = new HorarioDAO();
+		return hr.horarioAtualTurma(Horario.class, turma);
 	}
 
 	public int getDiaSemana() {
-		return diaSemana;
+		return this.diaSemana;
 	}
 	
 	
@@ -157,7 +154,7 @@ public class Horario {
 		this.diaSemana = diaSemana;
 	}
 	
-	public String getDiaSemanaString(){
+	public String getDiaSemanaString() {
 		
 		switch(this.diaSemana){
 			case Horario.DOMINGO_BANCO:
@@ -180,8 +177,9 @@ public class Horario {
 		
 	}
 	
-	public static String getDiaSemanaString(int diaDaSemana){
-		assert(diaDaSemana >= 0 && diaDaSemana <= 6);
+	public static String getDiaSemanaString(int diaDaSemana) {
+		assert diaDaSemana >= 0 && diaDaSemana <= 6;
+		
 		switch(diaDaSemana){
 			case Horario.DOMINGO_BANCO:
 				return Horario.DOMINGO;
@@ -202,12 +200,5 @@ public class Horario {
 		return " ";
 		
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

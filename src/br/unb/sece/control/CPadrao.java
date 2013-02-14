@@ -18,19 +18,15 @@ import br.unb.sece.view.VPadrao;
 
 public class CPadrao implements ICadastroPadrao   {
 	
-	private String classeModel;
-	
-	private List listaTabela;
-	
+	protected Object objAlterar;
+	protected String metodoBusca = null;
 	protected Object titulos[];
-	
 	protected Object[] metodos;
-	
+	private String classeModel;
+	private List listaTabela;
 	private ModeloDeTabela modeloDeTabela;
 	
-	protected Object objAlterar;
 	
-	protected String metodoBusca = null;
 	
 	public CPadrao (String classeModel){
 		
@@ -42,11 +38,11 @@ public class CPadrao implements ICadastroPadrao   {
 	}
 	
 	public  void definirTitulosEMetodos(){
-		Object[] titulos = {};
+		final Object[] titulos = {};
 		
 		this.titulos = titulos;
 		
-		Object [] metodos = {};
+		 final Object [] metodos = {};
 		
 		this.metodos = metodos;
 	}
@@ -114,8 +110,8 @@ public class CPadrao implements ICadastroPadrao   {
 	
 	public JPanel getPanelPadrao(Object obj){
 		VPadrao frame = (VPadrao)obj;
-		JPanel p = (JPanel)frame.getPanel();
-		return p;
+		JPanel panel = (JPanel)frame.getPanel();
+		return panel;
 	}
 
 	@Override

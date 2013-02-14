@@ -1,27 +1,29 @@
 package br.unb.sece.model;
 
+import br.unb.sece.model.DAO.ResponsavelDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 
-import br.unb.sece.model.DAO.AlunoDAO;
-import br.unb.sece.model.DAO.ResponsavelDAO;
-
 @Entity
 public class Responsavel extends Pessoa
 {
 	
-	private String telefone, endereco, CEP, email, CPF;
+	private String telefone;
+	private String endereco;
+	private String CEP;
+	private String email;
+	private String CPF;
 	
-	public Responsavel()
-	{
+	public Responsavel() {
 		
 	}
 	
 
 	public String getTelefone() {
-		return telefone;
+		return this.telefone;
 	}
 
 	public void setTelefone(String telefone) {
@@ -29,7 +31,7 @@ public class Responsavel extends Pessoa
 	}
 
 	public String getEndereco() {
-		return endereco;
+		return this.endereco;
 	}
 
 	public void setEndereco(String endereco) {
@@ -37,30 +39,30 @@ public class Responsavel extends Pessoa
 	}
 
 	public String getCEP() {
-		return CEP;
+		return this.CEP;
 	}
 
-	public void setCEP(String cEP) {
-		CEP = cEP;
+	public void setCEP(String CEP) {
+		this.CEP = CEP;
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	
-
-	public List getAll(){
-		ResponsavelDAO dao = new ResponsavelDAO();
-			List<Responsavel> lista = new ArrayList(dao.listAll(Responsavel.class));
+	public List getAll() {
+		final ResponsavelDAO dao = new ResponsavelDAO();
+		final List<Responsavel> lista = new ArrayList(dao.listAll(Responsavel.class));
+		
 		return lista;
 	}
 	
 	public void salvar(){
-		ResponsavelDAO dao = new ResponsavelDAO();
+		final ResponsavelDAO dao = new ResponsavelDAO();
 		dao.save(this);
 	}	
 	

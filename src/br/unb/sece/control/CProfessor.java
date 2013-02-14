@@ -28,7 +28,7 @@ private Professor professor;
 	
 	public void definirTitulosEMetodos() {
 		
-		Object[] titulos = {"Nome", "CPF","Telefone"};
+		final Object[] titulos = {"Nome","CPF","Telefone"};
 		
 		this.titulos = titulos;
 		
@@ -139,6 +139,7 @@ private Professor professor;
 		}
 
 
+
 	}
 	
 	public static DefaultListModel getListDisciplinas(){
@@ -159,5 +160,11 @@ private Professor professor;
 	}
 	
 	
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+		
+	}
+
 }
    

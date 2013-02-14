@@ -1,13 +1,11 @@
 package br.unb.sece.model.DAO;
 
-import java.io.Serializable;
+import br.unb.sece.exceptions.BancoDeDadosException;
+import br.unb.sece.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.exception.ConstraintViolationException;
 
-import br.unb.sece.exceptions.BancoDeDadosException;
-import br.unb.sece.model.entities.Horario;
-import br.unb.sece.util.HibernateUtil;
 
 /**
  * Implementa comportamentos padrões das classes DAO

@@ -6,8 +6,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.unb.sece.model.Disciplina;
-import br.unb.sece.model.entities.Horario;
-
 
 public class DisciplinaDAO extends Persistencia {
 

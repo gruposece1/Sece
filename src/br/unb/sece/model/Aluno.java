@@ -1,5 +1,8 @@
 package br.unb.sece.model;
 
+import br.unb.sece.exceptions.BancoDeDadosException;
+import br.unb.sece.model.DAO.AlunoDAO;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,15 +16,12 @@ import javax.persistence.ManyToMany;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import br.unb.sece.exceptions.BancoDeDadosException;
-import br.unb.sece.model.DAO.AlunoDAO;
-import br.unb.sece.util.HibernateUtil;
-
 
 @Entity
 public class Aluno extends Pessoa{
 	
-	private String matricula, dtNascimento;
+	private String matricula;
+	private String dtNascimento;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="alunoResponsavel", schema="sece", joinColumns={@JoinColumn(name="idAluno")},	inverseJoinColumns={@JoinColumn(name="idResponsavel")})
@@ -35,7 +35,7 @@ public class Aluno extends Pessoa{
 	Collection<Turma> turmas = new ArrayList<Turma>();
 	*/
 	public String getMatricula() {
-		return matricula;
+		return this.matricula;
 	}
 
 	public void setMatricula(String matricula) {
@@ -43,7 +43,7 @@ public class Aluno extends Pessoa{
 	}
 
 	public String getDtNascimento() {
-		return dtNascimento;
+		return this.dtNascimento;
 	}
 
 	public void setDtNascimento(String dtNascimento) {
@@ -51,7 +51,7 @@ public class Aluno extends Pessoa{
 	}
 
 	public Collection<Responsavel> getResponsaveis() {
-		return responsaveis;
+		return this.responsaveis;
 	}
 
 	public void setResponsaveis(Collection<Responsavel> responsaveis) {
@@ -60,30 +60,25 @@ public class Aluno extends Pessoa{
 	
 	
 
-	public void salvar(){
-		AlunoDAO dao = new AlunoDAO();
+	public void salvar() {
+		final AlunoDAO dao = new AlunoDAO();
 		dao.save(this);
 	}
 	
-	public static List getAll(){
-		AlunoDAO dao = new AlunoDAO();
+	public static List getAll() {
+		final AlunoDAO dao = new AlunoDAO();
 		
 		return dao.listAll(Aluno.class);
 	
 	}
 
-	public void excluir() throws BancoDeDadosException{
-		AlunoDAO dao = new AlunoDAO();
+	public void excluir() throws BancoDeDadosException {
+		final AlunoDAO dao = new AlunoDAO();
 		dao.remove(this);
 	}
 	
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-	
-
-	
-	
 	
 }

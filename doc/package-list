@@ -1,0 +1,13 @@
+br.unb.sece.control
+br.unb.sece.exceptions
+br.unb.sece.execucao
+br.unb.sece.junit
+br.unb.sece.model
+br.unb.sece.model.DAO
+br.unb.sece.util
+br.unb.sece.util.crudpadrao
+br.unb.sece.util.gradehoraria
+br.unb.sece.view
+br.unb.sece.view.panelcadastropadrao
+org.apache.commons.mail
+teste

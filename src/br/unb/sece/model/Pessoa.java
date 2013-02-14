@@ -12,65 +12,53 @@ import javax.persistence.InheritanceType;
 public class Pessoa
 {
 	public static final String MASCULINO = "Masculino";
-	
 	public static final String FEMININO = "Feminino";
-	@Id
-	@GeneratedValue
-	private Long idPessoa;
-	private String nome, sexo;
 	
 	protected String cpf;
 	
+	@Id
+	@GeneratedValue
+	private Long idPessoa;
+	private String nome;
+	private String sexo;
 	
-	public Pessoa()
-	{
+		
+	public Pessoa() {
 		
 	}
 	
 	
 
 	public Long getIdPessoa() {
-		return idPessoa;
+		return this.idPessoa;
 	}
-
-
 
 	public void setIdPessoa(Long idPessoa) {
 		this.idPessoa = idPessoa;
 	}
 
-
-
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
-	public void setNome(String nome)
-	{
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
 	public String getSexo() {
-		return sexo;
+		return this.sexo;
 	}
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 
-
-
 	public String getCpf() {
-		return cpf;
+		return this.cpf;
 	}
-
-
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
-	
-
 
 }

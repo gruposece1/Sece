@@ -66,6 +66,7 @@ public class CTurno extends CPadrao {
 	
 	@Override
 	public void verificarDados() throws Exception{
+		
 
 		if(this.turno.getInicio()== 0 || this.turno.getFim()== 0){
 			throw new AtributoNuloException("Horarios de Turnos Inválidos!");}
@@ -124,7 +125,8 @@ public class CTurno extends CPadrao {
 				turno.setInicio(Integer.parseInt(String.valueOf(panel.getTxtInicio().getText())));
 				turno.setFim(Integer.parseInt(String.valueOf(panel.getTxtFim().getText())));
 				turno.setTurno(String.valueOf(panel.getCBTipo().getSelectedItem()));
-				this.verificarDados();
+				
+				//this.verificarDados();
 				panel.getTxtInicio().setText("");
 				panel.getTxtFim().setText("");
 				

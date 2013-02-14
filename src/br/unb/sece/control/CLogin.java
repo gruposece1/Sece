@@ -9,8 +9,8 @@ public class CLogin {
 	
 	public void passarDados(String nome, String login)
 	{
-		usuario = new Usuario(nome, login);
-		temPermissao=usuario.verificarLogin();
+		this.usuario = new Usuario(nome, login);
+		this.temPermissao=usuario.verificarLogin();
 	}
 	
 	public boolean getVerificar()

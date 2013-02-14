@@ -74,8 +74,8 @@ public class TestarCSerie {
 		try {
 			CSerie.excluir(serie);
 		} catch (Exception e) {
-			//fail("Ocorreu erro");
-			e.printStackTrace();
+			fail("Ocorreu erro");
+			//e.printStackTrace();
 		}
 	}
 	
@@ -98,6 +98,19 @@ public class TestarCSerie {
 		catch(Exception e) {
 			fail("Ocorreu erro");
 		}
+		
+	}
+	
+	@Test (expected= AtributoNuloException.class)
+	public void testarDadosNome() throws Exception{
+		
+		
+		serie.setNome("");
+		
+		CSerie.setSerie(serie);
+		
+		CSerie.verificarDados();
+		
 		
 	}
 	

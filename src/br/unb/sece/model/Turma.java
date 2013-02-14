@@ -1,24 +1,23 @@
 package br.unb.sece.model;
 
+import br.unb.sece.model.DAO.TurmaDAO;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.ManyToMany;
-import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.Session;
-import org.hibernate.annotations.*;
-
-import br.unb.sece.model.DAO.TurmaDAO;
-import br.unb.sece.util.HibernateUtil;
+import org.hibernate.annotations.*; //Especificar o que está sendo importado
 
 @Entity
 public class Turma {
@@ -47,10 +46,8 @@ public class Turma {
 	private Collection<Aluno> aluno = new ArrayList<Aluno>();
 	
 	
-
-	
 	public Long getIdTurma() {
-		return idTurma;
+		return this.idTurma;
 	}
 
 	public void setIdTurma(Long idTurma) {
@@ -58,11 +55,11 @@ public class Turma {
 	}
 
 	public Collection<Aluno> getAluno() {
-		return aluno;
+		return this.aluno;
 	}
 	
 	public ArrayList<Aluno> getAlunos(){
-		return (ArrayList)this.aluno;
+		return (ArrayList) this.aluno;
 	}
 
 	public void setAluno(Collection<Aluno> aluno) {
@@ -70,7 +67,7 @@ public class Turma {
 	}
 
 	public String getNomeTurma() {
-		return nomeTurma;
+		return this.nomeTurma;
 	}
 
 	public void setNomeTurma(String nomeTurma) {
@@ -78,7 +75,7 @@ public class Turma {
 	}
 
 	public Serie getSerie() {
-		return serie;
+		return this.serie;
 	}
 
 	public void setSerie(Serie serie) {
@@ -86,45 +83,42 @@ public class Turma {
 	}
 	
 	public Turno getTurno() {
-		return turno;
+		return this.turno;
 	}
 
 	public void setTurno(Turno turno) {
 		this.turno = turno;
 	}
 	
-	
-	
 	public static List getAll(){
-		TurmaDAO dao = new TurmaDAO();
-		List<Object> lista = dao.listAll(Turma.class);
+		final TurmaDAO dao = new TurmaDAO();
+		final List<Object> lista = dao.listAll(Turma.class);
+		
 		return lista;
 	}
 	
-	public void salvar(){
-		TurmaDAO dao = new TurmaDAO();
+	public void salvar() {
+		final TurmaDAO dao = new TurmaDAO();
+		
 		dao.save(this);
 	}
 	
-	public void salvar(Session session){
-		TurmaDAO dao = new TurmaDAO(session);
+	public void salvar(Session session) {
+		final TurmaDAO dao = new TurmaDAO(session);
+		
 		//dao.close();
 		System.out.println("O id: " + this.getSerie().getIdSerie());
 		System.out.println("O id turno: " + this.getTurno().getId());
-		dao.save((Turma)this, session);
+		
+		dao.save((Turma) this, session);
 		
 	}
 	
-	public void alterar(){
-		TurmaDAO dao = new TurmaDAO();
+	public void alterar() {
+		final TurmaDAO dao = new TurmaDAO();
 		
 		dao.update(this);
 	}
-	
-	
-	
-	
-	
-	
+		
 
 }

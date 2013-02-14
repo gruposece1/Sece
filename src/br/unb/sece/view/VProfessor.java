@@ -6,6 +6,7 @@ import br.unb.sece.model.Funcionario;
 import br.unb.sece.model.Professor;
 import br.unb.sece.view.panelcadastropadrao.VCadFuncionario;
 import br.unb.sece.view.panelcadastropadrao.VCadProfessor;
+import javax.swing.JScrollPane;
 
 public class VProfessor extends VPadrao {
 	
@@ -73,6 +74,4 @@ public class VProfessor extends VPadrao {
 		
 		this.controle.receberDados(this);
 	}
-
-	
 }

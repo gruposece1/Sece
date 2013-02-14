@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Session;
 
 import br.unb.sece.model.Turma;
-import br.unb.sece.model.entities.Horario;
 
 public class TurmaDAO extends Persistencia {
 

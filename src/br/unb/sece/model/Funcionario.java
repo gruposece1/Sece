@@ -1,29 +1,30 @@
 package br.unb.sece.model;
 
-import java.util.List;
-
-import javax.persistence.Entity;
 
 import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.DAO.FuncionarioDAO;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+
 @Entity
 public class Funcionario extends Pessoa{
 	
-	private String telefone, senha, tipoFuncionario;
+	private String telefone;
+	private String senha; 
+	private String tipoFuncionario;
 	
-	public Funcionario()
-	{
+	public Funcionario() {
 		
 	}
 	
-	public Funcionario (String tipo)
-	{
+	public Funcionario (String tipo) {
 		this.tipoFuncionario = tipo;
 	}
 
 	public String getTelefone() {
-		return telefone;
+		return this.telefone;
 	}
 
 	public void setTelefone(String telefone) {
@@ -31,9 +32,8 @@ public class Funcionario extends Pessoa{
 	}
 
 	
-
 	public String getSenha() {
-		return senha;
+		return this.senha;
 	}
 
 	public void setSenha(String senha) {
@@ -41,32 +41,31 @@ public class Funcionario extends Pessoa{
 	}
 
 	public String getTipoFuncionario() {
-		return tipoFuncionario;
+		return this.tipoFuncionario;
 	}
 
 	public void setTipoFuncionario(String tipoFuncionario) {
 		this.tipoFuncionario = tipoFuncionario;
 	}
 	
-	public void salvar(){
-		FuncionarioDAO dao = new FuncionarioDAO();
+	public void salvar() {
+		final FuncionarioDAO dao = new FuncionarioDAO();
 		dao.save(this);
 	}
 	
-	public void excluir() throws BancoDeDadosException{
-		FuncionarioDAO dao = new FuncionarioDAO();
+	public void excluir() throws BancoDeDadosException {
+		final FuncionarioDAO dao = new FuncionarioDAO();
 		dao.remove(this);
 	}
 	
-	public  List getAll(){
-		FuncionarioDAO dao = new FuncionarioDAO();
+	public  List getAll() {
+		final FuncionarioDAO dao = new FuncionarioDAO();
 		
 		return dao.listAll(Funcionario.class);
-	
 	}
 	
 	public List<Funcionario> listCordenadoresSecretarias(){
-		FuncionarioDAO dao = new FuncionarioDAO();
+		final FuncionarioDAO dao = new FuncionarioDAO();
 		return dao.listCordenadoresSecretarias();
 		
 	}

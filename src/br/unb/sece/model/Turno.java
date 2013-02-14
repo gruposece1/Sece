@@ -1,17 +1,12 @@
 package br.unb.sece.model;
 
+import br.unb.sece.exceptions.BancoDeDadosException;
+import br.unb.sece.model.DAO.TurnoDAO;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import br.unb.sece.exceptions.BancoDeDadosException;
-import br.unb.sece.model.DAO.SerieDAO;
-import br.unb.sece.model.DAO.TurnoDAO;
-import br.unb.sece.util.HibernateUtil;
-
-import teste.Colecoes;
 
 @Entity
 public class Turno {
@@ -23,11 +18,11 @@ public class Turno {
 	@GeneratedValue
 	private Long id;
 	
-	private float inicio, fim;
+	private float inicio;
+	private float fim;
 	private String turno;
 	
-	public Turno()
-	{
+	public Turno() {
 		
 	}
 	
@@ -39,26 +34,31 @@ public class Turno {
 	}
 
 	public float getInicio() {
-		return inicio;
+		return this.inicio;
 	}
+	
 	public void setInicio(float inicio) {
 		this.inicio = inicio;
 	}
+	
 	public float getFim() {
-		return fim;
+		return this.fim;
 	}
+	
 	public void setFim(float fim) {
 		this.fim = fim;
 	}
+	
 	public String getTurno() {
-		return turno;
+		return this.turno;
 	}
+	
 	public void setTurno(String turno) {
 		this.turno = turno;
 	}
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -66,51 +66,50 @@ public class Turno {
 	}
 	
 	public List getAll(){
-
-		TurnoDAO dao = new TurnoDAO();
+		final TurnoDAO dao = new TurnoDAO();
 		
 		return dao.listAll(Turno.class);
 
 	}
 	
-	public void salvar(){
-		TurnoDAO dao = new TurnoDAO();
+	public void salvar() {
+		final TurnoDAO dao = new TurnoDAO();
+
 		dao.save(this);
 	}
 	
-	public void excluir() throws BancoDeDadosException{
-		TurnoDAO dao = new TurnoDAO();
+	public void excluir() throws BancoDeDadosException {
+		final TurnoDAO dao = new TurnoDAO();
+		
 		dao.remove(this);
 	}
 	
 	public void alterar(){
-		TurnoDAO dao = new TurnoDAO();
+		final TurnoDAO dao = new TurnoDAO();
+		
 		dao.update(this);
 	}
 	
-	public static String[] getTurnos(){
-		String[] tipo = {"Matutino", "Vespertino", "Noturno"};
+	public static String[] getTurnos() {
+		final String[] tipo = {"Matutino", "Vespertino", "Noturno"};
+		
 		return tipo;
-		
-		
 	}
 	
-	public static int getIndiceTurno(String turno){
-		int retorno =0;
-		String[] turnos = Turno.getTurnos();
+	public static int getIndiceTurno(String turno) {
+		int retorno = 0;
+		final String[] turnos = Turno.getTurnos();
 		
-		for (int i = 0; i <turnos.length; i++){
-			
-			if (turnos[i].equals(turno)){
-				
-			retorno=i;
-			
-			break;
+		for (int i = 0; i <turnos.length; i++) {
+			if (turnos[i].equals(turno)) {
+				retorno=i;
+				break;
 			}
+		}
 		
-		}
 		return retorno;
-		}
 	}
+
+}
 	
 

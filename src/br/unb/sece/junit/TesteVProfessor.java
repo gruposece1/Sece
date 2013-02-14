@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.Professor;
+import br.unb.sece.view.VProfessor;
 
 
 
