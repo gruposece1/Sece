@@ -112,7 +112,7 @@ public class VTurmaAluno extends JFrame{
 		lblTurma.setBounds(10, 11, 58, 14);
 		contentPane.add(lblTurma);
 		
-		JLabel lblNomeTurma = new JLabel(turma.getTurma().getSerie()+""+turma.getTurma().getNomeTurma());
+		JLabel lblNomeTurma = new JLabel(turma.getTurma().getSerie().getNome()+" / "+turma.getTurma().getNomeTurma());
 		lblNomeTurma.setBounds(74, 11, 146, 14);
 		contentPane.add(lblNomeTurma);
 		

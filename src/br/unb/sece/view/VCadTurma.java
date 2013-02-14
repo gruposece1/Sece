@@ -88,7 +88,7 @@ public class VCadTurma extends JFrame implements ActionListener {
 		lblTurno.setBounds(10, 58, 46, 14);
 		contentPane.add(lblTurno);
 		
-		CBTurno = new JComboBox(CTurma.getListaTurno().toArray());
+		CBTurno = new JComboBox(CTurma.getModelTurnos());
 		CBTurno.setBounds(60, 55, 86, 20);
 		contentPane.add(CBTurno);
 		
@@ -182,27 +182,7 @@ public class VCadTurma extends JFrame implements ActionListener {
 		}
 		
 		if(e.getSource().equals(this.btnGerarGrade)){
-			Turno turno;
-			Serie serie;
-			
-			
-			String itemTurno = CBTurno.getSelectedItem().toString(); 
-			String itemSerie = CBSerie.getSelectedItem().toString(); 
-			
-			
-			turno = CTurma.guardaTurno(itemTurno);
-			serie = CTurma.guardaSerie(itemSerie);
-			
-			if(turno != null)
-				System.out.println("ok\n");
-			if(serie != null)
-				System.out.println("ok2\n");
-			
-			
-			
-			table.setModel(CTurma.gerarLabel(serie));
-			CTurma.gerarGrade(serie, turno);
-			this.criarBotoes(serie.getQtdeDias(),serie.getQtdeHorarios());
+			this.gerarGrade();
 		}
 		
 		if(e.getSource() instanceof JButtonGradeHorario){
@@ -215,6 +195,22 @@ public class VCadTurma extends JFrame implements ActionListener {
 		
 		
 		
+	}
+	
+	
+	private void gerarGrade(){
+		Turno turno;
+		Serie serie;
+		
+		try{
+			turno = CTurma.getTurnoSelected();
+			serie = CTurma.getSerieSelected();
+			table.setModel(CTurma.gerarLabel(serie));
+			CTurma.gerarGrade(serie, turno);
+			this.criarBotoes(serie.getQtdeDias(),serie.getQtdeHorarios());
+		}catch(NullPointerException ex){
+			JOptionPane.showMessageDialog(null, "O campo deve ser preenchido: " + ex.getMessage(), "Atenção", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	private void criarBotoes(int qtdeDias, int qtdeHorarios){
