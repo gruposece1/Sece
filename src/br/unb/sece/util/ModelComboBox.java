@@ -43,7 +43,7 @@ public class ModelComboBox extends AbstractListModel implements ComboBoxModel {
 	}
 	
 	private void gerarElements2(List elementos,String metodoId){
-		
+		assert(elementos != null);
 		this.elements2 = new HashMap<Long, Object>();
 		this.mapeamento = new ArrayList<Long>();
 		for(int i = 0; i < elementos.size();i++){
