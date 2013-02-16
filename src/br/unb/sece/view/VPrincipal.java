@@ -218,6 +218,20 @@ public class VPrincipal extends JFrame {
 		mnAdministrao.add(mntmMatricularAluno);
 		mnAdministrao.add(mntmChamada);
 		
+		JMenuItem mntmLancarNota = new JMenuItem("Lançar Nota");
+		mntmLancarNota.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					VLancarNota vnota = new VLancarNota();
+					vnota.setVisible(true);
+				} catch (Exception a) {
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro no processamento", "Atenção", JOptionPane.ERROR_MESSAGE);
+					a.printStackTrace();
+				}
+			}
+		});
+		mnAdministrao.add(mntmLancarNota);
+		
 		JMenuItem mntmRelatorios = new JMenuItem("Relatórios Bimestrais");
 		mnAdministrao.add(mntmRelatorios);
 		
