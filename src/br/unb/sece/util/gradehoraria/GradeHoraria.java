@@ -1,17 +1,31 @@
 package br.unb.sece.util.gradehoraria;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
+import org.hibernate.Session;
+
+import br.unb.sece.exceptions.AtributoInvalidoException;
+import br.unb.sece.exceptions.AtributoNuloException;
+import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Horario;
 import br.unb.sece.model.Serie;
+import br.unb.sece.model.Turma;
+import br.unb.sece.model.TurmaDisciplina;
 import br.unb.sece.model.Turno;
 
 public class GradeHoraria {
 	
 	private Object[][] gradeDeHorarios;
+	
+	private HashMap<Disciplina,TurmaDisciplina> disciplinasTurma;
 	
 	public GradeHoraria(Serie serie, Turno turno){
 		
@@ -69,13 +83,59 @@ public class GradeHoraria {
 	
 	}
 	
-	public void verificarGrade(){
+	public void verificarGrade() throws AtributoNuloException, AtributoInvalidoException{
 		for(int i = 0 ; i < this.gradeDeHorarios.length; i++){
 			Object[] linha = this.gradeDeHorarios[i];
 			for(int j = 0; j < linha.length; j++){
 				Horario obHorario = (Horario)linha[j];
-				
+				obHorario.verificar();
 			}
+		}
+	}
+	
+	public void salvarGrade(Session session) throws AtributoNuloException, AtributoInvalidoException{
+		for(int i = 0 ; i < this.gradeDeHorarios.length; i++){
+			Object[] linha = this.gradeDeHorarios[i];
+			for(int j = 0; j < linha.length; j++){
+				Horario obHorario = (Horario)linha[j];
+				TurmaDisciplina turmaDisciplina = this.disciplinasTurma.get(obHorario.getDisciplina());
+				obHorario.setTurmaDisciplina(turmaDisciplina);
+				obHorario.salvar(session);
+			}
+		}
+	}
+	
+	public List getDisciplinasGrade(){
+		HashMap<Disciplina,Integer> disciplinas =  new HashMap<Disciplina, Integer>();
+		for(int i = 0 ; i < this.gradeDeHorarios.length; i++){
+			Object[] linha = this.gradeDeHorarios[i];
+			for(int j = 0; j < linha.length; j++){
+				Horario obHorario = (Horario)linha[j];
+				disciplinas.put(obHorario.getDisciplina(), 1);
+			}
+		}
+		
+		Set<Disciplina> disciplinasSet = disciplinas.keySet();
+		Iterator iDisciplinasSet = disciplinasSet.iterator();
+		ArrayList<Disciplina> listDisciplinas = new ArrayList<Disciplina>();
+		while(iDisciplinasSet.hasNext()){
+			Disciplina obDisciplina = (Disciplina) iDisciplinasSet.next();
+			listDisciplinas.add(obDisciplina);
+		}
+		return listDisciplinas;
+	}
+	
+	public void gerarTurmasDisciplinas(Turma turma, Session session){
+		List listaDisciplinas = this.getDisciplinasGrade();
+		this.disciplinasTurma = new HashMap<Disciplina,TurmaDisciplina>();
+		for(int i = 0 ; i < listaDisciplinas.size(); i++){
+			TurmaDisciplina turmaDisciplina = new TurmaDisciplina();
+			turmaDisciplina.setTurma(turma);
+			Disciplina obDisciplina = (Disciplina)listaDisciplinas.get(i);
+			turmaDisciplina.setDisciplina(obDisciplina);
+			turmaDisciplina.salvar(session);
+			this.disciplinasTurma.put(obDisciplina, turmaDisciplina);
+			
 		}
 	}
 	

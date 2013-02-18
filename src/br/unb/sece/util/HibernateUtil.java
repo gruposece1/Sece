@@ -14,6 +14,7 @@ import br.unb.sece.model.Professor;
 import br.unb.sece.model.Responsavel;
 import br.unb.sece.model.Serie;
 import br.unb.sece.model.Turma;
+import br.unb.sece.model.TurmaDisciplina;
 import br.unb.sece.model.Turno;
 
 
@@ -36,6 +37,7 @@ public class HibernateUtil {
 		cfg.addAnnotatedClass(Turno.class);
 		cfg.addAnnotatedClass(Serie.class);
 		cfg.addAnnotatedClass(Turma.class);
+		cfg.addAnnotatedClass(TurmaDisciplina.class);
 		if(factory == null){
 			factory = cfg.buildSessionFactory();
 		}
@@ -57,6 +59,7 @@ public class HibernateUtil {
 			cfg.addAnnotatedClass(Turno.class);
 			cfg.addAnnotatedClass(Serie.class);
 			cfg.addAnnotatedClass(Turma.class);
+			cfg.addAnnotatedClass(TurmaDisciplina.class);
 			factory = cfg.buildSessionFactory();
 			session = factory.openSession();
 		}

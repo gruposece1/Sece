@@ -7,10 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.Session;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
+import br.unb.sece.model.DAO.TurmaDisciplinaDAO;
 
 @Entity
 public class TurmaDisciplina {
@@ -52,6 +55,16 @@ public class TurmaDisciplina {
 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
+	}
+	
+	public void salvar(){
+		TurmaDisciplinaDAO dao = new TurmaDisciplinaDAO();
+		dao.save(this);
+	}
+	
+	public void salvar(Session session){
+		TurmaDisciplinaDAO dao = new TurmaDisciplinaDAO();
+		dao.save(this,session);
 	}
 	
 	

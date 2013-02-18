@@ -41,13 +41,13 @@ public class ProfessorDAO extends Persistencia {
 			
 					"pd.idDisciplina = " + disciplina + " and " +
 					"p.idPessoa not in( "+ 
-						"select idProfessor from  horario h  where "+
+						"select idProfessor from  horario h inner join turmadisciplina td on h.idTurmaDisciplina = td.idTurmaDisciplina   where "+
 						"(CONVERT(h.hrInicial,TIME)  between CONVERT('" + hrInicial + " ',TIME) and CONVERT('"+hrFinal+"',TIME) or "+
 						"CONVERT(h.hrFinal,TIME) between CONVERT('" + hrInicial +" ',TIME) and CONVERT('"+hrFinal+"',TIME)) "+
 					    "and diaSemana = " + diaDaSemana + 
-					    " and idDisciplina = " + disciplina +
+					    " and td.idDisciplina = " + disciplina +
 					    ")" ;
-		//System.out.println(sql);
+		System.out.println(sql);
 		List retorno = this.objSession.createSQLQuery(sql).addEntity(Professor.class).list();
 		return retorno;	
 	} 

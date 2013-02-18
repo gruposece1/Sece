@@ -16,6 +16,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 
+import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.GradeNulaException;
 import br.unb.sece.model.Aluno;
@@ -24,6 +25,7 @@ import br.unb.sece.model.Horario;
 import br.unb.sece.model.Professor;
 import br.unb.sece.model.Serie;
 import br.unb.sece.model.Turma;
+import br.unb.sece.model.TurmaDisciplina;
 import br.unb.sece.model.Turno;
 import br.unb.sece.util.HibernateUtil;
 import br.unb.sece.util.ModelComboBox;
@@ -53,7 +55,7 @@ public class CTurma {
 		
 	}
 	
-	public void cadastrarTurma(String nomeTurma,Serie serie, Turno turno, GradeHoraria gradeHoraria) throws AtributoNuloException{
+	public void cadastrarTurma(String nomeTurma,Serie serie, Turno turno, GradeHoraria gradeHoraria) throws Exception{
 		Turma turma = new Turma();
 		
 		turma.setNomeTurma(nomeTurma);
@@ -65,6 +67,28 @@ public class CTurma {
 		Session session = HibernateUtil.getSession();
 		
 		turma.salvar(session);
+		
+		try{
+		
+			gradeHoraria.verificarGrade();
+			
+			gradeHoraria.gerarTurmasDisciplinas(turma, session);
+			
+			gradeHoraria.salvarGrade(session);
+			
+			
+			session.getTransaction().commit();
+		
+		}catch(HibernateException ex){
+			session.getTransaction().rollback();
+			HibernateUtil.closeSession();
+			ex.printStackTrace();
+		}catch(Exception ex){
+			session.getTransaction().rollback();
+			HibernateUtil.closeSession();
+			throw ex;
+		}
+		
 		
 		
 	}
@@ -78,59 +102,13 @@ public class CTurma {
 		session.beginTransaction();
 		this.turma = new Turma();
 		this.turma.setNomeTurma(VTurma.getTxtNome().getText());
-		if(this.turma.getNomeTurma().equals("")){
-			throw new AtributoNuloException("Nome Turma");
-		}
-		if(this.gradeHoraria.getGradeDeHorarios() == null){
-			throw new GradeNulaException("Grade");
-		}
-		try{
-			
-			this.turma.setSerie(serie);
-			this.turma.setTurno(t);
-			this.turma.salvar(session); 
-			this.veriricarGradeAntesInserir();
-			
-			for(int i =0; i<serie.getQtdeHorarios(); i++)
-			{
-				for(int k=0; k<serie.getQtdeDias(); k++)
-				{
-					Horario h = this.gradeHoraria.getHorario(i, k);
-					h.setTurma(this.turma);
-					h.salvar(session);
-				}
-			}
-			session.getTransaction().commit();
-		}catch(AtributoNuloException ex){
-			session.getTransaction().rollback();
-			ex.printStackTrace();
-			throw ex;
-//			throw new Exception();
-		}catch(HibernateException ex){
-			
-			session.getTransaction().rollback();
-			ex.printStackTrace();
-			throw new Exception();
-		}
+		this.cadastrarTurma(VTurma.getTxtNome().getText(), serie, t, this.gradeHoraria);
+		
+		
 	}
 	
 	
-	public void veriricarGradeAntesInserir() throws AtributoNuloException{
-		for(int i =0; i<this.turma.getSerie().getQtdeHorarios(); i++)
-		{
-			for(int k=0; k<this.turma.getSerie().getQtdeDias(); k++)
-			{
-				Horario h = this.gradeHoraria.getHorario(i, k);
-				try {
-					h.verificar();
-				} catch (AtributoNuloException e) {
-					// TODO Auto-generated catch block
-					throw new AtributoNuloException("O " + i +"º horário de "+ Horario.getDiaSemanaString(k) + " tem o seguinte problema: " + e.getMessage());
-					
-				}
-			}
-		}
-	}
+	
 	
 	public int numeroHorarios(Serie serie)
 	{

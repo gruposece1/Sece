@@ -93,6 +93,8 @@ public class GerarTabelas {
 		s.salvar();
 		Serie s1 = new Serie("7ª", 4, 5);
 		s1.salvar();
+		Serie s2 = new Serie("5ª", 2, 2);
+		s2.salvar();
 		
 		Professor professor1 = new Professor();
 		professor1.setNome("Pedro");

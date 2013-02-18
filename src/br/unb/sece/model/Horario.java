@@ -1,5 +1,6 @@
 package br.unb.sece.model;
 
+import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.model.DAO.HorarioDAO;
 
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.Session;
 import org.hibernate.annotations.Cascade;
@@ -52,19 +54,30 @@ public class Horario {
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private Professor professor;
 	
+	/*
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="idDisciplina", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.SAVE_UPDATE)
+	*/
+	@Transient
 	private Disciplina disciplina;
-	
+	/*
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="idTurma", insertable=true, updatable=true)
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.SAVE_UPDATE)
+	*/
+	@Transient
 	private Turma turma;
 
 	private int diaSemana;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idTurmaDisciplina", insertable=true, updatable=true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.SAVE_UPDATE)
+	private TurmaDisciplina turmaDisciplina;
 	
 	public Long getIdHorario() {
 		return this.idHorario;
@@ -114,13 +127,22 @@ public class Horario {
 		this.disciplina = disciplina;
 	}
 	
-	public void salvar() throws AtributoNuloException{
+	public void salvar() throws AtributoNuloException, AtributoInvalidoException{
 		final HorarioDAO hr = new HorarioDAO();
 		this.verificar();
 		hr.save(this);
 	}
 	 
-	public void verificar() throws AtributoNuloException{
+	public void verificar() throws AtributoNuloException, AtributoInvalidoException{
+		if(this.hrInicial == null){
+			throw new AtributoNuloException("Hora Inicial");
+		}
+		if(this.hrFinal == null){
+			throw new AtributoNuloException("Hora Final");
+		}
+		if(this.diaSemana < 0 || this.diaSemana > 6){
+			throw new AtributoInvalidoException("Hora Final");
+		}
 		if(this.disciplina == null){
 			throw new AtributoNuloException("Disciplina");
 		}
@@ -128,13 +150,8 @@ public class Horario {
 			throw new AtributoNuloException("Professor");
 		}
 	}
-	public void salvar(Session session) throws AtributoNuloException{
-		final HorarioDAO hr = new HorarioDAO(session);
-		//hr.close();
-		
-		if(this.disciplina != null)
-			System.out.println("O id Disciplina: " + this.disciplina.getId());
-		
+	public void salvar(Session session) throws AtributoNuloException, AtributoInvalidoException{
+		final HorarioDAO hr = new HorarioDAO();
 		this.verificar();
 		hr.save(this, session);
 	}
@@ -149,6 +166,15 @@ public class Horario {
 	}
 	
 	
+	
+
+	public TurmaDisciplina getTurmaDisciplina() {
+		return turmaDisciplina;
+	}
+
+	public void setTurmaDisciplina(TurmaDisciplina turmaDisciplina) {
+		this.turmaDisciplina = turmaDisciplina;
+	}
 
 	public void setDiaSemana(int diaSemana) {
 		this.diaSemana = diaSemana;
@@ -200,5 +226,7 @@ public class Horario {
 		return " ";
 		
 	}
+	
+	
 
 }
