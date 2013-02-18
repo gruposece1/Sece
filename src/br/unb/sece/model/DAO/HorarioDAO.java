@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import br.unb.sece.model.Horario;
 import br.unb.sece.model.Turma;
@@ -56,6 +58,18 @@ public class HorarioDAO extends Persistencia {
 		// TODO Auto-generated method stub
 		List<Object> lista = (List<Object>) this.objSession.createQuery("select o from " + classe.getSimpleName() + " o").list();
 		//this.session.close();
+		return lista;
+	}
+	
+	public List<Horario> getHorariosTurmaSemRepeticaoDisciplina(Turma turma){
+		String sql = "select * "+
+					 "from horario where " +
+					 "horario.idTurma = " + turma.getIdTurma()+ " " +
+					 "group by   horario.idDisciplina ";
+		System.out.println(sql);
+		
+		//List lista = this.objSession.createCriteria(Horario.class).setProjection(Projections.groupProperty("disciplina")).add(Restrictions.eq("turma", turma)).list();
+		List lista = this.objSession.createSQLQuery(sql).addEntity(Horario.class).list();
 		return lista;
 	}
 

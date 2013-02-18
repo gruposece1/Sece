@@ -6,14 +6,18 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 import br.unb.sece.model.Aluno;
+import br.unb.sece.model.AlunoDisciplina;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Funcionario;
 import br.unb.sece.model.Horario;
+import br.unb.sece.model.Nota;
 import br.unb.sece.model.Pessoa;
 import br.unb.sece.model.Professor;
 import br.unb.sece.model.Responsavel;
 import br.unb.sece.model.Serie;
 import br.unb.sece.model.Turma;
+import br.unb.sece.model.TurmaAluno;
+import br.unb.sece.model.TurmaDisciplina;
 import br.unb.sece.model.Turno;
 
 
@@ -32,7 +36,11 @@ public class GerarTabelas {
 		cfg.addAnnotatedClass(Disciplina.class);
 		cfg.addAnnotatedClass(Turno.class);
 		cfg.addAnnotatedClass(Serie.class);
+		cfg.addAnnotatedClass(TurmaAluno.class);
+		cfg.addAnnotatedClass(AlunoDisciplina.class);
+		cfg.addAnnotatedClass(TurmaDisciplina.class);
 		cfg.addAnnotatedClass(Turma.class);
+		cfg.addAnnotatedClass(Nota.class);
 		
 		SchemaExport se = new SchemaExport(cfg);
 		se.create(true, true);

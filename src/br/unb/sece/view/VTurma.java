@@ -287,7 +287,7 @@ public class VTurma extends JFrame implements ActionListener {
 			JRadioButton radioFalta = new JRadioButton("");
 			radioFalta.setBounds(317, 7, 21, 23);
 			radioFalta.setName(String.valueOf(i));
-			radioFalta.addActionListener(this);
+			//radioFalta.addActionListener(this);
 			//chamada = new CChamada(a);
 			/*
 			radioFalta.addActionListener(new ActionListener() {

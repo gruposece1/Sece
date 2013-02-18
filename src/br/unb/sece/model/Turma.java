@@ -1,5 +1,6 @@
 package br.unb.sece.model;
 
+import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.model.DAO.TurmaDAO;
 
 import java.util.ArrayList;
@@ -70,8 +71,12 @@ public class Turma {
 		return this.nomeTurma;
 	}
 
-	public void setNomeTurma(String nomeTurma) {
-		this.nomeTurma = nomeTurma;
+	public void setNomeTurma(String nomeTurma) throws AtributoNuloException {
+		if(nomeTurma.isEmpty()){
+			throw new AtributoNuloException("Nome Turma");
+		}else{
+			this.nomeTurma = nomeTurma;
+		}
 	}
 
 	public Serie getSerie() {
@@ -118,6 +123,12 @@ public class Turma {
 		final TurmaDAO dao = new TurmaDAO();
 		
 		dao.update(this);
+	}
+	
+	static public Turma recuperarTuma(Long id){
+		final TurmaDAO dao = new TurmaDAO();
+		Turma turma = dao.findById(Turma.class, id);
+		return turma;
 	}
 		
 

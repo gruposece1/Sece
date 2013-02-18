@@ -98,7 +98,6 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
 		
 		select = new DefaultListSelectionModel();
 		
-		VCadMatricula vcadMatricula = new VCadMatricula ();
 		
 		panel = new JPanel(); 
 		this.criarPainel();

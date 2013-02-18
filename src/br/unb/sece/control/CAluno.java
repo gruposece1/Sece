@@ -35,10 +35,12 @@ public class CAluno extends CPadrao{
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
+		
 	}
 	
 	public void salvar() {
 		this.aluno.salvar();
+		this.aluno = new Aluno();
 		
 	}
 	

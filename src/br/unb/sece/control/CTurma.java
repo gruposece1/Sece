@@ -53,6 +53,22 @@ public class CTurma {
 		
 	}
 	
+	public void cadastrarTurma(String nomeTurma,Serie serie, Turno turno, GradeHoraria gradeHoraria) throws AtributoNuloException{
+		Turma turma = new Turma();
+		
+		turma.setNomeTurma(nomeTurma);
+		
+		turma.setSerie(serie);
+		
+		turma.setTurno(turno);
+		
+		Session session = HibernateUtil.getSession();
+		
+		turma.salvar(session);
+		
+		
+	}
+	
 	public void receberDados(VCadTurma VTurma) throws Exception{
 		
 		Serie serie = this.getSerieSelected();

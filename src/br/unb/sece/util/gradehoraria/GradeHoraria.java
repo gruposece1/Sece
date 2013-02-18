@@ -19,8 +19,7 @@ public class GradeHoraria {
 		
 	}
 	
-	public void gerarGrade(Serie serie, Turno turno)
-	{
+	public void gerarGrade(Serie serie, Turno turno){
 		
 		assert(serie != null);
 		assert(turno != null);
@@ -46,7 +45,8 @@ public class GradeHoraria {
 		
 		//System.out.println("Numero de série: " + serie.getQtdeDias());
 		this.preencherGrade(serie.getQtdeDias(), serie.getQtdeHorarios(), gc, duracao);
-}
+	}
+	
 	private void preencherGrade(int coluna, int linha, GregorianCalendar calendario, float duracao){
 		
 		for(int i =0; i<coluna; i++){
@@ -67,6 +67,16 @@ public class GradeHoraria {
 			}
 		}
 	
+	}
+	
+	public void verificarGrade(){
+		for(int i = 0 ; i < this.gradeDeHorarios.length; i++){
+			Object[] linha = this.gradeDeHorarios[i];
+			for(int j = 0; j < linha.length; j++){
+				Horario obHorario = (Horario)linha[j];
+				
+			}
+		}
 	}
 	
 	public Object[][] getGradeDeHorarios() {
