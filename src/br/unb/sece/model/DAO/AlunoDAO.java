@@ -3,6 +3,8 @@ package br.unb.sece.model.DAO;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Turma;
@@ -44,7 +46,8 @@ public class AlunoDAO extends Persistencia {
 					  "inner join turmadisciplina td "+ 
 					  "on td.idTurmaDisciplina = ad.idTurmaDisciplina "+
 					"where "+
-					  "td.idTurma = "+ idTurma;
+					  "td.idTurma = "+ idTurma +
+					  " group by p.idPessoa";
 		
 		return this.objSession.createSQLQuery(sql).addEntity(Aluno.class).list();
 		
@@ -64,9 +67,14 @@ public class AlunoDAO extends Persistencia {
 					  "on td.idTurmaDisciplina = ad.idTurmaDisciplina "+
 					"where "+
 					  "td.idTurma <> "+ idTurma;
-		
+		System.out.println(sql);
 		return this.objSession.createSQLQuery(sql).addEntity(Aluno.class).list();
 		
+	}
+	
+	public Aluno getAlunoMatricula(String matricula){
+		System.out.println("A matricula: " + matricula);
+		return (Aluno)this.objSession.createCriteria(Aluno.class).add(Restrictions.eq("matricula", matricula)).uniqueResult();
 	}
 
 	

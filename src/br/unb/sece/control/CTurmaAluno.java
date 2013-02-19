@@ -60,9 +60,20 @@ public class CTurmaAluno {
 		
 	}
 	
+	public void cadastrarAlunoTurma(Turma turmaDoAluno, List matriculaAluno){
+		for(int i = 0; i < matriculaAluno.size(); i++){
+			try{
+				Aluno aluno = Aluno.getAlunoMatricula(matriculaAluno.get(i).toString());
+				this.cadastrarAlunoTurma(turmaDoAluno, aluno);
+			}catch(NullPointerException ex){
+				ex.printStackTrace();
+			}
+		}
+	}
+	
 	public static DefaultListModel getListAlunos(Turma turma){
 		
-		List alunos = Aluno.getAlunosTurma(turma);
+		List alunos = Aluno.getAlunos(turma);
 		
 		return CTurmaAluno.getDefaultListModel(alunos);
 		

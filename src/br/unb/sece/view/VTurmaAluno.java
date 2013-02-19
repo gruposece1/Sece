@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 
 
 import br.unb.sece.model.Aluno;
+import br.unb.sece.model.Turma;
+import br.unb.sece.model.TurmaAluno;
 
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
@@ -30,7 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 
-public class VTurmaAluno extends JFrame{
+public class VTurmaAluno extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private DefaultListModel listTurma;
@@ -39,30 +41,16 @@ public class VTurmaAluno extends JFrame{
 	private JList list_1;
 	private JButton btnSalvar;
 	private ArrayList a_turma;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VTurmaAluno frame = new VTurmaAluno(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Turma turma;
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public VTurmaAluno(final CTurma turma) {
+	public VTurmaAluno(final CTurma turma)  {
 		
-		DefaultListModel model;
-		DefaultListSelectionModel select;
-		
+		this.turma = turma.getTurma();
+		this.setTitle("Cadastro de Aluno na Turma");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 684, 506);
@@ -92,19 +80,7 @@ public class VTurmaAluno extends JFrame{
 		contentPane.add(button_1);
 		
 		btnSalvar = new JButton("Salvar");
-		btnSalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				int tamanhoLista = list_1.getModel().getSize();  
-			    ArrayList listaAlunos = new ArrayList();  
-			       for (int i=0; i < tamanhoLista; i++){  
-			           listaAlunos.add(list_1.getModel().getElementAt(i));  
-			           System.out.println(listaAlunos.get(i).toString());
-			       }
-			        
-			       turma.addAlunos(listaAlunos);
-			}
-		});
+		btnSalvar.addActionListener(this);
 		btnSalvar.setBounds(274, 394, 96, 33);
 		contentPane.add(btnSalvar);
 		
@@ -118,18 +94,11 @@ public class VTurmaAluno extends JFrame{
 		
 		
 		
-		listTurma = new DefaultListModel();
+		listTurma = CTurmaAluno.getListAlunosDaTurma(turma.getTurma());
 		
 		
-		a_turma = new ArrayList(turma.getTurma().getAluno());
-		String[] values_1 = new String[a_turma.size()];
-		if(a_turma!=null){
-			for(int i = 0; i<a_turma.size(); i++){
-				values_1[i] = ((Aluno) a_turma.get(i)).getMatricula()+" "+((Aluno) a_turma.get(i)).getNome();
-				listTurma.addElement(values_1[i]);
-			}
-		}
-		listModel = CTurmaAluno.getListAlunos(turma.getTurma());
+		
+		listModel = CTurmaAluno.getListAlunos(turma.getTurma()) ;
 		list = new JList(listModel);
 		list.setBounds(10, 36, 265, 313);
 		contentPane.add(list); 
@@ -137,6 +106,24 @@ public class VTurmaAluno extends JFrame{
 		list_1 = new JList(listTurma);
 		list_1.setBounds(363, 36, 265, 313);
 		contentPane.add(list_1);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(this.btnSalvar)){
+			int tamanhoLista = list_1.getModel().getSize();  
+		    ArrayList listaAlunosMatricula = new ArrayList();  
+	       for (int i=0; i < tamanhoLista; i++){  
+	    	   String textoAluno = (String)list_1.getModel().getElementAt(i);
+	    	   String[] textos = textoAluno.split(" ");
+	           listaAlunosMatricula.add(textos[0]);  
+	       }
+	       
+	       CTurmaAluno obTurmaAluno = new CTurmaAluno();
+	       obTurmaAluno.cadastrarAlunoTurma(this.turma, listaAlunosMatricula);
+		}    
 	}
 
 	

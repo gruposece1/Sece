@@ -91,9 +91,26 @@ public class Aluno extends Pessoa{
 		return dao.getAlunosTurma(turma.getIdTurma());
 	}
 	
+	/**
+	 * Buscar os alunos que nao sao da turma
+	 * @param turma que nao terao seus alunos retornados
+	 * @return list de alunos
+	 */
 	public static List<Aluno> getAlunos(Turma turma){
 		final AlunoDAO dao = new AlunoDAO();
-		return dao.getAlunos(turma.getIdTurma());
+		List alunosDaTurma = Aluno.getAlunosTurma(turma);
+		List todosAlunos = Aluno.getAll();
+		todosAlunos.removeAll(alunosDaTurma);
+		return todosAlunos;
+	}
+	
+	public static Aluno getAlunoMatricula(String matricula) throws NullPointerException{
+		final AlunoDAO dao = new AlunoDAO();
+		Aluno aluno = dao.getAlunoMatricula(matricula);
+		if(aluno == null){
+			throw new NullPointerException("Objeto Nao Encontrado");
+		}
+		return aluno;
 	}
 	
 }
