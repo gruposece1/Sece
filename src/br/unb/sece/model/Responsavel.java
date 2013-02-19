@@ -65,12 +65,10 @@ public class Responsavel extends Pessoa
 		dao.save(this);
 	}
 
-
 	public void alterar() {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 	public void excluir() {
 		// TODO Auto-generated method stub
