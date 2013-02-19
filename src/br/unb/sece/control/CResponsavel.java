@@ -16,13 +16,14 @@ public class CResponsavel extends CPadrao{
 		// TODO Auto-generated constructor stub
 	}
 	
+	
 	public  void definirTitulosEMetodos(){
-		final Object[] titulos = {"Nome","Cpf","Email"};
+		final Object[] titulos = {"Nome","Cpf","Sexo","Endereco","Email","Telefone","Cep",};
 		
 		
 		this.titulos = titulos;
 		
-		final Object [] metodos = {"getNome","getCpf","getEmail"};
+		final Object [] metodos = {"getNome","getCpf","getSexo","getEndereco","getEmail","getTelefone","getCpf"};
 		
 		this.metodos = metodos;
 	}
@@ -65,7 +66,7 @@ public class CResponsavel extends CPadrao{
 	
 
 	public void receberDados(Object obj,int operacao) throws Exception{
-		VCadResponsavel panel=null;
+		VCadResponsavel panel= new VCadResponsavel();
 		
 		if(obj==null)
 			throw new AtributoNuloException();
@@ -78,7 +79,6 @@ public class CResponsavel extends CPadrao{
 		
 		switch(operacao) {
 		case CPadrao.OPERACAO_INSERIR:
-			final ArrayList<Responsavel> responsaveis = new ArrayList<Responsavel>();
 			
 			this.responsavel.setNome(panel.getTextField().getText());
 			this.responsavel.setCpf(panel.getTextField_1().getText());
@@ -111,6 +111,11 @@ public class CResponsavel extends CPadrao{
 			
 			//this.verificarDados();
 			panel.getTextField().setText("");
+			panel.getTextField_1().setText("");
+			panel.getTextField_2().setText("");
+			panel.getTextField_3().setText("");
+			panel.getTextField_4().setText("");
+			panel.getTextField_5().setText("");
 			
 			break;
 	}
