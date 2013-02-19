@@ -1,6 +1,10 @@
 package br.unb.sece.model;
 
+import br.unb.sece.exceptions.BancoDeDadosException;
+import br.unb.sece.model.DAO.AlunoDAO;
+import br.unb.sece.model.DAO.FuncionarioDAO;
 import br.unb.sece.model.DAO.ResponsavelDAO;
+import br.unb.sece.model.DAO.SerieDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +57,13 @@ public class Responsavel extends Pessoa
 		this.email = email;
 	}
 	
-	public List getAll() {
+
+	public List getAll(){
+		//Colecoes colecao = new Colecoes();
 		final ResponsavelDAO dao = new ResponsavelDAO();
-		final List<Responsavel> lista = new ArrayList(dao.listAll(Responsavel.class));
 		
-		return lista;
+		return dao.listAll(Responsavel.class);
+
 	}
 	
 	public void salvar(){
@@ -65,14 +71,15 @@ public class Responsavel extends Pessoa
 		dao.save(this);
 	}
 
-	public void alterar() {
-		// TODO Auto-generated method stub
+	public void alterar(){
+		final SerieDAO dao = new SerieDAO();
 		
+		dao.update(this);
 	}
-
-	public void excluir() {
-		// TODO Auto-generated method stub
-		
+	
+	public void excluir() throws BancoDeDadosException {
+		final ResponsavelDAO dao = new ResponsavelDAO();
+		dao.remove(this);
 	}
 
 

@@ -1,5 +1,7 @@
 package br.unb.sece.control;
 
+import java.util.ArrayList;
+
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.BancoDeDadosException;
@@ -33,6 +35,11 @@ public class CResponsavel extends CPadrao{
 		this.responsavel = responsavel;
 	}
 	
+	@Override
+	public void verificarDados() throws Exception {
+		if(this.responsavel.getNome().equals(""))
+			throw new AtributoNuloException();
+	}
 	
 	@Override
 	public void alterar(){
@@ -40,7 +47,7 @@ public class CResponsavel extends CPadrao{
 		
 		r.alterar();
 	}
-
+	
 	@Override
 	public void salvar() {
 		// TODO Auto-generated method stub
@@ -55,13 +62,8 @@ public class CResponsavel extends CPadrao{
 		
 		r.excluir();
 	}
-
-	@Override
-	public void verificarDados() throws Exception {
-		if(this.responsavel.getNome().equals(""))
-			throw new AtributoNuloException();
-	}
 	
+
 	public void receberDados(Object obj,int operacao) throws Exception{
 		VCadResponsavel panel=null;
 		
@@ -76,6 +78,8 @@ public class CResponsavel extends CPadrao{
 		
 		switch(operacao) {
 		case CPadrao.OPERACAO_INSERIR:
+			final ArrayList<Responsavel> responsaveis = new ArrayList<Responsavel>();
+			
 			this.responsavel.setNome(panel.getTextField().getText());
 			this.responsavel.setCpf(panel.getTextField_1().getText());
 			this.responsavel.setEndereco(panel.getTextField_2().getText());
@@ -86,7 +90,11 @@ public class CResponsavel extends CPadrao{
 			
 			this.verificarDados();
 			panel.getTextField().setText("");
-			panel.getTextField();
+			panel.getTextField_1().setText("");
+			panel.getTextField_2().setText("");
+			panel.getTextField_3().setText("");
+			panel.getTextField_4().setText("");
+			panel.getTextField_5().setText("");
 	
 			
 			break;
@@ -95,6 +103,12 @@ public class CResponsavel extends CPadrao{
 			final Responsavel r = (Responsavel) this.objAlterar;
 			
 			r.setNome(panel.getTextField().getText());
+			r.setCpf(panel.getTextField_1().getText());
+			r.setEndereco(panel.getTextField_2().getText());
+			r.setEmail(panel.getTextField_3().getText());
+			r.setTelefone(panel.getTextField_4().getText());
+			r.setCEP(panel.getTextField_5().getText());
+			
 			//this.verificarDados();
 			panel.getTextField().setText("");
 			
