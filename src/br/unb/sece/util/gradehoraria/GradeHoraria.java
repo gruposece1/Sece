@@ -12,8 +12,11 @@ import java.util.Set;
 
 import org.hibernate.Session;
 
+import com.sun.org.apache.xpath.internal.operations.Div;
+
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
+import br.unb.sece.exceptions.TurnoHrInicioMaiorHrFimException;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Horario;
 import br.unb.sece.model.Serie;
@@ -21,29 +24,45 @@ import br.unb.sece.model.Turma;
 import br.unb.sece.model.TurmaDisciplina;
 import br.unb.sece.model.Turno;
 
+
 public class GradeHoraria {
 	
 	private Object[][] gradeDeHorarios;
 	
 	private HashMap<Disciplina,TurmaDisciplina> disciplinasTurma;
 	
-	public GradeHoraria(Serie serie, Turno turno){
+	public GradeHoraria(Serie serie, Turno turno) throws NullPointerException, TurnoHrInicioMaiorHrFimException,ArithmeticException,IndexOutOfBoundsException{
 		
-		this.gerarGrade(serie, turno);
+		if(serie == null){
+			throw new NullPointerException();
+		}
+		if(turno == null){
+			throw new NullPointerException();
+		}
+		this.gerarGrade(serie.getQtdeHorarios(),serie.getQtdeDias(),turno.getInicio(),turno.getFim());
 		
 	}
 	
-	public void gerarGrade(Serie serie, Turno turno){
+	
+	private void gerarGrade(int qtdeHorario,int qtdeDias,float inicio, float fim) throws TurnoHrInicioMaiorHrFimException,ArithmeticException,IndexOutOfBoundsException{
 		
-		assert(serie != null);
-		assert(turno != null);
+		if(qtdeHorario == 0 ){
+			throw new ArithmeticException("/ by zero");
+		}
 		
-		float duracao = (turno.getFim() - turno.getInicio())/serie.getQtdeHorarios();
-		gradeDeHorarios = new Object[serie.getQtdeHorarios()][serie.getQtdeDias()]; 
+		if(qtdeDias < 1){
+			throw new IndexOutOfBoundsException();
+		}
+		
+		if(inicio > fim){
+			throw new TurnoHrInicioMaiorHrFimException();
+		}
+		
+		float duracao = (fim - inicio)/qtdeHorario;
+		gradeDeHorarios = new Object[qtdeHorario][qtdeDias]; 
 		Date data = new Date();
 	
 		
-		float inicio = turno.getInicio();
 		int init = (int)inicio;		
 		
 		data.setHours(init);
@@ -58,8 +77,10 @@ public class GradeHoraria {
 		//SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");  		
 		
 		//System.out.println("Numero de série: " + serie.getQtdeDias());
-		this.preencherGrade(serie.getQtdeDias(), serie.getQtdeHorarios(), gc, duracao);
+		this.preencherGrade(qtdeDias, qtdeHorario, gc, duracao);
 	}
+	
+	
 	
 	private void preencherGrade(int coluna, int linha, GregorianCalendar calendario, float duracao){
 		
@@ -111,7 +132,10 @@ public class GradeHoraria {
 			Object[] linha = this.gradeDeHorarios[i];
 			for(int j = 0; j < linha.length; j++){
 				Horario obHorario = (Horario)linha[j];
-				disciplinas.put(obHorario.getDisciplina(), 1);
+				Disciplina obDisciplina = obHorario.getDisciplina();
+				if(obDisciplina != null){
+					disciplinas.put(obHorario.getDisciplina(), 1);
+				}
 			}
 		}
 		
@@ -143,9 +167,7 @@ public class GradeHoraria {
 		return gradeDeHorarios;
 	}
 
-	public void setGradeDeHorarios(Object[][] gradeDeHorarios) {
-		this.gradeDeHorarios = gradeDeHorarios;
-	}
+	
 
 	public Horario getHorario (int linha, int coluna) throws NullPointerException {
 		

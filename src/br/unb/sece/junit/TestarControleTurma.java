@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.unb.sece.control.CTurma;
+import br.unb.sece.exceptions.TurnoHrInicioMaiorHrFimException;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Serie;
@@ -78,8 +79,13 @@ public class TestarControleTurma {
 		
 		Turno obTurno = new Turno();
 		obTurno.setInicio(8);
-		obTurno.setFim(6);
-		this.obCTurma.gerarGrade(obSerie, obTurno);
+		obTurno.setFim(10);
+		try {
+			this.obCTurma.gerarGrade(obSerie, obTurno);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			fail("Ocorreu um erro");
+		} 
 		assertNotNull(this.obCTurma.getGradeHoraria());
 		
 	}

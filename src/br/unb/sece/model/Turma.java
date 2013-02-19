@@ -46,6 +46,13 @@ public class Turma {
 	@Cascade(CascadeType.LOCK)
 	private Collection<Aluno> aluno = new ArrayList<Aluno>();
 	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="turmadisciplina", schema="sece", joinColumns={@JoinColumn(name="idTurma")},	inverseJoinColumns={@JoinColumn(name="idDisciplina")})
+	@Cascade(CascadeType.LOCK)
+	private Collection<Disciplina> disciplinasTurma = new ArrayList<Disciplina>();
+	
+	
+	
 	
 	public Long getIdTurma() {
 		return this.idTurma;
@@ -130,6 +137,7 @@ public class Turma {
 		Turma turma = dao.findById(Turma.class, id);
 		return turma;
 	}
+	
 		
 
 }

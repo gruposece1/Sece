@@ -1,5 +1,7 @@
 package br.unb.sece.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -68,5 +70,14 @@ public class TurmaDisciplina {
 	}
 	
 	
+	public static List<Disciplina> getDisciplinas(Turma turma){
+		TurmaDisciplinaDAO dao = new TurmaDisciplinaDAO();
+		return dao.getDisciplinasTurma(turma.getIdTurma());
+	}
+	
+	public static List<TurmaDisciplina> getTurmasDisciplina(Turma turma){
+		TurmaDisciplinaDAO dao = new TurmaDisciplinaDAO();
+		return dao.getTurmasDisciplina(turma);
+	}
 
 }

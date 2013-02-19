@@ -32,6 +32,7 @@ import javax.swing.JScrollPane;
 import br.unb.sece.control.CTurma;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.GradeNulaException;
+import br.unb.sece.exceptions.TurnoHrInicioMaiorHrFimException;
 import br.unb.sece.model.Horario;
 import br.unb.sece.model.Serie;
 import br.unb.sece.model.Turno;
@@ -209,7 +210,18 @@ public class VCadTurma extends JFrame implements ActionListener {
 			CTurma.gerarGrade(serie, turno);
 			this.criarBotoes(serie.getQtdeDias(),serie.getQtdeHorarios());
 		}catch(NullPointerException ex){
+			ex.printStackTrace();
 			JOptionPane.showMessageDialog(null, "O campo deve ser preenchido: " + ex.getMessage(), "Atenção", JOptionPane.ERROR_MESSAGE);
+		} catch (ArithmeticException ex) {
+			
+			ex.printStackTrace();
+			JOptionPane.showMessageDialog(null, "A quantidade de horário da Série não pode ser igual a zero", "Atenção", JOptionPane.ERROR_MESSAGE);
+		} catch (IndexOutOfBoundsException ex) {
+			JOptionPane.showMessageDialog(null, "A quantidade de dias da Série não pode ser menor que um.", "Atenção", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+		} catch (TurnoHrInicioMaiorHrFimException ex) {
+			JOptionPane.showMessageDialog(null, "O fim do Turno é menor que o início", "Atenção", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
 		}
 	}
 	

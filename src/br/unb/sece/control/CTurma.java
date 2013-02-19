@@ -19,6 +19,7 @@ import org.hibernate.Session;
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.GradeNulaException;
+import br.unb.sece.exceptions.TurnoHrInicioMaiorHrFimException;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Horario;
@@ -48,9 +49,8 @@ public class CTurma {
 	}
 	
 	
-	public void gerarGrade(Serie serie, Turno turno)
+	public void gerarGrade(Serie serie, Turno turno) throws NullPointerException, ArithmeticException, IndexOutOfBoundsException, TurnoHrInicioMaiorHrFimException
 	{
-		
 		this.gradeHoraria = new GradeHoraria (serie, turno);
 		
 	}
@@ -65,6 +65,8 @@ public class CTurma {
 		turma.setTurno(turno);
 		
 		Session session = HibernateUtil.getSession();
+		
+		session.getTransaction().begin();
 		
 		turma.salvar(session);
 		
@@ -99,7 +101,7 @@ public class CTurma {
 		Turno t = this.getTurnoSelected();
 		
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		//session.beginTransaction();
 		this.turma = new Turma();
 		this.turma.setNomeTurma(VTurma.getTxtNome().getText());
 		this.cadastrarTurma(VTurma.getTxtNome().getText(), serie, t, this.gradeHoraria);

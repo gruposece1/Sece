@@ -7,10 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.Session;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
+import br.unb.sece.model.DAO.AlunoDisciplinaDAO;
+import br.unb.sece.model.DAO.DisciplinaDAO;
 
 @Entity
 public class AlunoDisciplina {
@@ -55,6 +59,10 @@ public class AlunoDisciplina {
 		this.aluno = aluno;
 	}
 	
+	public void salvar(Session session){
+		AlunoDisciplinaDAO dao = new AlunoDisciplinaDAO();
+		dao.save(this, session);
+	}
 	
 
 }

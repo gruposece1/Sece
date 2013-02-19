@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import br.unb.sece.model.Aluno;
+import br.unb.sece.model.AlunoDisciplina;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Funcionario;
 import br.unb.sece.model.Horario;
@@ -60,6 +61,7 @@ public class HibernateUtil {
 			cfg.addAnnotatedClass(Serie.class);
 			cfg.addAnnotatedClass(Turma.class);
 			cfg.addAnnotatedClass(TurmaDisciplina.class);
+			cfg.addAnnotatedClass(AlunoDisciplina.class);
 			factory = cfg.buildSessionFactory();
 			session = factory.openSession();
 		}

@@ -81,4 +81,19 @@ public class Aluno extends Pessoa{
 		this.cpf = cpf;
 	}
 	
+	public static Aluno getAluno(Long idAluno){
+		final AlunoDAO dao = new AlunoDAO();
+		return dao.findById(Aluno.class, idAluno);
+	}
+	
+	public static List<Aluno> getAlunosTurma(Turma turma){
+		final AlunoDAO dao = new AlunoDAO();
+		return dao.getAlunosTurma(turma.getIdTurma());
+	}
+	
+	public static List<Aluno> getAlunos(Turma turma){
+		final AlunoDAO dao = new AlunoDAO();
+		return dao.getAlunos(turma.getIdTurma());
+	}
+	
 }

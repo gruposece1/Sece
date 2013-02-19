@@ -101,7 +101,7 @@ public class VTurmaAluno extends JFrame{
 			           listaAlunos.add(list_1.getModel().getElementAt(i));  
 			           System.out.println(listaAlunos.get(i).toString());
 			       }
-			       
+			        
 			       turma.addAlunos(listaAlunos);
 			}
 		});
@@ -117,18 +117,7 @@ public class VTurmaAluno extends JFrame{
 		contentPane.add(lblNomeTurma);
 		
 		
-		listModel = new DefaultListModel();
 		
-		
-		List alunos =  CTurmaAluno.getAll();
-		String[] values = new String[alunos.size()];
-		
-		if(turma!=null){
-		for(int i = 0; i<alunos.size(); i++){
-			values[i] = ((Aluno) alunos.get(i)).getMatricula()+" "+((Aluno) alunos.get(i)).getNome();
-			listModel.addElement(values[i]);
-		}
-		}
 		listTurma = new DefaultListModel();
 		
 		
@@ -140,6 +129,7 @@ public class VTurmaAluno extends JFrame{
 				listTurma.addElement(values_1[i]);
 			}
 		}
+		listModel = CTurmaAluno.getListAlunos(turma.getTurma());
 		list = new JList(listModel);
 		list.setBounds(10, 36, 265, 313);
 		contentPane.add(list); 

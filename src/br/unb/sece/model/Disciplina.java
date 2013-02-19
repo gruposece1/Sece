@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.Session;
+
 
 
 @Entity
@@ -81,5 +83,7 @@ public class Disciplina {
 		final DisciplinaDAO dao = new DisciplinaDAO();
 		dao.update(this);
 	}
+	
+	
 
 }
