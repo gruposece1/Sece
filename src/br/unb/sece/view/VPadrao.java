@@ -46,8 +46,7 @@ import br.unb.sece.util.crudpadrao.ModeloDeTabela;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public abstract class VPadrao extends JFrame implements IPadrao, ActionListener
-{
+public abstract class VPadrao extends JFrame implements IPadrao, ActionListener{
 
 	private JPanel contentPane;
 	private JTable table;

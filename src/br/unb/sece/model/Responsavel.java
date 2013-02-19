@@ -15,7 +15,6 @@ public class Responsavel extends Pessoa
 	private String endereco;
 	private String CEP;
 	private String email;
-	private String CPF;
 	
 	public Responsavel() {
 		
@@ -64,6 +63,21 @@ public class Responsavel extends Pessoa
 	public void salvar(){
 		final ResponsavelDAO dao = new ResponsavelDAO();
 		dao.save(this);
-	}	
+	}
+
+
+	public void alterar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void excluir() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 	
 }
