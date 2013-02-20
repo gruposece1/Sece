@@ -84,6 +84,37 @@ public class Disciplina {
 		dao.update(this);
 	}
 	
+	public static Disciplina getDisciplina(Long id){
+		
+		final DisciplinaDAO dao = new DisciplinaDAO();
+		return dao.findById(Disciplina.class, id);
+	} 
 	
+	/**
+	 * Converter List de Strings para List Disciplinas. 
+	 * @param strings Lista com as Strings a serem convertidas, no formato: idDisciplina nomeDisciplina.
+	 * @return Lista de Disciplinas
+	 */
+	public static List getString2Disciplina(List strings){
+		
+		ArrayList disciplinas = new ArrayList();
+		
+		for (int i = 0; i<strings.size(); i++){
+			
+			String obAtual = (String)strings.get(i);
+			String[] obAtualPartido = obAtual.split(" ");
+			
+			Disciplina obDisciplina = Disciplina.getDisciplina(Long.valueOf(obAtualPartido[0]));
+			
+			if (obDisciplina != null){
+				disciplinas.add(obDisciplina);	
+				
+			}
+			
+		}
+		
+		return disciplinas;
+		
+	}
 
 }

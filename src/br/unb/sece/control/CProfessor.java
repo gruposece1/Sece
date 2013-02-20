@@ -18,7 +18,12 @@ import br.unb.sece.view.panelcadastropadrao.VCadProfessor;
 
 public class CProfessor extends CFuncionario{
 
-private Professor professor;
+	private Professor professor;
+	
+	protected CProfessor(String classeModel) {
+		super(classeModel);
+		
+	}
 	
 	public CProfessor() {
 		super("br.unb.sece.model.Professor");
@@ -32,7 +37,7 @@ private Professor professor;
 		
 		this.titulos = titulos;
 		
-		Object [] metodos = {"getNome", "getCPF","getTelefone"};
+		Object [] metodos = {"getNome", "getCpf","getTelefone"};
 		
 		this.metodos = metodos;
 		
@@ -99,13 +104,11 @@ private Professor professor;
 		switch(operacao){
 		case CPadrao.OPERACAO_INSERIR:
 			
-			ArrayList<Responsavel> responsaveis = new ArrayList<Responsavel>();
-			
-			professor.setNome(panel.getTxtNome().getText());
-			professor.setCpf(panel.getTxtCPF().getText());
-			professor.setTelefone(panel.getTxtTelefone().getText());
-			professor.setSexo(panel.getSexo());
-			professor.setSenha(panel.getTxtSenha().getText());
+			this.professor.setNome(panel.getTxtNome().getText());
+			this.professor.setCpf(panel.getTxtCPF().getText());
+			this.professor.setTelefone(panel.getTxtTelefone().getText());
+			this.professor.setSexo(panel.getSexo());
+			this.professor.setSenha(panel.getTxtSenha().getText());
 			
 			
 			this.verificarDados();
@@ -119,7 +122,7 @@ private Professor professor;
 
 		case CPadrao.OPERACAO_ALTERAR:
 			
-			Professor funcionario = (Professor)this.objAlterar;
+			Professor professor = (Professor)this.objAlterar;
 			
 			professor.setNome(panel.getTxtNome().getText());
 			professor.setCpf(panel.getTxtCPF().getText());
@@ -159,12 +162,12 @@ private Professor professor;
 		
 	}
 	
-	
-
-	public void setProfessor(Professor professor) {
+		public void setProfessor(Professor professor) {
 		this.professor = professor;
 		
 	}
+		
+		
 
 }
    
