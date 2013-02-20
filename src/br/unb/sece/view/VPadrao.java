@@ -113,6 +113,12 @@ public abstract class VPadrao extends JFrame implements IPadrao, ActionListener{
 		//new ModeloDeTabela(this.controle.getDados(),this.controle.getTitulos())
 		table.setModel(this.controle.getDefaultTableModel());
 		table.setCellSelectionEnabled(false);
+		
+		btnCadastrar.setName("Cadastrar");
+		
+		this.btnAlterar.setName("Alt");
+		this.table.setName("Tabela");
+		this.btnExcluir.setName("Excluir");
 	}
 	
 	/**

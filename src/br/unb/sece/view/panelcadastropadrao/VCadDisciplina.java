@@ -23,6 +23,8 @@ public class VCadDisciplina extends JPanel {
 		textField.setColumns(10);
 		
 		super.setBounds(20,11,522,234);
+		
+		textField.setName("Nome");
 
 	}
 

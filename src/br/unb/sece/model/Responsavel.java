@@ -59,11 +59,16 @@ public class Responsavel extends Pessoa
 	
 
 	public List getAll(){
-		//Colecoes colecao = new Colecoes();
 		final ResponsavelDAO dao = new ResponsavelDAO();
 		
 		return dao.listAll(Responsavel.class);
 
+	}
+	
+	public void alterar(){
+		final ResponsavelDAO dao = new ResponsavelDAO();
+		
+		dao.update(this);
 	}
 	
 	public void salvar(){
@@ -71,11 +76,6 @@ public class Responsavel extends Pessoa
 		dao.save(this);
 	}
 
-	public void alterar(){
-		final SerieDAO dao = new SerieDAO();
-		
-		dao.update(this);
-	}
 	
 	public void excluir() throws BancoDeDadosException {
 		final ResponsavelDAO dao = new ResponsavelDAO();

@@ -131,7 +131,13 @@ public class VCadAluno extends JPanel implements ActionListener, WindowListener{
         btnPesquisarPai.setBounds(488, 112, 24, 23);
         add(btnPesquisarPai);
         
-        
+        this.btnPesquisarMae.setName("PesquisarMae");
+        this.btnPesquisarPai.setName("PesquisarPai");
+        this.rdbtMasculino.setName("Masculino");
+        this.txtMatricula.setName("Matricula");
+        this.txtNascimento.setName("Nascimento");
+        this.txtNome.setName("Nome");
+       
         
         
         

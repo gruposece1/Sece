@@ -25,9 +25,9 @@ public class DisciplinaDAO extends Persistencia {
 	
 
 	@Override
-	public Object findById(Class classe, Long pk) {
+	public Disciplina findById(Class classe, Long pk) {
 		// TODO Auto-generated method stub
-		return null;
+		return (Disciplina) this.objSession.load(classe, pk);
 	}
 
 	@Override

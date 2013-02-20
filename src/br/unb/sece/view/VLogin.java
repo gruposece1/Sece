@@ -65,7 +65,9 @@ public class VLogin extends JFrame implements ActionListener {
 		contentPane.add(txtSenha);
 		
 		
-		
+		btnEntrar.setName("Entrar");
+		txtNome.setName("Nome");
+		txtSenha.setName("Senha");
 		
 		
 	}
