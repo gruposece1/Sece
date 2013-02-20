@@ -34,7 +34,7 @@ public class TestarControleHorario {
 		assertNotNull(CHorario);
 	}
 	
-	@Test
+	/*@Test
 	public void testarModelDisciplinaNulo()
 	{
 		modelDisciplinas = null;
@@ -50,7 +50,7 @@ public class TestarControleHorario {
 			fail("Ocorreu um erro");
 		}
 		
-	}
+	}*/
 	
 	@Test
 	public void testarModelDisciplina()
@@ -73,7 +73,7 @@ public class TestarControleHorario {
 	@Test
 	public void getModelProfessores()
 	{
-		String disciplina = "2 - Física";
+		String disciplina = "2 - Astronomia";
 		
 		CHorario.getModelDisciplinas().setSelectedItem(disciplina);
 		

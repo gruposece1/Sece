@@ -137,7 +137,7 @@ public class TestarControleDisciplina {
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void testarSalvar(){
 
 	
@@ -146,7 +146,7 @@ public class TestarControleDisciplina {
 		} catch (Exception e) {
 			fail("Ocorreu erro");
 		}
-	}
+	}*/
 	
 	@Test
 	public void testarModeloTabela(){

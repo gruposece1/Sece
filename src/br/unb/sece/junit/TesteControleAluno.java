@@ -165,7 +165,7 @@ public class TesteControleAluno {
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void testarSalvar(){
 		
 		try {
@@ -173,7 +173,7 @@ public class TesteControleAluno {
 		} catch (Exception e) {
 			fail("Ocorreu erro");
 		}
-	}
+	}*/
 	
 	@Test
 	public void testarModeloTabela(){

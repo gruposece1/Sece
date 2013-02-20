@@ -124,7 +124,7 @@ public class CAluno extends CPadrao{
 	public ArrayList<ColunaPesquisa> gerarNomeColunas() {
 		final ArrayList<ColunaPesquisa> camposTabela = new ArrayList<ColunaPesquisa>();
 		final ColunaPesquisa nome = new ColunaPesquisa("Nome", "getNome");
-		final ColunaPesquisa cpf = new ColunaPesquisa("CPF", "getCPF");
+		final ColunaPesquisa cpf = new ColunaPesquisa("CPF", "getCpf");
 		
 		camposTabela.add(nome);
 		camposTabela.add(cpf);

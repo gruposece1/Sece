@@ -320,6 +320,9 @@ public class Pesquisa extends javax.swing.JFrame {
         btnOrdemCrescente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        
+        this.btnOK.setName("btnOk");
+        this.setName("Pesquisa");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
