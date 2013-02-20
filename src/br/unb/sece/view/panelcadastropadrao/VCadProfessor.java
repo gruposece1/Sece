@@ -70,6 +70,7 @@ public class VCadProfessor extends VCadFuncionario {
 	public JList getList_2(){
 		
 		return this.list_2;
-	} 
+	}
+	
 }
 
