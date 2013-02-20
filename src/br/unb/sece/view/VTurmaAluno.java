@@ -11,6 +11,7 @@ import br.unb.sece.model.TurmaAluno;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
@@ -113,16 +114,32 @@ public class VTurmaAluno extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(this.btnSalvar)){
-			int tamanhoLista = list_1.getModel().getSize();  
-		    ArrayList listaAlunosMatricula = new ArrayList();  
-	       for (int i=0; i < tamanhoLista; i++){  
+		   ArrayList listaAlunosMatricula = new ArrayList();  
+	       for (int i=0; i < list_1.getModel().getSize(); i++){  
 	    	   String textoAluno = (String)list_1.getModel().getElementAt(i);
+	    	   System.out.println("O texto: "+textoAluno);
 	    	   String[] textos = textoAluno.split(" ");
 	           listaAlunosMatricula.add(textos[0]);  
 	       }
-	       
-	       CTurmaAluno obTurmaAluno = new CTurmaAluno();
-	       obTurmaAluno.cadastrarAlunoTurma(this.turma, listaAlunosMatricula);
+	       ArrayList listaAlunosDesMatricula = new ArrayList();  
+	       for (int i=0; i < list.getModel().getSize(); i++){  
+	    	   String textoAluno = (String)list.getModel().getElementAt(i);
+	    	   String[] textos = textoAluno.split(" ");
+	    	   listaAlunosDesMatricula.add(textos[0]);  
+	       }
+	       try{
+	    	   int escolhaUsuario = JOptionPane.showConfirmDialog(null, "Deseja realmente incluir os registro?","Confirmação",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+				
+				if(escolhaUsuario == JOptionPane.OK_OPTION){
+			       CTurmaAluno obTurmaAluno = new CTurmaAluno();
+			       obTurmaAluno.cadastrarAlunoTurma(this.turma, listaAlunosMatricula);
+			       obTurmaAluno.excluirAlunoTurma(this.turma, listaAlunosDesMatricula);
+			       this.dispose();
+				}
+	       }catch(Exception ex){
+	    	   ex.printStackTrace();
+	    	   JOptionPane.showMessageDialog(null, "Ocorrecu o seguinte erro: " + ex.getMessage(), "Atenção", JOptionPane.ERROR_MESSAGE);
+	       }
 		}    
 	}
 

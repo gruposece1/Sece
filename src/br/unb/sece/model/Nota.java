@@ -21,73 +21,29 @@ public class Nota {
 	private Long idNota;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="idHorario", insertable=true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
-	private Horario horario;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="idTurmaAluno", insertable=true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
-	private TurmaAluno aluno;
-	
-	private double notaPrimeiroBimestre;
-	
-	private double notaSegundoBimestre;
-	
-	private double notaTerceiroBimestre;
-	
-	private double notaQuartoBimestre;
+	private String descNota;
+
 
 	public Long getIdNota() {
 		return idNota;
 	}
 
+
 	public void setIdNota(Long idNota) {
 		this.idNota = idNota;
 	}
 
-	public Horario getHorario() {
-		return horario;
+
+	public String getDescNota() {
+		return descNota;
 	}
 
-	public void setHorario(Horario horario) {
-		this.horario = horario;
-	}
 
-	public double getNotaPrimeiroBimestre() {
-		return notaPrimeiroBimestre;
+	public void setDescNota(String descNota) {
+		this.descNota = descNota;
 	}
-
-	public void setNotaPrimeiroBimestre(double notaPrimeiroBimestre) {
-		this.notaPrimeiroBimestre = notaPrimeiroBimestre;
-	}
-
-	public double getNotaSegundoBimestre() {
-		return notaSegundoBimestre;
-	}
-
-	public void setNotaSegundoBimestre(double notaSegundoBimestre) {
-		this.notaSegundoBimestre = notaSegundoBimestre;
-	}
-
-	public double getNotaTerceiroBimestre() {
-		return notaTerceiroBimestre;
-	}
-
-	public void setNotaTerceiroBimestre(double notaTerceiroBimestre) {
-		this.notaTerceiroBimestre = notaTerceiroBimestre;
-	}
-
-	public double getNotaQuartoBimestre() {
-		return notaQuartoBimestre;
-	}
-
-	public void setNotaQuartoBimestre(double notaQuartoBimestre) {
-		this.notaQuartoBimestre = notaQuartoBimestre;
-	}
+	
+	
 	
 	
 }
