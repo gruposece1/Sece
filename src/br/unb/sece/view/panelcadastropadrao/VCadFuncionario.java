@@ -100,6 +100,13 @@ public class VCadFuncionario extends JPanel implements ActionListener{
         CBCargo.setBounds(371, 118, 109, 20);
         add(CBCargo);
         
+        txtCPF.setName("CPF");
+        txtNome.setName("Nome");
+        txtSenha.setName("Senha");
+        txtTelefone.setName("Telefone");
+        CBCargo.setName("CBCargo");
+        rdbtMasculino.setName("Masculino");
+        rdbtFeminino.setName("Feminino");
         
 	}
 	
