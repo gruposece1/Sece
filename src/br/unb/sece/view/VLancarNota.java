@@ -43,7 +43,6 @@ public class VLancarNota extends JFrame {
 	private JButton btnConfirmaTurma;
 	private JComboBox CBDisciplina;
 	private JComboBox CBBimestre;
-	private JButton btnConfirmarBimestre;
 	
 	/**
 	 * Create the frame.
@@ -62,7 +61,8 @@ public class VLancarNota extends JFrame {
 		lblTurma.setBounds(10, 27, 46, 14);
 		contentPane.add(lblTurma);
 		
-		CBTurma = new JComboBox(gerarNomeDasTurmas());
+		
+		CBTurma = new JComboBox(CNota.getModelTurma());
 		CBTurma.setBounds(74, 24, 155, 20);
 		contentPane.add(CBTurma);
 		
@@ -100,7 +100,6 @@ public class VLancarNota extends JFrame {
 				
 				CNota.selectDisciplina(CBDisciplina.getSelectedItem().toString());
 				CBBimestre.setEnabled(true);
-				btnConfirmarBimestre.setEnabled(true);
 			}
 		});
 		btnSelecionarDisciplina.setEnabled(false);
@@ -116,15 +115,6 @@ public class VLancarNota extends JFrame {
 		CBBimestre.setBounds(74, 107, 155, 20);
 		contentPane.add(CBBimestre);
 		
-		btnConfirmarBimestre = new JButton("Ok");
-		btnConfirmarBimestre.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnConfirmarBimestre.setEnabled(false);
-		btnConfirmarBimestre.setBounds(239, 106, 53, 23);
-		contentPane.add(btnConfirmarBimestre);
-		
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -139,12 +129,6 @@ public class VLancarNota extends JFrame {
 		});
 		btnOk.setBounds(239, 205, 89, 23);
 		contentPane.add(btnOk);
-	}
-	
-	
-	public String[] gerarNomeDasTurmas(){
-		
-		return CNota.getAllTurmas();	
 	}
 	
 	

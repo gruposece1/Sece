@@ -14,6 +14,7 @@ public class CNota {
 	private Turma turma;
 	private Disciplina disciplina=new Disciplina();
 	private ModelComboBox modelDisciplinas = null;
+	private ModelComboBox modelTurma = null;
 	private TurmaDisciplina turmaDisciplina;
 	
 	public CNota(){
@@ -26,6 +27,15 @@ public class CNota {
 		}
 		
 		return this.modelDisciplinas;
+	}
+	
+	public ModelComboBox getModelTurma() {
+		
+		if(this.modelTurma == null) {
+			this.modelTurma = new ModelComboBox(Turma.getAll(), "getIdTurma", "getNomeTurma");
+		}
+		
+		return this.modelTurma;
 	}
 	
 	public Horario getHorario(){
@@ -70,6 +80,10 @@ public class CNota {
 	public int selectTurma(String nome)
 	{
 		Turma turma = new Turma();
+		
+		nome = nome.substring(4,nome.length());
+		
+		System.out.println(nome);
 		
 		
 		for (Iterator<Turma> iter = turma.getAll().iterator(); iter. hasNext();)
