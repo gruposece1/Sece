@@ -111,9 +111,18 @@ public class CTurno extends CPadrao {
 		
 		switch(operacao){
 			case CPadrao.OPERACAO_INSERIR:
-				turno.setInicio(Integer.parseInt(String.valueOf(panel.getTxtInicio().getText())));
-				turno.setFim(Integer.parseInt(String.valueOf(panel.getTxtFim().getText())));
-				turno.setTurno(String.valueOf(panel.getCBTipo().getSelectedItem()));
+				
+				try
+				{
+					turno.setInicio(Integer.parseInt(panel.getTxtInicio().getText()));
+					turno.setFim(Integer.parseInt(panel.getTxtFim().getText()));
+					turno.setTurno(String.valueOf(panel.getCBTipo().getSelectedItem()));
+				}
+				catch(NumberFormatException e)
+				{
+					throw new AtributoNuloException();
+				}
+				
 				this.verificarDados();
 				panel.getTxtInicio().setText("");
 				panel.getTxtFim().setText("");
@@ -122,8 +131,9 @@ public class CTurno extends CPadrao {
 			case CPadrao.OPERACAO_ALTERAR:
 				Turno turno = (Turno)this.objAlterar;
 				
-				turno.setInicio(Integer.parseInt(String.valueOf(panel.getTxtInicio().getText())));
-				turno.setFim(Integer.parseInt(String.valueOf(panel.getTxtFim().getText())));
+				
+				turno.setInicio((int)(Float.parseFloat(panel.getTxtInicio().getText())));
+				turno.setFim((int)(Float.parseFloat(panel.getTxtFim().getText())));
 				turno.setTurno(String.valueOf(panel.getCBTipo().getSelectedItem()));
 				
 				//this.verificarDados();

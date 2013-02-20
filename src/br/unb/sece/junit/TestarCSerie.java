@@ -79,7 +79,7 @@ public class TestarCSerie {
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void testarSalvar(){
 		
 		try {
@@ -87,7 +87,7 @@ public class TestarCSerie {
 		} catch (Exception e) {
 			fail("Ocorreu erro");
 		}
-	}
+	}*/
 	
 	@Test
 	public void testarModeloTabela(){

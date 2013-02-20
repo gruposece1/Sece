@@ -26,6 +26,8 @@ public class VCadSerie extends JPanel {
 		setLayout(null);
 		super.setBounds(20,11,522,234);
 		
+
+		
 		lblNome= new JLabel("Nome: ");
 		lblNome.setBounds(10, 25, 46, 14);
 		add(lblNome);
@@ -50,6 +52,10 @@ public class VCadSerie extends JPanel {
 		CBDias = new JComboBox(Ndias);
 		CBDias.setBounds(83, 98, 54, 20);
 		add(CBDias);
+		
+		txtNome.setName("Nome");
+		CBDias.setName("CBDias");
+		CBHorario.setName("CBHorario");
 
 	}
 
