@@ -4,15 +4,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import br.unb.sece.model.Disciplina;
+import br.unb.sece.model.Horario;
 import br.unb.sece.model.Turma;
+import br.unb.sece.model.TurmaDisciplina;
+import br.unb.sece.util.ModelComboBox;
 
 public class CNota {
 	
 	private Turma turma;
 	private Disciplina disciplina=new Disciplina();
+	private ModelComboBox modelDisciplinas = null;
+	private TurmaDisciplina turmaDisciplina;
 	
 	public CNota(){
 		
+	}
+	
+	public ModelComboBox getModelDisciplinas() {
+		if(this.modelDisciplinas == null) {
+			this.modelDisciplinas = new ModelComboBox(turmaDisciplina.getDisciplinas(getTurma()), "getId", "getNome");
+		}
+		
+		return this.modelDisciplinas;
+	}
+	
+	public Horario getHorario(){
+		Horario h = new Horario();
+		return h.horarioAtualTurma(turma);
 	}
 	
 	

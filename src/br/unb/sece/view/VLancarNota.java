@@ -76,6 +76,8 @@ public class VLancarNota extends JFrame {
 				CBDisciplina.setEnabled(true);
 				btnSelecionarDisciplina.setEnabled(true);
 				
+				CBDisciplina.setModel(CNota.getModelDisciplinas());
+				
 			}
 			
 		});
@@ -87,7 +89,7 @@ public class VLancarNota extends JFrame {
 		lblDisciplina.setBounds(10, 68, 59, 14);
 		contentPane.add(lblDisciplina);
 		
-		CBDisciplina = new JComboBox(gerarNomeDasDisciplinas());
+		CBDisciplina = new JComboBox();
 		CBDisciplina.setEnabled(false);
 		CBDisciplina.setBounds(74, 65, 155, 20);
 		contentPane.add(CBDisciplina);
@@ -122,6 +124,21 @@ public class VLancarNota extends JFrame {
 		btnConfirmarBimestre.setEnabled(false);
 		btnConfirmarBimestre.setBounds(239, 106, 53, 23);
 		contentPane.add(btnConfirmarBimestre);
+		
+		JButton btnOk = new JButton("Ok");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					VPreencherNota preencherNota = new VPreencherNota(CNota);
+					preencherNota.setVisible(true);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnOk.setBounds(239, 205, 89, 23);
+		contentPane.add(btnOk);
 	}
 	
 	
@@ -130,10 +147,6 @@ public class VLancarNota extends JFrame {
 		return CNota.getAllTurmas();	
 	}
 	
-	public String[] gerarNomeDasDisciplinas(){
-		
-		return CNota.getAllDisciplinas();	
-	}
 	
 	public String[] gerarNomeDosBimestres(){
 		
@@ -141,5 +154,4 @@ public class VLancarNota extends JFrame {
 		
 		return nomeBimestres;
 	}	
-	
 }

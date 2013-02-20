@@ -29,14 +29,14 @@ public class CTurmaAluno {
 	}
 	
 	
-	public void cadastrarAlunoTurma(Long idTurma, Long idAluno){
+	public void cadastrarAlunoTurma(Long idTurma, Long idAluno) throws Exception{
 		Turma turmaDoAluno = Turma.recuperarTuma(idTurma);
 		Aluno aluno = Aluno.getAluno(idAluno);
 		this.cadastrarAlunoTurma(turmaDoAluno, aluno);
 	}
 	
 	
-	public void cadastrarAlunoTurma(Turma turmaDoAluno, Aluno aluno){
+	public void cadastrarAlunoTurma(Turma turmaDoAluno, Aluno aluno) throws Exception{
 		
 		Session session = HibernateUtil.getSession();
 		session.getTransaction().begin();
@@ -48,19 +48,21 @@ public class CTurmaAluno {
 				AlunoDisciplina alunoDisciplina = new AlunoDisciplina();
 				alunoDisciplina.setTurmaDisciplina(turmaDisciplina);
 				alunoDisciplina.setAluno(aluno);
-				alunoDisciplina.salvar(session);
+				if(alunoDisciplina.verificarExistencia() == false){
+					alunoDisciplina.salvar(session);
+				}
 			}
 			
 			session.getTransaction().commit();
 		}catch(Exception ex){
-			ex.printStackTrace();
 			session.getTransaction().rollback();
 			HibernateUtil.closeSession();
+			throw ex;
 		}
 		
 	}
 	
-	public void cadastrarAlunoTurma(Turma turmaDoAluno, List matriculaAluno){
+	public void cadastrarAlunoTurma(Turma turmaDoAluno, List matriculaAluno) throws Exception{
 		for(int i = 0; i < matriculaAluno.size(); i++){
 			try{
 				Aluno aluno = Aluno.getAlunoMatricula(matriculaAluno.get(i).toString());
@@ -71,12 +73,37 @@ public class CTurmaAluno {
 		}
 	}
 	
+	public void excluirAlunoTurma(Turma turmaDoAluno, List matriculaAluno) throws Exception{
+		for(int i = 0; i < matriculaAluno.size(); i++){
+			try{
+				Aluno aluno = Aluno.getAlunoMatricula(matriculaAluno.get(i).toString());
+				this.excluirAlunoTurma(turmaDoAluno, aluno);
+			}catch(NullPointerException ex){
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	public void excluirAlunoTurma(Turma turmaDoAluno, Aluno aluno) throws Exception{
+		List listAlunoDisciplina = AlunoDisciplina.getAllAlunoDisciplina(turmaDoAluno, aluno);
+		Iterator iAlunoDisciplina = listAlunoDisciplina.iterator();
+		while(iAlunoDisciplina.hasNext()){
+			AlunoDisciplina alunoDisciplina = (AlunoDisciplina)iAlunoDisciplina.next();
+			alunoDisciplina.excluir();
+			
+		}
+	}
+	
 	public static DefaultListModel getListAlunos(Turma turma){
 		
 		List alunos = Aluno.getAlunos(turma);
 		
 		return CTurmaAluno.getDefaultListModel(alunos);
 		
+	}
+	
+	public static List getAlunosDaTurma(Turma turma){
+		return Aluno.getAlunosTurma(turma);
 	}
 	
 	public static DefaultListModel getListAlunosDaTurma(Turma turma){
