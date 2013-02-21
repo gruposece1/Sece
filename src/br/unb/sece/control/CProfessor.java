@@ -52,6 +52,11 @@ public class CProfessor extends CFuncionario{
 	public void setFuncionario(Professor professor) {
 		this.professor = professor;
 	}
+	
+	public void definirMetodoBusca(){
+		
+		this.metodoBusca = "getAll";
+	}
 
 	public void salvar() {
 		this.professor.salvar();
@@ -110,6 +115,9 @@ public class CProfessor extends CFuncionario{
 			this.professor.setSexo(panel.getSexo());
 			this.professor.setSenha(panel.getTxtSenha().getText());
 			
+			List listaDisciplinas = panel.getDisciplinasParaCadastrar();
+			List ListaDisciplinas2 = Disciplina.getString2Disciplina(listaDisciplinas);
+			this.professor.setDisciplinas(ListaDisciplinas2);
 			
 			this.verificarDados();
 			

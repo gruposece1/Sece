@@ -29,7 +29,7 @@ public class CFuncionario extends CPadrao {
 		
 		this.titulos = titulos;
 		
-		final Object [] metodos = {"getNome", "getCPF", "getTipoFuncionario", "getTelefone"};
+		final Object [] metodos = {"getNome", "getCpf", "getTipoFuncionario", "getTelefone"};
 		
 		this.metodos = metodos;
 	}

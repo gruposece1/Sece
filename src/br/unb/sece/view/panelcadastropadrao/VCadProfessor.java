@@ -8,6 +8,8 @@ import br.unb.sece.control.CProfessor;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VCadProfessor extends VCadFuncionario {
 	
@@ -70,6 +72,22 @@ public class VCadProfessor extends VCadFuncionario {
 	public JList getList_2(){
 		
 		return this.list_2;
+	}
+	
+	public List getDisciplinasParaCadastrar (){
+		
+		ArrayList listDisciplinas = new ArrayList();
+		
+		for (int i =0; i <list_2.getModel().getSize(); i++){
+			
+			listDisciplinas.add(list_2.getModel().getElementAt(i));
+			
+		}
+		
+		return listDisciplinas;
+		
+		
+		
 	}
 	
 }
