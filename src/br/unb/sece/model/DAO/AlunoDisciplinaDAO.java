@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.AlunoDisciplina;
+import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Turma;
 import br.unb.sece.model.TurmaDisciplina;
 
@@ -74,6 +75,25 @@ public class AlunoDisciplinaDAO extends Persistencia {
 					" group by p.idPessoa "+
 					" order by p.nome";
 		return this.objSession.createSQLQuery(sql).addEntity(Aluno.class).list();
+	}
+	
+	public AlunoDisciplina getAlunoDisciplina(Aluno aluno, Disciplina disciplina){
+	 String sql = " " + 
+					" select  " + 
+					"  ad.*  " +
+					" from " +
+					"   pessoa p  " + 
+					"   inner join aluno a  " +
+					"   on p.idPessoa = a.idPessoa  " +
+					"   inner join alunodisciplina ad " +
+					"   on a.idPessoa = ad.idAluno " +
+					"   inner join turmadisciplina td " +
+					"   on ad.idTurmaDisciplina = td.idTurmaDisciplina " +
+					" where " +
+					"   a.idPessoa =  "+ aluno.getIdPessoa() + " "+
+					"   and td.idDisciplina = " + disciplina.getId() + " ";
+		
+		return (AlunoDisciplina)this.objSession.createSQLQuery(sql).addEntity(AlunoDisciplina.class).uniqueResult();
 	}
 
 }

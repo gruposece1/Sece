@@ -29,10 +29,10 @@ public class PanelAlunoChamadaNota extends JPanel {
 	
 	private JRadioButton radioAtrasado;
 	
-	public PanelAlunoChamadaNota(Long idAluno,String nomeAluno,String matricula, int tipoPanel) {
+	public PanelAlunoChamadaNota(Long idAluno,String nomeAluno,String matricula,int tamanho, int tipoPanel) {
 		super();
 		this.idAluno = idAluno;
-		this.setBounds(10, 34, 1103, 33);
+		this.setBounds(10, tamanho, 1103, 33);
 		this.setLayout(null);
 		this.lblMatNomeAluno = new JLabel(nomeAluno + "  "+matricula);
 		this.lblMatNomeAluno.setBounds(10, 11, 272, 14);
@@ -99,6 +99,10 @@ public class PanelAlunoChamadaNota extends JPanel {
 			this.valorChamada = Chamada.ALUNO_PRESENTE;
 		}
 		return this.valorChamada;
+	}
+	
+	public String getObsAluno(){
+		return this.textFieldAnotation.getText();
 	}
 
 	public static final int CHAMADA = 1;

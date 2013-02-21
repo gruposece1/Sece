@@ -101,5 +101,10 @@ public class AlunoDisciplina {
 		return dao.getAlunosDaTurma(turma.getIdTurma());
 	}
 	
+	public static AlunoDisciplina getAlunoDisciplina(Aluno aluno,Disciplina disciplina){
+		final AlunoDisciplinaDAO dao = new AlunoDisciplinaDAO();
+		return dao.getAlunoDisciplina(aluno, disciplina);
+	}
+	
 
 }

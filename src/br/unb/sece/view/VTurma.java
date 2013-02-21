@@ -33,11 +33,16 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import org.hibernate.Session;
+
 import br.unb.sece.control.CChamada;
 import br.unb.sece.control.CTurma;
 import br.unb.sece.model.Aluno;
+import br.unb.sece.model.Disciplina;
+import br.unb.sece.model.Horario;
 import br.unb.sece.model.Pessoa;
 import br.unb.sece.model.Turma;
+import br.unb.sece.util.HibernateUtil;
 import br.unb.sece.view.util.PanelAlunoChamadaNota;
 
 import java.awt.Scrollbar;
@@ -59,6 +64,7 @@ public class VTurma extends JFrame implements ActionListener {
 	private JTextField textFieldAnotation;
 	private CTurma cturma;
 	private CChamada chamada;
+	private JButton btnCadastrar;
 
 	/**
 	 * Launch the application.
@@ -236,11 +242,18 @@ public class VTurma extends JFrame implements ActionListener {
 				ArrayList<Aluno> lista = new ArrayList<Aluno>(cturma.getTurma().getAluno());
 				System.out.println("VTurma a qtde na turma : " + lista.size());
 				PanelAlunoChamadaNota panelChamada;
+				int tamanho = 34;
 				for(int i=0; i< lista.size(); i++){
-					panelChamada = new PanelAlunoChamadaNota(lista.get(i).getIdPessoa(), lista.get(i).getNome(),lista.get(i).getMatricula(), PanelAlunoChamadaNota.CHAMADA);
+					tamanho = (i+1) * 34;
+					panelChamada = new PanelAlunoChamadaNota(lista.get(i).getIdPessoa(), lista.get(i).getNome(),lista.get(i).getMatricula(),tamanho, PanelAlunoChamadaNota.CHAMADA);
 					panel_1.add(panelChamada);
 					
 				}
+				
+				this.btnCadastrar = new JButton("Salvar");
+				this.btnCadastrar.setBounds(1300, 700, 100, 50);
+				this.btnCadastrar.addActionListener(this);
+				this.contentPane.add(btnCadastrar);
 				
 				iniciaRelogio();
 				
@@ -347,10 +360,35 @@ public class VTurma extends JFrame implements ActionListener {
 			}
 		}.start();
 	}
+	
+	private void cadastrar(){
+		Session session = HibernateUtil.getSession();
+		try{
+			session.getTransaction().begin();
+			CChamada chamada = new CChamada();
+			for(int i =0; i < this.panel_1.getComponentCount(); i++){
+				Component componente = this.panel_1.getComponent(i);
+				if(componente instanceof PanelAlunoChamadaNota){
+					PanelAlunoChamadaNota panel = (PanelAlunoChamadaNota)componente;
+					Horario obHorario = new Horario();
+					
+					chamada.cadastrarChamada(panel.geIdAluno(), Disciplina.getDisciplina(obHorario.horarioAtualTurma(cturma.getTurma())).getId(), panel.getValorChamada(), null,panel.getObsAluno(), session);
+				}
+			}
+			session.getTransaction().commit();
+			this.dispose();
+		}catch(Exception ex){
+			
+			ex.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		/*
 		JRadioButton j = (JRadioButton)e.getSource();
 		int i = Integer.parseInt(j.getName());
 		
@@ -358,6 +396,10 @@ public class VTurma extends JFrame implements ActionListener {
 		Aluno aluno = alunos.get(i);
 		this.chamada = new CChamada(aluno);
 		this.chamada.enviarEmail();
+		*/
+		if(e.getSource().equals(this.btnCadastrar)){
+			this.cadastrar();
+		}
 	}
 
 }

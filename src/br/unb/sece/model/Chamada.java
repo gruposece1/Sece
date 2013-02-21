@@ -9,10 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.Session;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
+import br.unb.sece.exceptions.AtributoInvalidoException;
+import br.unb.sece.model.DAO.ChamadaDAO;
 
 @Entity
 public class Chamada {
@@ -31,6 +35,8 @@ public class Chamada {
 	private int verificacaoAluno;
 	
 	private boolean verificacaoEmail;
+	
+	private String obsAluno;
 
 	public Long getIdChamada() {
 		return idChamada;
@@ -60,7 +66,10 @@ public class Chamada {
 		return verificacaoAluno;
 	}
 
-	public void setVerificacaoAluno(int verificacaoAluno) {
+	public void setVerificacaoAluno(int verificacaoAluno) throws AtributoInvalidoException {
+		if(verificacaoAluno < 1 || verificacaoAluno >3){
+			throw new AtributoInvalidoException();
+		}
 		this.verificacaoAluno = verificacaoAluno;
 	}
 
@@ -71,6 +80,18 @@ public class Chamada {
 	public void setVerificacaoEmail(boolean verificacaoEmail) {
 		this.verificacaoEmail = verificacaoEmail;
 	}
+	
+	
+
+	public String getObsAluno() {
+		return obsAluno;
+	}
+
+	public void setObsAluno(String obsAluno) {
+		this.obsAluno = obsAluno;
+	}
+
+
 
 	public static final int  ALUNO_PRESENTE = 1;
 	
@@ -79,6 +100,14 @@ public class Chamada {
 	public static final int  ALUNO_ATRASADO = 3;
 	
 	
+	public void salvar(){
+		final ChamadaDAO dao = new ChamadaDAO();
+		dao.save(this);
+	}
 	
+	public void salvar(Session session){
+		final ChamadaDAO dao = new ChamadaDAO();
+		dao.save(this,session);
+	}
 	
 }

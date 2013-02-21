@@ -1,16 +1,22 @@
 package br.unb.sece.control;
 
+import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.model.Aluno;
+import br.unb.sece.model.AlunoDisciplina;
+import br.unb.sece.model.Chamada;
+import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Responsavel;
 import br.unb.sece.util.MandarEmail;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 import javax.swing.JOptionPane;
 
 import org.apache.commons.mail.EmailException;
+import org.hibernate.Session;
 
 public class CChamada {
 
@@ -18,6 +24,10 @@ public class CChamada {
 	
 	public CChamada(Aluno aluno) {
 		this.aluno = aluno;
+	}
+	
+	public CChamada(){
+		
 	}
 	
 	public void setAluno(Aluno aluno) {
@@ -68,6 +78,38 @@ public class CChamada {
 
 	public void findAluno(String nome) {
 		
+	}
+	
+	public void cadastrarChamada(Long idAluno,Long idDisciplina,int verificacaoAluno, Calendar data,String observacao, Session session ) throws AtributoInvalidoException{
+		Aluno aluno = Aluno.getAluno(idAluno);
+		Disciplina disciplina = Disciplina.getDisciplina(idDisciplina);
+		if(disciplina == null || aluno == null){
+			throw new NullPointerException();
+		}
+		this.cadastrarChamada(aluno, disciplina, verificacaoAluno, data,observacao,session);
+	}
+	
+	public void cadastrarChamada(Aluno aluno,Disciplina disciplina,int verificacaoAluno, Calendar data,String observacao, Session session ) throws AtributoInvalidoException{
+		AlunoDisciplina alunoDisciplina = AlunoDisciplina.getAlunoDisciplina(aluno, disciplina);
+		this.cadastrarChamada(alunoDisciplina, verificacaoAluno, data,observacao, session);
+	}
+	
+	public void cadastrarChamada(AlunoDisciplina alunoDisciplina, int verificacaoAluno, Calendar data, String observacao, Session session) throws AtributoInvalidoException{
+		Chamada chamada = new Chamada();
+		chamada.setAlunoDisciplina(alunoDisciplina);
+		chamada.setVerificacaoAluno(verificacaoAluno);
+		if(data == null){
+			data = Calendar.getInstance();
+			
+		}
+		chamada.setData(data);
+		chamada.setVerificacaoEmail(false);
+		if(session == null){
+			chamada.salvar();
+		}else{
+			chamada.salvar(session);
+		}
+		chamada.setObsAluno(observacao);
 	}
 
 }
