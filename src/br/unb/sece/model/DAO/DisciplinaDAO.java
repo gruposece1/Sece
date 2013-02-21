@@ -36,6 +36,20 @@ public class DisciplinaDAO extends Persistencia {
 		return null;
 	}
 	
+	public Disciplina getDisciplina(Long idHorario){
+		String sql = "select " +  
+					  "d.* " + 
+					  "from " + 
+					   " horario h " +
+					   " inner join turmadisciplina td " +
+					   " on h.idTurmaDisciplina = td.idTurmaDisciplina " +
+					   " inner join disciplina d " +
+					   " on td.idDisciplina = d.id " +
+					  "where " +
+					   " h.idHorario = " + idHorario;
+		return (Disciplina)this.objSession.createSQLQuery(sql).addEntity(Disciplina.class).uniqueResult();
+	}
+	
 	
 	
 	

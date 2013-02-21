@@ -120,6 +120,9 @@ public class Horario {
 	}
 
 	public Disciplina getDisciplina() {
+		if(this.disciplina == null && this.idHorario != null){
+			this.disciplina = Disciplina.getDisciplina(this);
+		}
 		return this.disciplina;
 	}
 

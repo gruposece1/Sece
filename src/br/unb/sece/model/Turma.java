@@ -62,6 +62,9 @@ public class Turma {
 	}
 
 	public Collection<Aluno> getAluno() {
+		if((this.aluno.size() == 0 || this.aluno == null) && this.idTurma != null){
+			this.aluno = AlunoDisciplina.getAlunosDaTurma(this);
+		}
 		return this.aluno;
 	}
 	
@@ -116,10 +119,6 @@ public class Turma {
 	
 	public void salvar(Session session) {
 		final TurmaDAO dao = new TurmaDAO(session);
-		
-		//dao.close();
-		System.out.println("O id: " + this.getSerie().getIdSerie());
-		System.out.println("O id turno: " + this.getTurno().getId());
 		
 		dao.save((Turma) this, session);
 		

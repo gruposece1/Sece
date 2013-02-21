@@ -116,5 +116,13 @@ public class Disciplina {
 		return disciplinas;
 		
 	}
+	
+	public static Disciplina getDisciplina(Horario obHorario){
+		final DisciplinaDAO dao = new DisciplinaDAO();
+		if(obHorario == null){
+			throw new NullPointerException();
+		}
+		return dao.getDisciplina(obHorario.getIdHorario());
+	}
 
 }

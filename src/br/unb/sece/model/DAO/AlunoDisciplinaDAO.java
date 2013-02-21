@@ -55,5 +55,25 @@ public class AlunoDisciplinaDAO extends Persistencia {
 		return this.objSession.createSQLQuery(sql).addEntity(AlunoDisciplina.class).list();
 		
 	}
+	
+	public List<Aluno> getAlunosDaTurma(Long idTurma){
+		String sql = 
+					" select " + 
+					 " a.*, " +
+					 " p.* " +
+					" from " +
+					 " pessoa p " +
+					 " inner join aluno a " +
+					 " on p.idPessoa = a.idPessoa " +
+					 " inner join alunodisciplina ad  " +
+					 " on ad.idAluno = a.idPessoa " +
+					 " inner join turmadisciplina td " +
+					 " on ad.idTurmaDisciplina = td.idDisciplina " +
+					" where " +
+					  " idTurma = "+ idTurma + " " +
+					" group by p.idPessoa "+
+					" order by p.nome";
+		return this.objSession.createSQLQuery(sql).addEntity(Aluno.class).list();
+	}
 
 }
