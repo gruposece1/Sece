@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.Session;
 import org.hibernate.annotations.*; //Especificar o que está sendo importado
@@ -41,9 +42,7 @@ public class Turma {
 	@Cascade(CascadeType.LOCK)
 	private Turno turno;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="turmaaluno", schema="sece", joinColumns={@JoinColumn(name="idTurma")},	inverseJoinColumns={@JoinColumn(name="idPessoa")})
-	@Cascade(CascadeType.LOCK)
+	@Transient
 	private Collection<Aluno> aluno = new ArrayList<Aluno>();
 	
 	@ManyToMany(fetch=FetchType.LAZY)

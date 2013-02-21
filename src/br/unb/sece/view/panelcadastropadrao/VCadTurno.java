@@ -50,6 +50,10 @@ public class VCadTurno extends JPanel
 		CBTipo = new JComboBox(tipo);
 		CBTipo.setBounds(57, 110, 86, 20);
 		add(CBTipo);
+		
+		txtInicio.setName("Inicio");
+		txtFim.setName("Fim");
+		CBTipo.setName("Tipo");
 
 	}
 

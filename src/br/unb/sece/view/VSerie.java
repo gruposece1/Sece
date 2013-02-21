@@ -52,7 +52,7 @@ public class VSerie extends VPadrao{
 		// TODO Auto-generated method stub
 		Serie obSerie = (Serie)this.retonarObjetoGrade();
 		VCadSerie vc = (VCadSerie)this.panel;
-		vc.getTextField().setText(obSerie.getNome());
+		vc.getTxtNome().setText(obSerie.getNome());
 		
 		
 		try {
