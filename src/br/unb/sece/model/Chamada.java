@@ -72,9 +72,11 @@ public class Chamada {
 		this.verificacaoEmail = verificacaoEmail;
 	}
 
+	public static final int  ALUNO_PRESENTE = 1;
 	
+	public static final int  ALUNO_AUSENTE = 2;
 	
-	
+	public static final int  ALUNO_ATRASADO = 3;
 	
 	
 	

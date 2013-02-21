@@ -93,5 +93,13 @@ public class AlunoDisciplina {
 		dao.remove(this);
 	}
 	
+	public static List<Aluno> getAlunosDaTurma(Turma turma){
+		final AlunoDisciplinaDAO dao = new AlunoDisciplinaDAO();
+		if(turma == null){
+			throw new NullPointerException();
+		}
+		return dao.getAlunosDaTurma(turma.getIdTurma());
+	}
+	
 
 }

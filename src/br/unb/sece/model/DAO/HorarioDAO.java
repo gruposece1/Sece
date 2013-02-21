@@ -33,10 +33,17 @@ public class HorarioDAO extends Persistencia {
 		
 		Date d = new Date();
 		
-		
-		String sql = "select o from "  + classe.getSimpleName() + " o where diaSemana = 0 and idTurma = " + turma.getIdTurma();
-		List horarios = objSession.createQuery(sql).list();
-		System.out.println("A qtde: "+ horarios.size());
+		String sql = "select "+ 
+					  "h.*  "+
+					"from "+
+					 " turmadisciplina td "+
+					  "inner join horario h "+
+					  "on td.idTurmaDisciplina = h.idTurmaDisciplina "+
+					"where "+
+					 " td.idTurma = "+ turma.getIdTurma() + " " +
+					  "and diaSemana = 1";
+		//String sql = "select o from "  + classe.getSimpleName() + " o where diaSemana = 0 and idTurma = " + turma.getIdTurma();
+		List horarios = this.objSession.createSQLQuery(sql).addEntity(classe).list();
 		for(int i =0; i < horarios.size(); i++){
 			Horario h = (Horario)horarios.get(i);
 			if(d.getHours() >=   h.getHrInicial().getTime().getHours() && d.getMinutes() >= h.getHrInicial().getTime().getMinutes()){

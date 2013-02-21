@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JTextPane;
 
@@ -37,6 +38,7 @@ import br.unb.sece.control.CTurma;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Pessoa;
 import br.unb.sece.model.Turma;
+import br.unb.sece.view.util.PanelAlunoChamadaNota;
 
 import java.awt.Scrollbar;
 
@@ -226,14 +228,17 @@ public class VTurma extends JFrame implements ActionListener {
 				lblAnotation.setBounds(430, 11, 108, 14);
 				panelHeader.add(lblAnotation);
 				
-				JPanel []panelAlunos = addPanelAluno();
+				//JPanel []panelAlunos = addPanelAluno();
 				
 				panelHeader.setBounds(10, 11, 1103, 33);
-
-				for(int i=0; i<cturma.getTurma().getAluno().size(); i++)
-
-				{
-					panel_1.add(panelAlunos[i]);
+				
+				
+				ArrayList<Aluno> lista = new ArrayList<Aluno>(cturma.getTurma().getAluno());
+				System.out.println("VTurma a qtde na turma : " + lista.size());
+				PanelAlunoChamadaNota panelChamada;
+				for(int i=0; i< lista.size(); i++){
+					panelChamada = new PanelAlunoChamadaNota(lista.get(i).getIdPessoa(), lista.get(i).getNome(),lista.get(i).getMatricula(), PanelAlunoChamadaNota.CHAMADA);
+					panel_1.add(panelChamada);
 					
 				}
 				
@@ -249,7 +254,7 @@ public class VTurma extends JFrame implements ActionListener {
 		final int QNT_ALUNOS=cturma.getTurma().getAluno().size();
 		JPanel []panelChamadaEstrutura = new JPanel[QNT_ALUNOS];
 		
-
+		System.out.println("A qtde alunos: "+QNT_ALUNOS);
 		final int tamanho = 34;
 		int j=0, tam = 679;
 		for(int i=0; i<QNT_ALUNOS; i++){
@@ -314,6 +319,7 @@ public class VTurma extends JFrame implements ActionListener {
 			textFieldAnotation.setBounds(427, 8, 666, 20);
 			panelChamadaEstrutura[i].add(textFieldAnotation);
 			textFieldAnotation.setColumns(10);
+			
 		}
 		
 		
