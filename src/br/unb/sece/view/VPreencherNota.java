@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JTextPane;
 
@@ -32,11 +33,17 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import org.hibernate.Session;
+
 import br.unb.sece.control.CChamada;
 import br.unb.sece.control.CNota;
 import br.unb.sece.model.Aluno;
+import br.unb.sece.model.Disciplina;
+import br.unb.sece.model.Horario;
 import br.unb.sece.model.Pessoa;
 import br.unb.sece.model.Turma;
+import br.unb.sece.util.HibernateUtil;
+import br.unb.sece.view.util.PanelAlunoChamadaNota;
 
 import java.awt.Scrollbar;
 
@@ -57,6 +64,7 @@ public class VPreencherNota extends JFrame implements ActionListener {
 	private JTextField textFieldAnotation;
 	private CNota cnota;
 	private CChamada chamada;
+	private JButton btnCadastrar;
 
 	/**
 	 * Launch the application.
@@ -81,10 +89,8 @@ public class VPreencherNota extends JFrame implements ActionListener {
 	 * Create the frame.
 	 * @throws InterruptedException 
 	 */
-	public VPreencherNota(CNota nota) throws InterruptedException {
-		
-		this.cnota=nota;
-		
+	public VPreencherNota(CNota cnota) throws InterruptedException {
+		this.cnota=cnota;
 		setResizable(false);
 				setTitle("SECE - Sistema Escolar de Chamada Eletr\u00F4nica");
 
@@ -96,7 +102,7 @@ public class VPreencherNota extends JFrame implements ActionListener {
 				setContentPane(contentPane);
 				contentPane.setLayout(null);
 				
-
+				
 				
 				JPanel panel = new JPanel();
 				panel.setBounds(0, 23, 178, 681);
@@ -180,35 +186,45 @@ public class VPreencherNota extends JFrame implements ActionListener {
 				lblNomeMatrcula.setBounds(10, 11, 237, 14);
 				panelHeader.add(lblNomeMatrcula);
 				
-				JLabel lblNota01 = new JLabel("Nota 01");
-				lblNota01.setForeground(Color.BLACK);
-				lblNota01.setBounds(246, 11, 60, 14);
-				panelHeader.add(lblNota01);
+				JLabel lblPresente = new JLabel("Presente");
+				lblPresente.setForeground(new Color(34, 139, 34));
+				lblPresente.setBounds(246, 11, 60, 14);
+				panelHeader.add(lblPresente);
 				
-				JLabel lblNota02 = new JLabel("Nota 02");
-				lblNota02.setForeground(Color.BLACK);
-				lblNota02.setBounds(304, 11, 43, 14);
-				panelHeader.add(lblNota02);
+				JLabel lblNewLabel_1 = new JLabel("Falta");
+				lblNewLabel_1.setForeground(new Color(255, 0, 0));
+				lblNewLabel_1.setBounds(316, 11, 31, 14);
+				panelHeader.add(lblNewLabel_1);
 				
-				JLabel lblNota03 = new JLabel("Nota 03");
-				lblNota03.setForeground(Color.BLACK);
-				lblNota03.setBounds(364, 11, 60, 14);
-				panelHeader.add(lblNota03);
+				JLabel lblNewLabel_2 = new JLabel("Atrasado");
+				lblNewLabel_2.setForeground(new Color(210, 105, 30));
+				lblNewLabel_2.setBounds(357, 11, 83, 14);
+				panelHeader.add(lblNewLabel_2);
 				
-				JLabel lblNota04 = new JLabel("Nota 04");
-				lblNota04.setBounds(423, 11, 108, 14);
-				panelHeader.add(lblNota04);
+				JLabel lblAnotation = new JLabel("Anota\u00E7\u00F5es");
+				lblAnotation.setBounds(430, 11, 108, 14);
+				panelHeader.add(lblAnotation);
 				
-				JPanel []panelAlunos = addPanelAluno();
+				//JPanel []panelAlunos = addPanelAluno();
 				
 				panelHeader.setBounds(10, 11, 1103, 33);
-
-				for(int i=0; i<cnota.getTurma().getAluno().size(); i++)
-
-				{
-					panel_1.add(panelAlunos[i]);
+				
+				
+				ArrayList<Aluno> lista = new ArrayList<Aluno>(cnota.getTurma().getAluno());
+				System.out.println("VTurma a qtde na turma : " + lista.size());
+				PanelAlunoChamadaNota panelChamada;
+				int tamanho = 34;
+				for(int i=0; i< lista.size(); i++){
+					tamanho = (i+1) * 34;
+					panelChamada = new PanelAlunoChamadaNota(lista.get(i).getIdPessoa(), lista.get(i).getNome(),lista.get(i).getMatricula(),tamanho, PanelAlunoChamadaNota.CHAMADA);
+					panel_1.add(panelChamada);
 					
 				}
+				
+				this.btnCadastrar = new JButton("Salvar");
+				this.btnCadastrar.setBounds(1300, 700, 100, 50);
+				this.btnCadastrar.addActionListener(this);
+				this.contentPane.add(btnCadastrar);
 				
 				iniciaRelogio();
 				
@@ -222,7 +238,7 @@ public class VPreencherNota extends JFrame implements ActionListener {
 		final int QNT_ALUNOS=cnota.getTurma().getAluno().size();
 		JPanel []panelChamadaEstrutura = new JPanel[QNT_ALUNOS];
 		
-
+		System.out.println("A qtde alunos: "+QNT_ALUNOS);
 		final int tamanho = 34;
 		int j=0, tam = 679;
 		for(int i=0; i<QNT_ALUNOS; i++){
@@ -252,9 +268,10 @@ public class VPreencherNota extends JFrame implements ActionListener {
 			lblMatNomeAluno.setBounds(10, 11, 272, 14);
 			panelChamadaEstrutura[i].add(lblMatNomeAluno);
 			
+			ButtonGroup chamadaGroup = new ButtonGroup();
 			
-			JTextField txtNota01 = new JTextField();
-			txtNota01.setBounds(267, 7, 21, 23);
+			JRadioButton radioPresente = new JRadioButton("");
+			radioPresente.setBounds(267, 7, 21, 23);
 			
 			JRadioButton radioFalta = new JRadioButton("");
 			radioFalta.setBounds(317, 7, 21, 23);
@@ -275,6 +292,10 @@ public class VPreencherNota extends JFrame implements ActionListener {
 			JRadioButton radioAtrasado = new JRadioButton("");
 			radioAtrasado.setBounds(366, 7, 21, 23);
 			
+			chamadaGroup.add(radioPresente);
+			chamadaGroup.add(radioFalta);
+			chamadaGroup.add(radioAtrasado);
+			panelChamadaEstrutura[i].add(radioPresente);
 			panelChamadaEstrutura[i].add(radioFalta);
 			panelChamadaEstrutura[i].add(radioAtrasado);
 			
@@ -282,6 +303,7 @@ public class VPreencherNota extends JFrame implements ActionListener {
 			textFieldAnotation.setBounds(427, 8, 666, 20);
 			panelChamadaEstrutura[i].add(textFieldAnotation);
 			textFieldAnotation.setColumns(10);
+			
 		}
 		
 		
@@ -309,10 +331,35 @@ public class VPreencherNota extends JFrame implements ActionListener {
 			}
 		}.start();
 	}
+	
+	private void cadastrar(){
+		Session session = HibernateUtil.getSession();
+		try{
+			session.getTransaction().begin();
+			CChamada chamada = new CChamada();
+			for(int i =0; i < this.panel_1.getComponentCount(); i++){
+				Component componente = this.panel_1.getComponent(i);
+				if(componente instanceof PanelAlunoChamadaNota){
+					PanelAlunoChamadaNota panel = (PanelAlunoChamadaNota)componente;
+					Horario obHorario = new Horario();
+					
+					chamada.cadastrarChamada(panel.geIdAluno(), Disciplina.getDisciplina(obHorario.horarioAtualTurma(cnota.getTurma())).getId(), panel.getValorChamada(), null,panel.getObsAluno(), session);
+				}
+			}
+			session.getTransaction().commit();
+			this.dispose();
+		}catch(Exception ex){
+			
+			ex.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		/*
 		JRadioButton j = (JRadioButton)e.getSource();
 		int i = Integer.parseInt(j.getName());
 		
@@ -320,6 +367,10 @@ public class VPreencherNota extends JFrame implements ActionListener {
 		Aluno aluno = alunos.get(i);
 		this.chamada = new CChamada(aluno);
 		this.chamada.enviarEmail();
+		*/
+		if(e.getSource().equals(this.btnCadastrar)){
+			this.cadastrar();
+		}
 	}
 
 }

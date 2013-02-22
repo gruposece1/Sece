@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Horario;
+import br.unb.sece.model.Professor;
 import br.unb.sece.model.Turma;
 import br.unb.sece.model.TurmaDisciplina;
 import br.unb.sece.util.ModelComboBox;
@@ -60,69 +61,42 @@ public class CNota {
 			return nomes;
 	}
 	
-	public String[] getAllDisciplinas(){
-		
-		ArrayList<Disciplina> disciplinas = (ArrayList)disciplina.getAll();
-		
-		String[] nomes = new String[disciplinas.size()];
-		
-		for(int i=0; i<disciplinas.size(); i++){
-			
-			Disciplina disciplina = (Disciplina) disciplinas.get(i);
-			nomes[i] = disciplina.getNome();
-			
-		}
-		
-		
-			return nomes;
-	}
+
 	
-	public int selectTurma(String nome)
+	public int selectTurma(String nome) throws NullPointerException
 	{
-		Turma turma = new Turma();
-		
-		nome = nome.substring(4,nome.length());
-		
-		System.out.println(nome);
-		
-		
-		for (Iterator<Turma> iter = turma.getAll().iterator(); iter. hasNext();)
-		{	
-			Turma t = iter.next();
+		 
+		final Turma turma = (Turma) this.modelTurma.getSelectedItemObject();
 			
-			if(t.getNomeTurma().equals(nome))
-			{	
-				setTurma(t);
-				return 0;
-			}	
-		}
+		if(turma == null)
+		{	
+			setTurma(null);
+			throw new NullPointerException();
+		}	
+			
+		setTurma(turma);
 		
 		
-		setTurma(null);
-		
-		return 1;
+		return 0;
 	}
 	
 	public int selectDisciplina(String nome)
 	{
 		
-		Disciplina disciplina = new Disciplina();
+		final Disciplina disciplina = (Disciplina) this.modelDisciplinas.getSelectedItemObject();
 		
-		
-		for (Iterator<Disciplina> iter = disciplina.getAll().iterator(); iter. hasNext();)
+		if(disciplina == null)
 		{	
-			Disciplina disciplinas = iter.next();
+			setDisciplina(null);
+			throw new NullPointerException();
+		}	
 			
-			if(disciplinas.getNome().equals(nome))
-			{	
-				setDisciplina(disciplinas);
-				return 0;
-			}	
-		}
+		setDisciplina(disciplina);
 		
 		
-		setDisciplina(null);
-		return 1;
+		return 0;
+		
+		
 	}
 
 

@@ -119,7 +119,7 @@ public class VLancarNota extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				try {
+			try {
 					VPreencherNota preencherNota = new VPreencherNota(CNota);
 					preencherNota.setVisible(true);
 				} catch (InterruptedException e) {

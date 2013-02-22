@@ -74,6 +74,9 @@ public class AlunoDisciplinaDAO extends Persistencia {
 					  " idTurma = "+ idTurma + " " +
 					" group by p.idPessoa "+
 					" order by p.nome";
+		
+		System.out.println(sql);
+		
 		return this.objSession.createSQLQuery(sql).addEntity(Aluno.class).list();
 	}
 	

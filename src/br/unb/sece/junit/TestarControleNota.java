@@ -37,19 +37,7 @@ public class TestarControleNota {
 		}
 	}
 	
-	@Test
-	public void testarGetAllDisciplinas(){
-		
-		try
-		{
-			CNota.getAllDisciplinas();
-		}
-		catch(Exception e)
-		{
-			fail("Ocorreu um erro");
-		}
-		
-	}
+
 	
 	@Test
 	public void testarSelectTurmaCerto()
