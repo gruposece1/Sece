@@ -38,7 +38,6 @@ public class GerarTabelas {
 		cfg.addAnnotatedClass(Disciplina.class);
 		cfg.addAnnotatedClass(Turno.class);
 		cfg.addAnnotatedClass(Serie.class);
-		cfg.addAnnotatedClass(TurmaAluno.class);
 		cfg.addAnnotatedClass(AlunoDisciplina.class);
 		cfg.addAnnotatedClass(TurmaDisciplina.class);
 		cfg.addAnnotatedClass(Turma.class);
