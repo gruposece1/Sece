@@ -18,7 +18,6 @@ import br.unb.sece.model.RegistroNota;
 import br.unb.sece.model.Responsavel;
 import br.unb.sece.model.Serie;
 import br.unb.sece.model.Turma;
-import br.unb.sece.model.TurmaAluno;
 import br.unb.sece.model.TurmaDisciplina;
 import br.unb.sece.model.Turno;
 
@@ -42,7 +41,7 @@ public class GerarTabelas {
 		cfg.addAnnotatedClass(TurmaDisciplina.class);
 		cfg.addAnnotatedClass(Turma.class);
 		cfg.addAnnotatedClass(Nota.class);
-		//cfg.addAnnotatedClass(RegistroNota.class);
+		cfg.addAnnotatedClass(RegistroNota.class);
 		cfg.addAnnotatedClass(Chamada.class);
 		
 		SchemaExport se = new SchemaExport(cfg);

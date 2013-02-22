@@ -6,7 +6,6 @@ import java.awt.EventQueue;
 
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Turma;
-import br.unb.sece.model.TurmaAluno;
 
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
