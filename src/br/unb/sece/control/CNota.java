@@ -1,11 +1,19 @@
 package br.unb.sece.control;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 
+import org.hibernate.Session;
+
+import br.unb.sece.exceptions.AtributoInvalidoException;
+import br.unb.sece.model.Aluno;
+import br.unb.sece.model.AlunoDisciplina;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Horario;
-import br.unb.sece.model.Professor;
+import br.unb.sece.model.Nota;
+import br.unb.sece.model.RegistroNota;
 import br.unb.sece.model.Turma;
 import br.unb.sece.model.TurmaDisciplina;
 import br.unb.sece.util.ModelComboBox;
@@ -13,10 +21,12 @@ import br.unb.sece.util.ModelComboBox;
 public class CNota {
 	
 	private Turma turma;
-	private Disciplina disciplina=new Disciplina();
+	private Disciplina disciplina;
 	private ModelComboBox modelDisciplinas = null;
 	private ModelComboBox modelTurma = null;
 	private TurmaDisciplina turmaDisciplina;
+	private int bimestre;
+	private AlunoDisciplina alunoDisciplina;
 	
 	public CNota(){
 		
@@ -118,9 +128,72 @@ public class CNota {
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
-	
-	
-	
 
+	public int getBimestre() {
+		return bimestre;
+	}
+
+	public void setBimestre(int bimestre) {
+		this.bimestre = bimestre;
+	}
+	
+	
+	
+	public void salvarNota(double valorNota,Long idAluno, Nota nota){
+		
+		alunoDisciplina = this.retornarAluno(idAluno);
+		
+		if(this.getModelDisciplinas().getSelectedItem() == null || alunoDisciplina == null){
+			throw new NullPointerException();
+		}
+		
+		RegistroNota registroNota = new RegistroNota();
+		
+		registroNota.setAlunoDisciplina(alunoDisciplina);
+		registroNota.setBimestre(getBimestre());
+		registroNota.setValor(valorNota);
+		registroNota.setNota(nota);
+		
+		
+		
+		registroNota.salvar();
+	
+	}
+	
+	public void salvarNota(AlunoDisciplina alunoDisciplina,double valorNota, Nota nota,int bimestre, Session session){
+		
+		
+		RegistroNota registroNota = new RegistroNota();
+		registroNota.setAlunoDisciplina(alunoDisciplina);
+		registroNota.setBimestre(bimestre);
+		registroNota.setValor(valorNota);
+		registroNota.setNota(nota);
+		
+		if(session == null){
+			registroNota.salvar();
+		}else{
+		
+			registroNota.salvar(session);
+		}
+		
+	}
+	
+	public void salvarNota(Long idAluno, Disciplina disciplina, HashMap<Integer, Double> notas, int bimestre, Session session){
+		Aluno aluno = Aluno.getAluno(idAluno);
+		this.salvar(aluno, disciplina, notas, bimestre,session);
+		
+	}
+	
+	public void salvar(Aluno aluno, Disciplina disciplina, HashMap<Integer, Double> notas, int bimestre, Session session){
+		AlunoDisciplina alunoDisciplina = AlunoDisciplina.getAlunoDisciplina(aluno, disciplina);
+		Double valorNota = notas.get(bimestre);
+		Nota nota = Nota.getNota();
+		this.salvarNota(alunoDisciplina, valorNota, nota, bimestre, session);
+	}
+	
+	public AlunoDisciplina retornarAluno(Long idAluno)
+	{
+		return AlunoDisciplina.getAlunoDisciplina(Aluno.getAluno(idAluno), disciplina);
+	}
 
 }

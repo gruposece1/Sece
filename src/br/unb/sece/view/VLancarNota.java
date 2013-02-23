@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class VLancarNota extends JFrame {
+public class VLancarNota extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 
@@ -116,17 +116,7 @@ public class VLancarNota extends JFrame {
 		contentPane.add(CBBimestre);
 		
 		JButton btnOk = new JButton("Ok");
-		btnOk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			try {
-					VPreencherNota preencherNota = new VPreencherNota(CNota);
-					preencherNota.setVisible(true);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		btnOk.addActionListener(this);
 		btnOk.setBounds(239, 205, 89, 23);
 		contentPane.add(btnOk);
 	}
@@ -137,5 +127,24 @@ public class VLancarNota extends JFrame {
 		String[] nomeBimestres = {"1","2", "3", "4"};
 		
 		return nomeBimestres;
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg) {
+		
+		this.dispose();
+		
+		CNota.setBimestre(Integer.parseInt((String) CBBimestre.getSelectedItem()));
+		
+		try {
+			VPreencherNota preencherNota = new VPreencherNota(CNota);
+			preencherNota.setVisible(true);
+		
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	
+		
 	}	
 }

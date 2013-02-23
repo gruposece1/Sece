@@ -186,24 +186,24 @@ public class VPreencherNota extends JFrame implements ActionListener {
 				lblNomeMatrcula.setBounds(10, 11, 237, 14);
 				panelHeader.add(lblNomeMatrcula);
 				
-				JLabel lblPresente = new JLabel("Presente");
-				lblPresente.setForeground(new Color(34, 139, 34));
-				lblPresente.setBounds(246, 11, 60, 14);
-				panelHeader.add(lblPresente);
+				JLabel lblNota01 = new JLabel("Nota 01");
+				lblNota01.setForeground(Color.BLACK);
+				lblNota01.setBounds(246, 11, 60, 14);
+				panelHeader.add(lblNota01);
 				
-				JLabel lblNewLabel_1 = new JLabel("Falta");
-				lblNewLabel_1.setForeground(new Color(255, 0, 0));
-				lblNewLabel_1.setBounds(316, 11, 31, 14);
-				panelHeader.add(lblNewLabel_1);
+				JLabel lblNota02 = new JLabel("Nota 02");
+				lblNota02.setForeground(Color.BLACK);
+				lblNota02.setBounds(303, 11, 44, 14);
+				panelHeader.add(lblNota02);
 				
-				JLabel lblNewLabel_2 = new JLabel("Atrasado");
-				lblNewLabel_2.setForeground(new Color(210, 105, 30));
-				lblNewLabel_2.setBounds(357, 11, 83, 14);
-				panelHeader.add(lblNewLabel_2);
+				JLabel lblNota03 = new JLabel("Nota 03");
+				lblNota03.setForeground(Color.BLACK);
+				lblNota03.setBounds(357, 11, 83, 14);
+				panelHeader.add(lblNota03);
 				
-				JLabel lblAnotation = new JLabel("Anota\u00E7\u00F5es");
-				lblAnotation.setBounds(430, 11, 108, 14);
-				panelHeader.add(lblAnotation);
+				JLabel lblNota04 = new JLabel("Nota 04");
+				lblNota04.setBounds(410, 11, 108, 14);
+				panelHeader.add(lblNota04);
 				
 				//JPanel []panelAlunos = addPanelAluno();
 				
@@ -216,7 +216,10 @@ public class VPreencherNota extends JFrame implements ActionListener {
 				int tamanho = 34;
 				for(int i=0; i< lista.size(); i++){
 					tamanho = (i+1) * 34;
-					panelChamada = new PanelAlunoChamadaNota(lista.get(i).getIdPessoa(), lista.get(i).getNome(),lista.get(i).getMatricula(),tamanho, PanelAlunoChamadaNota.CHAMADA);
+					
+					System.out.println(cnota.getBimestre());
+					
+					panelChamada = new PanelAlunoChamadaNota(lista.get(i).getIdPessoa(), lista.get(i).getNome(),lista.get(i).getMatricula(),tamanho, PanelAlunoChamadaNota.NOTA, cnota.getBimestre());
 					panel_1.add(panelChamada);
 					
 				}
@@ -336,14 +339,12 @@ public class VPreencherNota extends JFrame implements ActionListener {
 		Session session = HibernateUtil.getSession();
 		try{
 			session.getTransaction().begin();
-			CChamada chamada = new CChamada();
+			
 			for(int i =0; i < this.panel_1.getComponentCount(); i++){
 				Component componente = this.panel_1.getComponent(i);
 				if(componente instanceof PanelAlunoChamadaNota){
 					PanelAlunoChamadaNota panel = (PanelAlunoChamadaNota)componente;
-					Horario obHorario = new Horario();
-					
-					chamada.cadastrarChamada(panel.geIdAluno(), Disciplina.getDisciplina(obHorario.horarioAtualTurma(cnota.getTurma())).getId(), panel.getValorChamada(), null,panel.getObsAluno(), session);
+					this.cnota.salvarNota(panel.geIdAluno(), this.cnota.getDisciplina(), panel.getNotas(), this.cnota.getBimestre(), session);
 				}
 			}
 			session.getTransaction().commit();

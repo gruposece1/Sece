@@ -1,6 +1,8 @@
 package br.unb.sece.view.util;
 
 
+import java.util.HashMap;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,6 +10,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import br.unb.sece.model.Chamada;
+import br.unb.sece.model.RegistroNota;
 
 public class PanelAlunoChamadaNota extends JPanel {
 	
@@ -29,8 +32,36 @@ public class PanelAlunoChamadaNota extends JPanel {
 	
 	private JRadioButton radioAtrasado;
 	
+	private JTextField txtNota01;
+	
+	private JTextField txtNota02;
+	
+	private JTextField txtNota03;
+	
+	private JTextField txtNota04;
+	
+	private int bimestre;
+	
+	
+	
 	public PanelAlunoChamadaNota(Long idAluno,String nomeAluno,String matricula,int tamanho, int tipoPanel) {
-		super();
+		
+		
+		this.construtorPadrao(idAluno, nomeAluno, matricula, tamanho, tipoPanel);
+		
+	}
+	
+	public PanelAlunoChamadaNota(Long idAluno,String nomeAluno,String matricula,int tamanho, int tipoPanel, int bimestre)
+	{
+		this.bimestre = bimestre;
+		
+		this.construtorPadrao(idAluno, nomeAluno, matricula, tamanho, tipoPanel);
+		
+		
+	}
+	
+	private void construtorPadrao(Long idAluno,String nomeAluno,String matricula,int tamanho, int tipoPanel){
+		
 		this.idAluno = idAluno;
 		this.setBounds(10, tamanho, 1103, 33);
 		this.setLayout(null);
@@ -38,6 +69,7 @@ public class PanelAlunoChamadaNota extends JPanel {
 		this.lblMatNomeAluno.setBounds(10, 11, 272, 14);
 		this.add(this.lblMatNomeAluno);
 		this.tipoPanel = tipoPanel;
+		
 		switch(this.tipoPanel){
 			case PanelAlunoChamadaNota.CHAMADA:
 				this.constrututorChamada();
@@ -49,6 +81,7 @@ public class PanelAlunoChamadaNota extends JPanel {
 				this.constrututorChamada();
 				break;
 		}
+		
 	}
 	
 	private void constrututorChamada(){
@@ -78,10 +111,61 @@ public class PanelAlunoChamadaNota extends JPanel {
 		this.add(radioAtrasado);
 		this.add(radioFalta);
 		this.add(this.textFieldAnotation);
+		
+		this.textFieldAnotation.setName("obsAluno");
 	}
 	
 	private void construtorNota(){
 		
+		this.txtNota01 = new JTextField();
+		this.txtNota01.setBounds(267, 7, 21, 23);
+		
+		this.txtNota02 = new JTextField();
+		this.txtNota02.setBounds(317, 7, 21, 23);
+		
+		this.txtNota03 = new JTextField();
+		this.txtNota03.setBounds(366, 7, 21, 23);
+		
+		this.txtNota04 = new JTextField();
+		this.txtNota04.setBounds(427, 8, 21, 23);
+		
+		System.out.println(this.bimestre);
+		
+		this.add(txtNota01);
+		this.add(txtNota02);
+		this.add(txtNota03);
+		this.add(txtNota04);
+		
+		//this.validarCamposNota();
+		
+	}
+	
+	private void validarCamposNota()
+	{
+		if(bimestre==1){
+			
+			this.txtNota02.setEnabled(false);
+			this.txtNota03.setEnabled(false);
+			this.txtNota04.setEnabled(false);
+		}
+		else if(bimestre == 2){
+			
+			this.txtNota01.setEnabled(false);
+			this.txtNota03.setEnabled(false);
+			this.txtNota04.setEnabled(false);
+		}
+		else if(bimestre == 3)
+		{
+			this.txtNota01.setEnabled(false);
+			this.txtNota02.setEnabled(false);
+			this.txtNota04.setEnabled(false);
+		}
+		else
+		{
+			this.txtNota01.setEnabled(false);
+			this.txtNota02.setEnabled(false);
+			this.txtNota03.setEnabled(false);
+		}
 	}
 	
 	public Long geIdAluno(){
@@ -103,6 +187,23 @@ public class PanelAlunoChamadaNota extends JPanel {
 	
 	public String getObsAluno(){
 		return this.textFieldAnotation.getText();
+	}
+	
+	public HashMap<Integer, Double> getNotas()
+	{
+		HashMap<Integer, Double> notas = new HashMap<Integer, Double>() ;
+		
+		notas.put(RegistroNota.PRIMEIRO_BIMESTRE, Double.parseDouble(this.txtNota01.getText()));
+		
+		notas.put(RegistroNota.SEGUNDO_BIMESTRE, Double.parseDouble(this.txtNota02.getText()));
+		
+		notas.put(RegistroNota.TERCEIRO_BIMESTRE, Double.parseDouble(this.txtNota03.getText()));
+		
+		notas.put(RegistroNota.QUARTO_BIMESTRE, Double.parseDouble(this.txtNota04.getText()));
+		
+		return notas;
+		
+		
 	}
 
 	public static final int CHAMADA = 1;

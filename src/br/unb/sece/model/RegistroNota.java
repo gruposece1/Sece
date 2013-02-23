@@ -7,10 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.Session;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
+import br.unb.sece.model.DAO.ChamadaDAO;
+import br.unb.sece.model.DAO.RegistroNotaDAO;
 
 @Entity
 public class RegistroNota {
@@ -74,12 +78,22 @@ public class RegistroNota {
 		this.alunoDisciplina = alunoDisciplina;
 	}
 	
+	public void salvar(){
+		final RegistroNotaDAO dao = new RegistroNotaDAO();
+		dao.save(this);
+	}
+	
+	public void salvar(Session session){
+		final RegistroNotaDAO dao = new RegistroNotaDAO();
+		dao.save(this,session);
+	}
+	
 	public static final int PRIMEIRO_BIMESTRE = 1;
 	
-	public static final int SEGUNDO_BIMESTRE = 1;
+	public static final int SEGUNDO_BIMESTRE = 2;
 	
-	public static final int TERCEIRO_BIMESTRE = 1;
+	public static final int TERCEIRO_BIMESTRE = 3;
 	
-	public static final int QUARTO_BIMESTRE = 1;
+	public static final int QUARTO_BIMESTRE = 4;
 
 }
