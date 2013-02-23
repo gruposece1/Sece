@@ -1,15 +1,16 @@
 package br.unb.sece.view;
 
 import br.unb.sece.control.CResponsavel;
+import br.unb.sece.model.Professor;
+import br.unb.sece.model.Responsavel;
+import br.unb.sece.model.Serie;
+import br.unb.sece.view.panelcadastropadrao.VCadProfessor;
 import br.unb.sece.view.panelcadastropadrao.VCadResponsavel;
+import br.unb.sece.view.panelcadastropadrao.VCadSerie;
 
 public class VResponsavel extends VPadrao{
 
-	@Override
-	public void excluir() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void criarControle() {
@@ -27,10 +28,28 @@ public class VResponsavel extends VPadrao{
 
 	@Override
 	public void popularInterface() {
+		Responsavel responsavel = (Responsavel)this.retonarObjetoGrade();
+		VCadResponsavel vc = (VCadResponsavel)this.panel;
+		vc.getTxtNome().setText(responsavel.getNome());
+	
+		
+		try {
+			this.controle.receberObjetoAlterar(responsavel);
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void excluir() {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public void alterar() {
 		// TODO Auto-generated method stub
@@ -39,8 +58,8 @@ public class VResponsavel extends VPadrao{
 
 	@Override
 	public void passarDados() throws Exception {
-		// TODO Auto-generated method stub
 		
+		this.controle.receberDados(this);
 	}
 	
 

@@ -57,6 +57,13 @@ public class Responsavel extends Pessoa
 		this.email = email;
 	}
 	
+	public static String[] getDiasDaSemana(){
+		
+		 final String diasDaSemana[] = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"};
+		 
+		 return diasDaSemana;
+	}
+	
 
 	public List getAll(){
 		final ResponsavelDAO dao = new ResponsavelDAO();

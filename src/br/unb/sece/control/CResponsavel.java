@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import br.unb.sece.exceptions.AtributoInvalidoException;
 import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.BancoDeDadosException;
+import br.unb.sece.model.Professor;
 import br.unb.sece.model.Responsavel;
 import br.unb.sece.view.panelcadastropadrao.VCadResponsavel;
 
@@ -100,9 +101,9 @@ public class CResponsavel extends CPadrao{
 			break;
 
 		case CPadrao.OPERACAO_ALTERAR:
-			final Responsavel r = (Responsavel) this.objAlterar;
+			Responsavel r = (Responsavel) this.objAlterar;
 			
-			r.setNome(panel.getTextField().getText());
+			r.setNome(panel.getName());
 			r.setCpf(panel.getTextField_1().getText());
 			r.setEndereco(panel.getTextField_2().getText());
 			r.setEmail(panel.getTextField_3().getText());
@@ -116,6 +117,8 @@ public class CResponsavel extends CPadrao{
 			panel.getTextField_3().setText("");
 			panel.getTextField_4().setText("");
 			panel.getTextField_5().setText("");
+
+		
 			
 			break;
 	}

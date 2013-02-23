@@ -25,7 +25,6 @@ public class VCadResponsavel extends JPanel{
 	private JLabel lblEmail;
 	private JLabel lblCep;
 	
-	private JComboBox CBTipo;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -141,13 +140,6 @@ public class VCadResponsavel extends JPanel{
 		this.textField_5 = textField_5;
 	}
 
-	public JComboBox getCBTipo() {
-		return CBTipo;
-	}
-
-	public void setCBTipo(JComboBox cBTipo) {
-		CBTipo = cBTipo;
-	}
 
 	public JTextField getTextField_1() {
 		return textField_1;
@@ -183,6 +175,59 @@ public class VCadResponsavel extends JPanel{
 
 	public void setTextField(JTextField textField) {
 		this.textField = textField;
+	}
+
+	public JLabel getLblNome() {
+		return lblNome;
+	}
+
+	public void setLblNome(JLabel lblNome) {
+		this.lblNome = lblNome;
+	}
+
+	public JLabel getLblSexo() {
+		return lblSexo;
+	}
+
+	public void setLblSexo(JLabel lblSexo) {
+		this.lblSexo = lblSexo;
+	}
+
+	public JLabel getLblTelefone() {
+		return lblTelefone;
+	}
+
+	public void setLblTelefone(JLabel lblTelefone) {
+		this.lblTelefone = lblTelefone;
+	}
+
+	public JLabel getLblEndereo() {
+		return lblEndereo;
+	}
+
+	public void setLblEndereo(JLabel lblEndereo) {
+		this.lblEndereo = lblEndereo;
+	}
+
+	public JLabel getLblEmail() {
+		return lblEmail;
+	}
+
+	public void setLblEmail(JLabel lblEmail) {
+		this.lblEmail = lblEmail;
+	}
+
+	public JLabel getLblCep() {
+		return lblCep;
+	}
+
+	public void setLblCep(JLabel lblCep) {
+		this.lblCep = lblCep;
+	}
+
+	public Object getTxtNome() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
