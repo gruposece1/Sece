@@ -25,13 +25,19 @@ public class VResponsavel extends VPadrao{
 		this.panel = new VCadResponsavel();
 		
 	}
-
+    //nome,  cpf, sexo, endereço, email, telefone, cep
 	@Override
 	public void popularInterface() {
-		Responsavel responsavel = (Responsavel)this.retonarObjetoGrade();
+		final Responsavel responsavel = (Responsavel)this.retonarObjetoGrade();
 		VCadResponsavel vc = (VCadResponsavel)this.panel;
-		vc.getTxtNome().setText(responsavel.getNome());
-	
+		
+		vc.getTextField().setText(responsavel.getNome());
+		vc.getTextField_1().setText(responsavel.getCpf());
+		vc.getTextField_2().setToolTipText(responsavel.getSexo());
+		vc.getTextField_3().setText(responsavel.getEmail());
+		vc.getTextField_4().setText(responsavel.getTelefone());
+		vc.getTextField_5().setText(responsavel.getCEP());
+
 		
 		try {
 			this.controle.receberObjetoAlterar(responsavel);

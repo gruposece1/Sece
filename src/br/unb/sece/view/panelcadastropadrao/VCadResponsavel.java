@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import br.unb.sece.control.CResponsavel;
-import br.unb.sece.control.CTurno;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -33,6 +32,7 @@ public class VCadResponsavel extends JPanel{
 	private JTextField rbrMasculino;
 	private JTextField rbrFeminino;
 	private JTextField textField_5;
+	private JTextField txtNome;
 	
 	public JTextField getRbrMasculino() {
 		return rbrMasculino;
@@ -157,6 +157,9 @@ public class VCadResponsavel extends JPanel{
 		this.textField_2 = textField_2;
 	}
 
+	public void setTxtNome(JTextField txtNome) {
+		this.txtNome = txtNome;
+	}
 	public JTextField getTextField_3() {
 		return textField_3;
 	}
@@ -226,6 +229,16 @@ public class VCadResponsavel extends JPanel{
 	}
 
 	public Object getTxtNome() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getRdbtMasculino() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getRdbtFeminino() {
 		// TODO Auto-generated method stub
 		return null;
 	}

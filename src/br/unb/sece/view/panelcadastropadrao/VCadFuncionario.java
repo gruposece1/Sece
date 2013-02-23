@@ -192,12 +192,6 @@ public class VCadFuncionario extends JPanel implements ActionListener{
 	}
 
 
-
-	public void setTxtSenha(JTextField txtSenha) {
-		this.txtSenha = txtSenha;
-	}
-
-
 	public String getCargo()
 	{
 		return CBCargo.getSelectedItem().toString();
