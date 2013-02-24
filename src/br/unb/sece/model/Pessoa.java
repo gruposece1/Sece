@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import br.unb.sece.exceptions.AtributoInvalidoException;
+
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -59,6 +61,14 @@ public class Pessoa
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	public String getPronomeTratamento(){
+		if(this.sexo.equals(FEMININO)){
+			return "Sra. ";
+		}else{
+			return "Sr. ";
+		}
 	}
 
 }

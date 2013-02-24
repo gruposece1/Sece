@@ -3,21 +3,45 @@ package br.unb.sece.util;
 
 import java.net.MalformedURLException;  
 import java.net.URL;  
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
   
 import org.apache.commons.mail.EmailAttachment;  
 import org.apache.commons.mail.EmailException;  
 import org.apache.commons.mail.HtmlEmail;  
 import org.apache.commons.mail.MultiPartEmail;  
 import org.apache.commons.mail.SimpleEmail;  
+
+import br.unb.sece.model.Aluno;
+import br.unb.sece.model.Disciplina;
+import br.unb.sece.model.Responsavel;
   
 public class MandarEmail { 
 	
 	private String e_mail, destinatario,nomeAluno;
+	private Aluno aluno;
+	private Responsavel responsavael;
+	private Calendar data;
+	private Disciplina disciplina;
       
     public MandarEmail(String e_mail, String destinatario, String nomeAluno) throws EmailException, MalformedURLException {  
         this.e_mail = e_mail;
         this.destinatario = destinatario;
         this.nomeAluno = nomeAluno;
+        enviaEmailSimples();  
+        //enviaEmailComAnexo();  
+        //enviaEmailFormatoHtml();  
+    }  
+    
+    public MandarEmail(Aluno aluno, Responsavel responsavel, Disciplina disciplina, Calendar data) throws EmailException, MalformedURLException {  
+        this.e_mail = responsavel.getEmail();
+        this.destinatario = "Grupo SECE";
+        this.aluno = aluno;
+        this.data = data;
+        this.responsavael = responsavel;
+        this.data = data;
+        this.disciplina = disciplina;
         enviaEmailSimples();  
         //enviaEmailComAnexo();  
         //enviaEmailFormatoHtml();  
@@ -35,13 +59,22 @@ public class MandarEmail {
        //destinatário  
         email.setFrom("gruposece@gmail.com", "SECE"); // remetente  
         email.setSubject("Aviso de ausência escolar"); // assunto do e-mail  
-        email.setMsg("O aluno: " + this.nomeAluno + " não esta presente na aula na presente data."); //conteudo do e-mail  
+        email.setMsg(this.getMensagem()); //conteudo do e-mail  
         email.setAuthentication("gruposece@gmail.com", "gppmds2012");  
         email.setSmtpPort(465);  
         email.setSSL(true);  
         email.setTLS(true);  
         email.send();     
     }  
+    
+    public String getMensagem(){
+    	SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+    	Date data = this.data.getTime();
+    	String texto =
+    			this.responsavael.getPronomeTratamento()+this.responsavael.getNome()+", o "+this.aluno.getPronomePossessivo()+" filho(a) "+ this.aluno.getNome()+
+    			" não esteve presente na aula do dia: "+formatador.format(data) + "  da displina de: "+this.disciplina.getNome()+". \nAtt, Grupo Sece. ";
+    	return texto;
+    }
       
       
     /** 

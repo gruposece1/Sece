@@ -42,7 +42,7 @@ public class VLogin extends JFrame implements ActionListener {
 		lblNome.setBounds(10, 29, 46, 14);
 		contentPane.add(lblNome);
 		
-		txtNome = new JTextField();
+		txtNome = new JTextField("Sece");
 		txtNome.setBounds(66, 26, 145, 20);
 		contentPane.add(txtNome);
 		txtNome.setColumns(10);
@@ -60,7 +60,7 @@ public class VLogin extends JFrame implements ActionListener {
 		btnEntrar.setBounds(255, 106, 89, 23);
 		contentPane.add(btnEntrar);
 		
-		txtSenha = new JPasswordField();
+		txtSenha = new JPasswordField("1");
 		txtSenha.setBounds(66, 69, 145, 20);
 		contentPane.add(txtSenha);
 		

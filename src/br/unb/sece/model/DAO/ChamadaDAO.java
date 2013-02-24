@@ -26,10 +26,10 @@ public class ChamadaDAO extends Persistencia {
 	}
 	
 	
-	public Chamada getChamada(Long idTurma, Long idDisciplina,Long idAluno, Calendar data){
+	public List<Chamada> getChamada(Long idTurma, Long idDisciplina,Long idAluno, Calendar data, int condicaoAluno){
 		String sql =
 					"select "+
-					"  c.*, "+
+					"  c.* "+
 					" from "+
 					"  pessoa p "+ 
 					"  inner join aluno a "+
@@ -43,18 +43,19 @@ public class ChamadaDAO extends Persistencia {
 					" where "+
 					"  td.idTurma = "+ idTurma + " "+
 					"  and td.idDisciplina = "+ idDisciplina + " "+
-					" and ad.idAluno =  "+ idAluno;
-		return (Chamada)this.objSession.createSQLQuery(sql).addEntity(Chamada.class).uniqueResult();
+					" and ad.idAluno =  "+ idAluno + " "+
+					" and convert(c.data,date) = " + this.calendar2StringBusca(data) + " " + 
+					"  and c.verificacaoAluno = "+ condicaoAluno + " ";
+		return (List<Chamada>)this.objSession.createSQLQuery(sql).addEntity(Chamada.class).list();
 	}
 	
 	public List<Aluno> getAlunosVerificacaoChamada(Long idTurma, Long idDisciplina, Calendar data, int condicaoAluno){
-		System.out.println( "o dia" + data.get(Calendar.DAY_OF_MONTH)); 
-		System.out.println("o mes:"+data.get(Calendar.MONTH));
-		System.out.println("o ano"+data.get(Calendar.YEAR));
+		
 		
 		if(idTurma == null || idDisciplina == null || data == null){
 			throw new NullPointerException();
 		}
+		
 		String sql =
 						"select "+
 						"  p.*, "+
@@ -72,9 +73,24 @@ public class ChamadaDAO extends Persistencia {
 						" where "+
 						"  td.idTurma = "+ idTurma + " "+
 						"  and td.idDisciplina = "+ idDisciplina + " "+
-						"  and c.verificacaoAluno = "+ condicaoAluno;
+						"  and c.verificacaoAluno = "+ condicaoAluno + " "+
+						"  and convert(c.data,date) = " + this.calendar2StringBusca(data) + " "+
+						"  group by  "+
+						"  p.idPessoa";
 		
 		return (List<Aluno>)this.objSession.createSQLQuery(sql).addEntity(Aluno.class).list();
+	}
+	
+	private String calendar2StringBusca(Calendar data){
+		String dataBusca = "str_to_date('"+data.get(Calendar.DAY_OF_MONTH);
+		if(data.get(Calendar.MONTH) < 10){
+			//dataBusca += "0"+data.get(Calendar.MONTH);
+			dataBusca += "02";
+			System.out.println("O mes: " + data.get(Calendar.MONTH));
+		}
+		dataBusca += data.get(Calendar.YEAR)+ "','%d%m%Y')";
+		System.out.println("ChamadaDao: " +dataBusca);
+		return dataBusca;
 	}
 	
 }

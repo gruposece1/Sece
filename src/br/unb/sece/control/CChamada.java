@@ -41,33 +41,19 @@ public class CChamada {
 		return this.aluno;
 	}
 	
-	public Aluno recuperarAluno(String nome) {
-		/*
-		for (Iterator<Aluno> iter =serie.serie.iterator(); iter.hasNext();)
-		{	
-			Aluno a = iter.next();
-			if(a.getNome().equals(nome))
-				return a;
-			
-		}
-		*/
-		return null;
-	}
 	
 	
-	public void enviarEmail(Aluno aluno) throws MalformedURLException,EmailException {
+	
+	public void enviarEmail(Aluno aluno, Disciplina disciplina, Calendar data) throws MalformedURLException,EmailException {
 		final Collection responsaveis =  aluno.getResponsaveis();
 		final ArrayList<Responsavel> resp = new ArrayList<Responsavel>(responsaveis);
-		Responsavel r;
+		Responsavel rensponsavel;
 		
-		System.out.println("Qtde responsaveis" + responsaveis.size());
 		
 		for(int i = 0; i < resp.size(); i++) {
-			r = (Responsavel) resp.get(i);
-			
-				System.out.print("O email:" + r.getEmail());
-				final MandarEmail envio = new MandarEmail(r.getEmail(), "Grupo SECE", this.aluno.getNome());
-			
+				rensponsavel = (Responsavel) resp.get(i);
+				//final MandarEmail envio = new MandarEmail(r.getEmail(), "Grupo SECE", aluno.getNome());
+				final MandarEmail envio = new MandarEmail(aluno, rensponsavel, disciplina, data);
 		}	
 	}
 	
@@ -77,9 +63,14 @@ public class CChamada {
 		while(inAlunos.hasNext()){
 			Aluno obAluno = inAlunos.next();
 			try {
-				this.enviarEmail(obAluno);
-				Chamada obChamada = Chamada.getChamadaChamada(turma, disciplina, obAluno, data);
-				obChamada.setVerificacaoEmail(true);
+				this.enviarEmail(obAluno, disciplina, data);
+				List<Chamada> listaChamada = Chamada.getChamadaChamada(turma, disciplina, obAluno, data,Chamada.ALUNO_AUSENTE);
+				Iterator<Chamada> inChamada = listaChamada.iterator();
+				while(inChamada.hasNext()){
+					Chamada obChamada = inChamada.next();
+					obChamada.setVerificacaoEmail(true);
+					obChamada.alterar();
+				}
 				
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

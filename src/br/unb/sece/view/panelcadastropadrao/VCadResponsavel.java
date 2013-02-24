@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import br.unb.sece.control.CResponsavel;
+import br.unb.sece.model.Pessoa;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -33,6 +34,8 @@ public class VCadResponsavel extends JPanel{
 	private JTextField rbrFeminino;
 	private JTextField textField_5;
 	private JTextField txtNome;
+	private JRadioButton rdbtMasculino;
+	private JRadioButton rdbtFeminino ;
 	
 	public JTextField getRbrMasculino() {
 		return rbrMasculino;
@@ -66,10 +69,10 @@ public class VCadResponsavel extends JPanel{
 		lblSexo.setBounds(18, 72, 46, 14);
 		add(lblSexo);
 		
-		JRadioButton rdbtMasculino = new JRadioButton("M");
+		rdbtMasculino = new JRadioButton("M");
 		rdbtMasculino.setBounds(82, 68, 38, 23);
 		
-		JRadioButton rdbtFeminino = new JRadioButton("F");
+		rdbtFeminino = new JRadioButton("F");
 		rdbtFeminino.setBounds(142, 68, 38, 23);
 		
 		ButtonGroup grpSexo = new ButtonGroup();   
@@ -126,7 +129,13 @@ public class VCadResponsavel extends JPanel{
 		textField_5.setColumns(10);
 	}
 
-	
+	public String getSexo(){
+		if(this.rdbtMasculino.isSelected())
+			return Pessoa.MASCULINO;
+		else
+			return Pessoa.FEMININO;
+					
+	}
 
 	public JTextField getTextField() {
 		return textField;

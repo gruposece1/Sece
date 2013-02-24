@@ -19,12 +19,12 @@ public class CResponsavel extends CPadrao{
 	
 	
 	public  void definirTitulosEMetodos(){
-		final Object[] titulos = {"Nome","Cpf","Sexo","Endereco","Email","Telefone","Cep",};
+		final Object[] titulos = {"Nome","Cpf","Sexo","Email"};
 		
 		
 		this.titulos = titulos;
 		
-		final Object [] metodos = {"getNome","getCpf","getSexo","getEndereco","getEmail","getTelefone","getCpf"};
+		final Object [] metodos = {"getNome","getCpf","getSexo","getEmail"};
 		
 		this.metodos = metodos;
 	}
@@ -87,6 +87,7 @@ public class CResponsavel extends CPadrao{
 			this.responsavel.setEmail(panel.getTextField_3().getText());
 			this.responsavel.setTelefone(panel.getTextField_4().getText());
 			this.responsavel.setCEP(panel.getTextField_5().getText());
+			this.responsavel.setSexo(panel.getSexo());
 	
 			
 			this.verificarDados();
@@ -103,13 +104,13 @@ public class CResponsavel extends CPadrao{
 		case CPadrao.OPERACAO_ALTERAR:
 			Responsavel r = (Responsavel) this.objAlterar;
 			
-			r.setNome(panel.getName());
+			r.setNome(panel.getTextField().getText());
 			r.setCpf(panel.getTextField_1().getText());
 			r.setEndereco(panel.getTextField_2().getText());
 			r.setEmail(panel.getTextField_3().getText());
 			r.setTelefone(panel.getTextField_4().getText());
 			r.setCEP(panel.getTextField_5().getText());
-			
+			r.setSexo(panel.getSexo());
 			//this.verificarDados();
 			panel.getTextField().setText("");
 			panel.getTextField_1().setText("");

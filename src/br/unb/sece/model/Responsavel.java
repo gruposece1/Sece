@@ -88,6 +88,8 @@ public class Responsavel extends Pessoa
 		final ResponsavelDAO dao = new ResponsavelDAO();
 		dao.remove(this);
 	}
+	
+	
 
 
 	

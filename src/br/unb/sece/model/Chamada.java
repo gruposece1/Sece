@@ -129,10 +129,10 @@ public class Chamada {
 		
 	}
 	
-	public static Chamada getChamadaChamada(Turma turma, Disciplina disciplina,Aluno aluno, Calendar data){
+	public static List<Chamada> getChamadaChamada(Turma turma, Disciplina disciplina,Aluno aluno, Calendar data,int verificacaoAluno){
 		final ChamadaDAO dao = new ChamadaDAO();
 		
-		return dao.getChamada(turma.getIdTurma(), disciplina.getId(), aluno.getIdPessoa(), data);
+		return dao.getChamada(turma.getIdTurma(), disciplina.getId(), aluno.getIdPessoa(), data,verificacaoAluno);
 		
 	}
 	

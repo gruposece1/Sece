@@ -37,6 +37,7 @@ public class ThreadEnviarEmail extends Thread {
 	public void run(){
 		CChamada obCChamada = new CChamada();
 		obCChamada.enviarEmails(turma, disciplina, data);
+		this.stop();
 	}
 
 	

@@ -113,4 +113,12 @@ public class Aluno extends Pessoa{
 		return aluno;
 	}
 	
+	public String getPronomePossessivo(){
+		if(this.getSexo().equals(FEMININO)){
+			return "sua ";
+		}else{
+			return "seu ";
+		}
+	}
+	
 }
