@@ -20,6 +20,9 @@ public class RegistroNotaDAO extends Persistencia{
 	}
 	
 	public List<RegistroNota> getNotasPorAluno(Long idAluno, Long idDisciplina, Long idNota){
+		
+		System.out.println("Registro nota: "+idNota);
+		
 		String sql =
 				
 					"select "+
@@ -31,10 +34,10 @@ public class RegistroNotaDAO extends Persistencia{
 					"  inner join turmadisciplina td "+
 					"  on ad.idTurmaDisciplina = td.idTurmaDisciplina "+
 					" where  "+
-					"  a.idPessoa = "+  idAluno + " " +
+					"  ad.idAluno = "+  idAluno + " " +
 					"  and td.idDisciplina = "+ idDisciplina + 
 					"  and rn.idNota = "+ idNota ;
-		return (List<RegistroNota>)this.objSession.createSQLQuery(sql).list();
+		return (List<RegistroNota>)this.objSession.createSQLQuery(sql).addEntity(RegistroNota.class).list();
 	}
 	
 

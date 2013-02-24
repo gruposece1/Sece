@@ -40,6 +40,10 @@ public class CNota {
 		return this.modelDisciplinas;
 	}
 	
+	public HashMap<Integer,Double> getNotas(Aluno aluno,Disciplina discplina, Nota nota){
+		return RegistroNota.getNotas(aluno, discplina, nota);
+	}
+	
 	public ModelComboBox getModelTurma() {
 		
 		if(this.modelTurma == null) {
