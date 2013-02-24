@@ -24,7 +24,7 @@ import br.unb.sece.view.VTurno;
 import br.unb.sece.view.panelcadastropadrao.VCadDisciplina;
 import br.unb.sece.view.panelcadastropadrao.VCadTurno;
 
-public class TesteCTurno {
+public class TesteControleTurno {
 	
 	private CTurno CTurno;
 	private Turno turno;

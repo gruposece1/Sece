@@ -11,7 +11,7 @@ import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Responsavel;
 import br.unb.sece.view.VAluno;
 
-public class TestarViewAluno {
+public class TesteViewAluno {
 	
 	private VAluno VAluno;
 	private Aluno aluno;

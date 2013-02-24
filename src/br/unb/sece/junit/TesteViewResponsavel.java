@@ -9,7 +9,7 @@ import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.Responsavel;
 import br.unb.sece.view.VResponsavel;
 
-public class TesteVResponsavel {
+public class TesteViewResponsavel {
 	
 	private VResponsavel vresponsavel;
 	private Responsavel responsavel;

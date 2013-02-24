@@ -8,7 +8,7 @@ import org.junit.Test;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.DAO.AlunoDAO;
 
-public class TesteAlunoDAO {
+public class TesteDAOAluno {
 
 	private AlunoDAO alunoDAO;
 	private Aluno aluno;

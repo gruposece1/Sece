@@ -8,7 +8,7 @@ import br.unb.sece.model.Professor;
 import br.unb.sece.model.DAO.ProfessorDAO;
 
 
-public class TesteProfessorDAO {
+public class TesteDAOProfessor {
 
 	private ProfessorDAO professorDAO;
 	private Professor professor;

@@ -10,7 +10,7 @@ import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.Serie;
 import br.unb.sece.view.VSerie;
 
-public class TesteVSerie {
+public class TesteViewSerie {
 	
 	private VSerie vserie;
 	private Serie serie;

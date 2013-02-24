@@ -24,7 +24,7 @@ import br.unb.sece.view.panelcadastropadrao.VCadSerie;
 
 
 
-public class TestarCSerie {
+public class TestarControleSerie {
 
 	private CSerie CSerie;
 	private Serie serie;

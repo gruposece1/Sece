@@ -9,7 +9,7 @@ import br.unb.sece.exceptions.BancoDeDadosException;
 import br.unb.sece.model.Turno;
 import br.unb.sece.view.VTurno;
 
-public class TesteVTurno {
+public class TesteViewTurno {
 
 
 	private VTurno vturno;

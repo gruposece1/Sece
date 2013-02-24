@@ -11,7 +11,7 @@ import org.junit.Test;
 import br.unb.sece.model.Turno;
 import br.unb.sece.model.DAO.TurnoDAO;
 
-public class TesteTurnoDAO {
+public class TesteDAOTurno {
 	
 	private TurnoDAO turnoDAO;
 	private Turno turno;

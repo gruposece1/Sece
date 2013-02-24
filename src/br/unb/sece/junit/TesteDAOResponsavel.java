@@ -10,7 +10,7 @@ import br.unb.sece.model.Responsavel;
 import br.unb.sece.model.DAO.AlunoDAO;
 import br.unb.sece.model.DAO.ResponsavelDAO;
 
-public class TesteResponsavelDAO {
+public class TesteDAOResponsavel {
 	
 	private ResponsavelDAO responsavelDAO;
 	private Responsavel responsavel;

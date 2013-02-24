@@ -10,7 +10,7 @@ import br.unb.sece.view.VProfessor;
 
 
 
-public class TesteVProfessor {
+public class TesteViewProfessor {
     
 	private VProfessor vprofessor;
 	private Professor professor;
