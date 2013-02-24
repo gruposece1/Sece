@@ -1,6 +1,7 @@
 package br.unb.sece.model;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -81,7 +82,13 @@ public class Chamada {
 		this.verificacaoEmail = verificacaoEmail;
 	}
 	
-	
+	public boolean enviarEmail(){
+		if(this.verificacaoAluno == Chamada.ALUNO_AUSENTE){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 	public String getObsAluno() {
 		return obsAluno;
@@ -108,6 +115,25 @@ public class Chamada {
 	public void salvar(Session session){
 		final ChamadaDAO dao = new ChamadaDAO();
 		dao.save(this,session);
+	}
+	
+	public void alterar(){
+		final ChamadaDAO dao = new ChamadaDAO();
+		dao.update(this);
+	}
+	
+	public static List<Aluno> getAlunosVerificacaoChamada(Turma turma, Disciplina disciplina, Calendar data, int condicaoAluno){
+		final ChamadaDAO dao = new ChamadaDAO();
+		
+		return dao.getAlunosVerificacaoChamada(turma.getIdTurma(), disciplina.getId(), data, condicaoAluno);
+		
+	}
+	
+	public static Chamada getChamadaChamada(Turma turma, Disciplina disciplina,Aluno aluno, Calendar data){
+		final ChamadaDAO dao = new ChamadaDAO();
+		
+		return dao.getChamada(turma.getIdTurma(), disciplina.getId(), aluno.getIdPessoa(), data);
+		
 	}
 	
 }

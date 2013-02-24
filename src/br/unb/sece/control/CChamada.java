@@ -6,12 +6,15 @@ import br.unb.sece.model.AlunoDisciplina;
 import br.unb.sece.model.Chamada;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Responsavel;
+import br.unb.sece.model.Turma;
 import br.unb.sece.util.MandarEmail;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -52,7 +55,7 @@ public class CChamada {
 	}
 	
 	
-	public void enviarEmail() {
+	public void enviarEmail(Aluno aluno) throws MalformedURLException,EmailException {
 		final Collection responsaveis =  aluno.getResponsaveis();
 		final ArrayList<Responsavel> resp = new ArrayList<Responsavel>(responsaveis);
 		Responsavel r;
@@ -62,18 +65,31 @@ public class CChamada {
 		for(int i = 0; i < resp.size(); i++) {
 			r = (Responsavel) resp.get(i);
 			
-			try {
 				System.out.print("O email:" + r.getEmail());
 				final MandarEmail envio = new MandarEmail(r.getEmail(), "Grupo SECE", this.aluno.getNome());
+			
+		}	
+	}
+	
+	public void enviarEmails(Turma turma, Disciplina disciplina, Calendar data){
+		List<Aluno> alunos = Chamada.getAlunosVerificacaoChamada(turma, disciplina, data, Chamada.ALUNO_AUSENTE);
+		Iterator<Aluno> inAlunos = alunos.iterator();
+		while(inAlunos.hasNext()){
+			Aluno obAluno = inAlunos.next();
+			try {
+				this.enviarEmail(obAluno);
+				Chamada obChamada = Chamada.getChamadaChamada(turma, disciplina, obAluno, data);
+				obChamada.setVerificacaoEmail(true);
+				
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (EmailException e) {
 				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(null, "Erro com a conexão com a internet.", "Atenção", JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
 			}
-		}	
+			
+		}
 	}
 
 	public void findAluno(String nome) {

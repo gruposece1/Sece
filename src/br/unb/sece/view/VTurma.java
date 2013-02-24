@@ -18,6 +18,7 @@ import java.awt.SystemColor;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +44,7 @@ import br.unb.sece.model.Horario;
 import br.unb.sece.model.Pessoa;
 import br.unb.sece.model.Turma;
 import br.unb.sece.util.HibernateUtil;
+import br.unb.sece.util.ThreadEnviarEmail;
 import br.unb.sece.view.util.PanelAlunoChamadaNota;
 
 import java.awt.Scrollbar;
@@ -361,21 +363,28 @@ public class VTurma extends JFrame implements ActionListener {
 		}.start();
 	}
 	
+	private void enviarEmails(Turma turma, Disciplina disciplina, Calendar data) {
+		// TODO Auto-generated method stub
+		new ThreadEnviarEmail(turma, disciplina, data).start();
+	}
+	
 	private void cadastrar(){
 		Session session = HibernateUtil.getSession();
+		Horario obHorario = new Horario();
 		try{
 			session.getTransaction().begin();
 			CChamada chamada = new CChamada();
+			Calendar data = Calendar.getInstance();
 			for(int i =0; i < this.panel_1.getComponentCount(); i++){
 				Component componente = this.panel_1.getComponent(i);
 				if(componente instanceof PanelAlunoChamadaNota){
 					PanelAlunoChamadaNota panel = (PanelAlunoChamadaNota)componente;
-					Horario obHorario = new Horario();
 					
-					chamada.cadastrarChamada(panel.geIdAluno(), Disciplina.getDisciplina(obHorario.horarioAtualTurma(cturma.getTurma())).getId(), panel.getValorChamada(), null,panel.getObsAluno(), session);
+					chamada.cadastrarChamada(panel.geIdAluno(), Disciplina.getDisciplina(obHorario.horarioAtualTurma(cturma.getTurma())).getId(), panel.getValorChamada(), data,panel.getObsAluno(), session);
 				}
 			}
 			session.getTransaction().commit();
+			this.enviarEmails(this.cturma.getTurma(), Disciplina.getDisciplina(obHorario.horarioAtualTurma(cturma.getTurma())), data);
 			this.dispose();
 		}catch(Exception ex){
 			

@@ -131,5 +131,9 @@ public class GerarTabelas {
 		responsavel.setCEP("kfhdsfsa");
 		responsavel.setCpf("12345");
 		responsavel.salvar();	
+		
+		Nota nota = new Nota();
+		nota.setDescNota("Nota Bimistral");
+		nota.salvar();
 	}
 }

@@ -1,5 +1,9 @@
 package br.unb.sece.model;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -86,6 +90,21 @@ public class RegistroNota {
 	public void salvar(Session session){
 		final RegistroNotaDAO dao = new RegistroNotaDAO();
 		dao.save(this,session);
+	}
+	
+	public static HashMap<Integer,Double> getNotas(Aluno aluno, Disciplina disciplina, Nota nota){
+		HashMap<Integer,Double> notas = new HashMap<Integer,Double>();
+		final RegistroNotaDAO dao = new RegistroNotaDAO();
+		List<RegistroNota> registros = dao.getNotasPorAluno(aluno.getIdPessoa(), disciplina.getId(),nota.getIdNota());
+		Iterator<RegistroNota> inRegistros = registros.iterator();
+		while(inRegistros.hasNext()){
+			RegistroNota obRegistroNota = inRegistros.next();
+			notas.put(obRegistroNota.getBimestre(), obRegistroNota.getValor());
+		}
+		for(int i = notas.size()+1; i <= 4; i++){
+			notas.put(i, 0.00);
+		}
+		return notas;
 	}
 	
 	public static final int PRIMEIRO_BIMESTRE = 1;
