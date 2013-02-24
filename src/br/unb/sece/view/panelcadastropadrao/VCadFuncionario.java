@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 
+import br.unb.sece.model.Pessoa;
+
 
 
 public class VCadFuncionario extends JPanel implements ActionListener{
@@ -180,9 +182,11 @@ public class VCadFuncionario extends JPanel implements ActionListener{
 	public String getSexo()
 	{
 		if(rdbtMasculino.isSelected())
-			return "Masculino";
+			return Pessoa.MASCULINO;
+		else if(rdbtFeminino.isSelected())
+			return Pessoa.FEMININO;
 		else
-			return "Feminino";
+			return null;
 					
 	}
 

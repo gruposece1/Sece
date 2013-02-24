@@ -39,6 +39,7 @@ public class TesteControleFuncionario {
 		((VCadFuncionario) panel.getPanel()).getTxtTelefone().setText("Teste");
 		((VCadFuncionario) panel.getPanel()).getTxtCPF().setText("Teste");
 		((VCadFuncionario) panel.getPanel()).getTxtSenha().setText("Teste");
+		((VCadFuncionario) panel.getPanel()).getRdbtMasculino().setSelected(true);
 	}	
 	
 	@Test
@@ -86,6 +87,19 @@ public class TesteControleFuncionario {
 		
 	}
 	
+	@Test (expected= AtributoNuloException.class)
+	public void testarDadosSexo() throws Exception{
+		
+		
+		funcionario.setSexo("");
+		
+		CFuncionario.setFuncionario(funcionario);
+		
+		CFuncionario.verificarDados();
+		
+		
+	}
+	
 	@Test
 	public void testarDadosValidos(){
 		
@@ -109,7 +123,7 @@ public class TesteControleFuncionario {
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void testarSalvar(){
 		
 		try {
@@ -117,7 +131,7 @@ public class TesteControleFuncionario {
 		} catch (Exception e) {
 			fail("Ocorreu erro");
 		}
-	}
+	}*/
 	
 	@Test
 	public void testarModeloTabela(){

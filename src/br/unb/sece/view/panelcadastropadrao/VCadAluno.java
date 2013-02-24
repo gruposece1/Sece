@@ -5,10 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -17,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.text.MaskFormatter;
 
 import br.unb.sece.control.CAluno;
 import br.unb.sece.control.CDisciplina;
@@ -35,7 +38,7 @@ public class VCadAluno extends JPanel implements ActionListener, WindowListener{
 	private JRadioButton rdbtMasculino;
 	private JRadioButton rdbtFeminino; 
 	private JTextField txtMatricula;
-	private JTextField txtNascimento;
+	private JFormattedTextField txtNascimento;
 	private JTextField txtMae;
 	private JTextField txtPai;
 	private JButton btnPesquisarMae;
@@ -96,7 +99,16 @@ public class VCadAluno extends JPanel implements ActionListener, WindowListener{
         lblNascimento.setBounds(290, 80, 71, 14);
         add(lblNascimento);
         
-        txtNascimento = new JTextField();
+        MaskFormatter mascaraFormat=null;
+		try {
+			mascaraFormat = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}  
+       
+
+        
+        txtNascimento = new JFormattedTextField(mascaraFormat);
         txtNascimento.setBounds(371, 77, 109, 20);
         add(txtNascimento);
         txtNascimento.setColumns(10);
@@ -200,7 +212,7 @@ public class VCadAluno extends JPanel implements ActionListener, WindowListener{
 
 
 
-	public void setTxtNascimento(JTextField txtNascimento) {
+	public void setTxtNascimento(JFormattedTextField txtNascimento) {
 		this.txtNascimento = txtNascimento;
 	}
 
@@ -274,6 +286,11 @@ public class VCadAluno extends JPanel implements ActionListener, WindowListener{
 		}
 		
 	}
+	
+	/*private void gerarMatricula()
+	{
+		this.getTxtNome().getText().
+	}*/
 
 
 

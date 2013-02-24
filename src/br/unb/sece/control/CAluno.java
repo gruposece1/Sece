@@ -67,6 +67,10 @@ public class CAluno extends CPadrao{
 		
 		if(this.aluno.getResponsaveis().size()>2)
 			throw new AtributoInvalidoException("Numero de responsaveis invalido");
+		
+		if(this.aluno.getSexo().equals(""))
+			throw new AtributoNuloException();
+			
 	}
 	
 	public void receberDados(Object obj, int operacao) throws Exception {

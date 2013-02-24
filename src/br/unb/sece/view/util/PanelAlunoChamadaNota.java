@@ -42,7 +42,7 @@ public class PanelAlunoChamadaNota extends JPanel {
 	
 	private int bimestre;
 	
-	
+	private HashMap<Integer,Double> notas;
 	
 	public PanelAlunoChamadaNota(Long idAluno,String nomeAluno,String matricula,int tamanho, int tipoPanel) {
 		
@@ -51,9 +51,11 @@ public class PanelAlunoChamadaNota extends JPanel {
 		
 	}
 	
-	public PanelAlunoChamadaNota(Long idAluno,String nomeAluno,String matricula,int tamanho, int tipoPanel, int bimestre)
+	public PanelAlunoChamadaNota(Long idAluno,String nomeAluno,String matricula,int tamanho, int tipoPanel, int bimestre, HashMap<Integer, Double> notas)
 	{
 		this.bimestre = bimestre;
+		
+		this.notas = notas;
 		
 		this.construtorPadrao(idAluno, nomeAluno, matricula, tamanho, tipoPanel);
 		
@@ -101,7 +103,9 @@ public class PanelAlunoChamadaNota extends JPanel {
 		chamadaGroup.add(radioFalta);
 		chamadaGroup.add(radioAtrasado);
 		
-		
+		this.radioPresente.setName("Presente");
+		this.radioFalta.setName("Falta");
+		this.radioAtrasado.setName("Atrasado");
 		
 		this.textFieldAnotation = new JTextField();
 		this.textFieldAnotation.setBounds(427, 8, 666, 20);
@@ -118,26 +122,51 @@ public class PanelAlunoChamadaNota extends JPanel {
 	private void construtorNota(){
 		
 		this.txtNota01 = new JTextField();
-		this.txtNota01.setBounds(267, 7, 21, 23);
+		this.txtNota01.setBounds(247, 7, 42, 23);
 		
 		this.txtNota02 = new JTextField();
-		this.txtNota02.setBounds(317, 7, 21, 23);
+		this.txtNota02.setBounds(302, 7, 42, 23);
 		
 		this.txtNota03 = new JTextField();
-		this.txtNota03.setBounds(366, 7, 21, 23);
+		this.txtNota03.setBounds(355, 7, 42, 23);
 		
 		this.txtNota04 = new JTextField();
-		this.txtNota04.setBounds(427, 8, 21, 23);
+		this.txtNota04.setBounds(407, 8, 42, 23);
 		
-		System.out.println(this.bimestre);
+		//System.out.println(this.bimestre);
 		
 		this.add(txtNota01);
 		this.add(txtNota02);
 		this.add(txtNota03);
 		this.add(txtNota04);
 		
-		//this.validarCamposNota();
+		this.preencherNotas();
 		
+		this.validarCamposNota();
+		
+	}
+	
+	private void preencherNotas(){
+		
+		
+		for(int i = 1; i <= this.notas.size();i++){
+		
+			Double nota = this.notas.get(i);
+			switch(i){
+				case 1:
+					this.txtNota01.setText(String.valueOf(nota));
+					break;
+				case 2:
+					this.txtNota02.setText(String.valueOf(nota));
+					break;
+				case 3:
+					this.txtNota03.setText(String.valueOf(nota));
+					break;
+				case 4:
+					this.txtNota04.setText(String.valueOf(nota));
+					break;
+			}
+		}
 	}
 	
 	private void validarCamposNota()

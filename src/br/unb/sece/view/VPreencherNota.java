@@ -40,6 +40,7 @@ import br.unb.sece.control.CNota;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Horario;
+import br.unb.sece.model.Nota;
 import br.unb.sece.model.Pessoa;
 import br.unb.sece.model.Turma;
 import br.unb.sece.util.HibernateUtil;
@@ -219,7 +220,7 @@ public class VPreencherNota extends JFrame implements ActionListener {
 					
 					System.out.println(cnota.getBimestre());
 					
-					panelChamada = new PanelAlunoChamadaNota(lista.get(i).getIdPessoa(), lista.get(i).getNome(),lista.get(i).getMatricula(),tamanho, PanelAlunoChamadaNota.NOTA, cnota.getBimestre());
+					panelChamada = new PanelAlunoChamadaNota(lista.get(i).getIdPessoa(), lista.get(i).getNome(),lista.get(i).getMatricula(),tamanho, PanelAlunoChamadaNota.NOTA, cnota.getBimestre(), this.cnota.getNotas(lista.get(i), this.cnota.getDisciplina(), Nota.getNota()));
 					panel_1.add(panelChamada);
 					
 				}
