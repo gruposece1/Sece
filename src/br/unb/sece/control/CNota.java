@@ -143,26 +143,7 @@ public class CNota {
 	
 	
 	
-	public void salvarNota(double valorNota,Long idAluno, Nota nota){
-		
-		alunoDisciplina = this.retornarAluno(idAluno);
-		
-		if(this.getModelDisciplinas().getSelectedItem() == null || alunoDisciplina == null){
-			throw new NullPointerException();
-		}
-		
-		RegistroNota registroNota = new RegistroNota();
-		
-		registroNota.setAlunoDisciplina(alunoDisciplina);
-		registroNota.setBimestre(getBimestre());
-		registroNota.setValor(valorNota);
-		registroNota.setNota(nota);
-		
-		
-		
-		registroNota.salvar();
 	
-	}
 	
 	public void salvarNota(AlunoDisciplina alunoDisciplina,double valorNota, Nota nota,int bimestre, Session session){
 		

@@ -103,7 +103,9 @@ public class PanelAlunoChamadaNota extends JPanel {
 		chamadaGroup.add(radioFalta);
 		chamadaGroup.add(radioAtrasado);
 		
-		
+		this.radioPresente.setName("Presente");
+		this.radioFalta.setName("Falta");
+		this.radioAtrasado.setName("Atrasado");
 		
 		this.textFieldAnotation = new JTextField();
 		this.textFieldAnotation.setBounds(427, 8, 666, 20);

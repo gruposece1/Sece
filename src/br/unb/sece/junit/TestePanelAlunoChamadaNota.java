@@ -32,24 +32,25 @@ public class TestePanelAlunoChamadaNota {
 		window.show(new Dimension(700,500));
 	}
 	
-	@Test
+	/*@Test
 	public void testPanelNotaGetValorChamadaPresente() {
 		
 		
 		window.radioButton("Presente").click();
 		assertEquals(Chamada.ALUNO_PRESENTE, panel.getValorChamada());
-	}
+		window.close();
+	}*/
 	
-	@Test
+	/*@Test
 	public void testPanelNotaGetObsAluno() {
 		
 		String obsAluno = "Não compareceu a aula";
 		window.textBox("obsAluno").enterText(obsAluno);
 		assertEquals(obsAluno, panel.getObsAluno());
 		window.close();
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void testPanelNotaGetValorChamadaAtraso() {
 		
 		
@@ -99,7 +100,7 @@ public class TestePanelAlunoChamadaNota {
 		PanelAlunoChamadaNota panel = new PanelAlunoChamadaNota(idAluno, nomeAluno, matricula, tamanho, PanelAlunoChamadaNota.CHAMADA);
 		Long idAlunoRecuperado = panel.geIdAluno();
 		assertEquals(idAluno, idAlunoRecuperado);
-	}
+	}*/
 	
 
 }

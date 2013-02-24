@@ -68,6 +68,9 @@ public class CFuncionario extends CPadrao {
 		if(this.funcionario.getTelefone().equals(""))
 			throw new AtributoNuloException();
 		
+		if(this.funcionario.getSexo().equals(""))
+			throw new AtributoNuloException();
+		
 	}
 	
 	@Override

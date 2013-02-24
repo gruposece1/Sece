@@ -45,6 +45,9 @@ public class TesteInterfaceResponsavel {
 		try{
 			
 			window.textBox("Nome").enterText("Responsavel");
+			
+			Thread.sleep(1000);
+			
 			window.textBox("CPF").enterText("2143");
 			window.radioButton("Masculino").click();
 			window.textBox("Endereco").enterText("ruacasimero");
@@ -73,8 +76,8 @@ public class TesteInterfaceResponsavel {
 	public void testarAlterarDado(){
 		
 			window.table().selectCell(TableCell.row(0).column(0));
-			window.table().selectCell(TableCell.row(1).column(1));
-			window.table().selectCell(TableCell.row(2).column(2));
+			//window.table().selectCell(TableCell.row(0).column(1));
+			//window.table().selectCell(TableCell.row(2).column(2));
 			window.button("Alt").click();
 			window.textBox("CPF").deleteText();
 			window.textBox("CPF").enterText("Alterar");

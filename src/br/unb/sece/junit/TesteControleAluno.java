@@ -51,6 +51,7 @@ public class TesteControleAluno {
 		((VCadAluno) panel.getPanel()).getTxtMatricula().setText("Teste");
 		((VCadAluno) panel.getPanel()).getTxtNascimento().setText("Teste");
 		((VCadAluno) panel.getPanel()).setResponsavel(listaResponsavel);
+		((VCadAluno) panel.getPanel()).getRdbtFeminino().setSelected(true);
 		
 	}
 	
@@ -129,6 +130,18 @@ public class TesteControleAluno {
 		responsaveis.add(responsavel);
 		
 		aluno.setResponsaveis(responsaveis);
+		
+		CAluno.setAluno(aluno);
+		
+		CAluno.verificarDados();
+		
+	}
+	
+	@Test (expected= AtributoNuloException.class)
+	public void testarSexoErrado() throws Exception{
+		
+	
+		aluno.setSexo("");
 		
 		CAluno.setAluno(aluno);
 		
@@ -222,8 +235,8 @@ public class TesteControleAluno {
 		}
 		catch(Exception e)
 		{
-			fail("Ocorreu um erro");
-			//e.printStackTrace();
+			//fail("Ocorreu um erro");
+			e.printStackTrace();
 		}
 	}
 	
