@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
@@ -193,6 +194,11 @@ public class VTurma extends JFrame implements ActionListener {
 				lblHoraRes.setBounds(66, 112, 77, 14);
 				panel.add(lblHoraRes);
 				
+				this.btnCadastrar = new JButton("Registrar");
+				btnCadastrar.setBounds(32, 553, 100, 50);
+				panel.add(btnCadastrar);
+				this.btnCadastrar.addActionListener(this);
+				
 				JScrollPane scrollPane = new JScrollPane();
 				scrollPane.setBounds(190, 23, 1144, 679);
 				contentPane.add(scrollPane);
@@ -249,11 +255,6 @@ public class VTurma extends JFrame implements ActionListener {
 					panel_1.add(panelChamada);
 					
 				}
-				
-				this.btnCadastrar = new JButton("Salvar");
-				this.btnCadastrar.setBounds(1300, 700, 100, 50);
-				this.btnCadastrar.addActionListener(this);
-				this.contentPane.add(btnCadastrar);
 				
 				iniciaRelogio();
 				
@@ -376,7 +377,8 @@ public class VTurma extends JFrame implements ActionListener {
 				}
 			}
 			session.getTransaction().commit();
-			this.dispose();
+			JOptionPane.showMessageDialog(null, "Chamada Realizada com sucesso");
+			//this.dispose();
 		}catch(Exception ex){
 			
 			ex.printStackTrace();

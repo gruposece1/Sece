@@ -28,20 +28,26 @@ public class VResponsavel extends VPadrao{
 
 	@Override
 	public void popularInterface() {
-		Responsavel responsavel = (Responsavel)this.retonarObjetoGrade();
-		VCadResponsavel vc = (VCadResponsavel)this.panel;
-		vc.getTxtNome().setText(responsavel.getNome());
-	
-		
-		try {
-			this.controle.receberObjetoAlterar(responsavel);
-		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		  final Responsavel responsavel = (Responsavel)this.retonarObjetoGrade();
+		  VCadResponsavel vc = (VCadResponsavel)this.panel;
+		  
+		  vc.getTextField().setText(responsavel.getNome());
+		  vc.getTextField_1().setText(responsavel.getCpf());
+		  vc.getTextField_2().setToolTipText(responsavel.getSexo());
+		  vc.getTextField_3().setText(responsavel.getEmail());
+		  vc.getTextField_4().setText(responsavel.getTelefone());
+		  vc.getTextField_5().setText(responsavel.getCEP());
+
+		  
+		  try {
+		   this.controle.receberObjetoAlterar(responsavel);
+		  } catch (NullPointerException e) {
+		   // TODO Auto-generated catch block
+		   e.printStackTrace();
+		  } catch (Exception e) {
+		   // TODO Auto-generated catch block
+		   e.printStackTrace();
+		  }
 	}
 
 	@Override
