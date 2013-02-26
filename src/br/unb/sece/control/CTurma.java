@@ -111,28 +111,13 @@ public class CTurma {
 	
 	
 	
-	
+	/*
 	public int numeroHorarios(Serie serie)
 	{
 		return serie.getQtdeHorarios();
 	}
+	*/
 	
-	public JButton[][] gerarBotao(Serie serie, Turno turno)
-	{
-		int i;
-		
-		JButton[][] gradeBotao = new JButton[serie.getQtdeDias()][serie.getQtdeHorarios()]; 
-		
-		String label[] = new String[numeroHorarios(serie)];
-		
-		for(i =0; i<label.length; i++)
-		{
-			label[i] = String.valueOf(i);
-		}
-		
-		
-		return gradeBotao;
-	}
 	
 	/*
 	 * Gerar um DefaultTableModel com os dias da semana da serie
@@ -233,42 +218,6 @@ public class CTurma {
 		return obSerie;
 	}
 	
-	
-	public ArrayList<Aluno> getAlunos(Turma turma){
-		return (ArrayList)turma.getAluno();
-	}
-	
-	public Turma selectTurma(String nome)
-	{
-		Turma turma = new Turma();
-		
-		ArrayList<Turma> nmTurma = new ArrayList<Turma>();
-		
-		for (Iterator<Turma> iter = turma.getAll().iterator(); iter. hasNext();)
-		{	
-			Turma t = iter.next();
-			
-			if(t.getNomeTurma().equals(nome))
-				return t;
-		}
-		
-		
-		return null;
-	}
-	
-
-	
-
-	public String[] getAllTurmas(){
-		ArrayList turmas = (ArrayList)Turma.getAll();
-		String[] nomes = new String[turmas.size()];
-		for(int i=0; i<turmas.size(); i++){
-			Turma a = (Turma) turmas.get(i);
-			nomes[i] = a.getNomeTurma();
-		}
-			
-			return nomes;
-	}
 
 	public Turma getTurma() {
 		return turma;
@@ -278,39 +227,13 @@ public class CTurma {
 		this.turma = turma;
 	}
 	
-	public Horario getHorario(){
-		Horario h = new Horario();
-		return h.horarioAtualTurma(turma);
-	}
 	
-	public void addAlunos(ArrayList alunos){
-		List todos = Aluno.getAll();
-		ArrayList alunosTurma = new ArrayList();
-		for(int i = 0; i < alunos.size();i++){
-			String matricula = alunos.get(i).toString().split(" ")[0];
-			try{
-				Aluno aluno = (Aluno) UtilList.getObject(todos, "getMatricula", matricula);
-				alunosTurma.add(aluno); 
-			}catch(NullPointerException ex){
-				//Não faz nada
-				ex.printStackTrace();
-				
-			}
-		}
-		
-		turma.setAluno(alunosTurma);
-		turma.alterar();
-	}
-
 
 	public GradeHoraria getGradeHoraria() {
 		return gradeHoraria;
 	}
 
 
-	public void setGradeHoraria(GradeHoraria gradeHoraria) {
-		this.gradeHoraria = gradeHoraria;
-	}
 	
 	
 	

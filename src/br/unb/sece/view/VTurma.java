@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
@@ -37,6 +38,7 @@ import javax.swing.JButton;
 import org.hibernate.Session;
 
 import br.unb.sece.control.CChamada;
+import br.unb.sece.control.CIdentificaTurma;
 import br.unb.sece.control.CTurma;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Disciplina;
@@ -44,7 +46,6 @@ import br.unb.sece.model.Horario;
 import br.unb.sece.model.Pessoa;
 import br.unb.sece.model.Turma;
 import br.unb.sece.util.HibernateUtil;
-import br.unb.sece.util.ThreadEnviarEmail;
 import br.unb.sece.view.util.PanelAlunoChamadaNota;
 
 import java.awt.Scrollbar;
@@ -67,6 +68,7 @@ public class VTurma extends JFrame implements ActionListener {
 	private CTurma cturma;
 	private CChamada chamada;
 	private JButton btnCadastrar;
+	private CIdentificaTurma cIdentificaTurma;
 
 	/**
 	 * Launch the application.
@@ -91,8 +93,9 @@ public class VTurma extends JFrame implements ActionListener {
 	 * Create the frame.
 	 * @throws InterruptedException 
 	 */
-	public VTurma(CTurma turma) throws InterruptedException {
+	public VTurma(CTurma turma, CIdentificaTurma indetifica) throws InterruptedException {
 		this.cturma=turma;
+		this.cIdentificaTurma = indetifica;
 		setResizable(false);
 				setTitle("SECE - Sistema Escolar de Chamada Eletr\u00F4nica");
 
@@ -172,12 +175,12 @@ public class VTurma extends JFrame implements ActionListener {
 				lblTurmaRes.setBounds(78, 12, 64, 14);
 				panel.add(lblTurmaRes);
 				
-				JLabel lblDisciplinaRes = new JLabel(cturma.getHorario().getDisciplina().getNome());
-				lblDisciplinaRes.setBounds(78, 37, 7*cturma.getHorario().getDisciplina().getNome().length(), 14);
+				JLabel lblDisciplinaRes = new JLabel(this.cIdentificaTurma.getDisciplinaSelected().getNome());
+				lblDisciplinaRes.setBounds(78, 37, 7*this.cIdentificaTurma.getDisciplinaSelected().getNome().length(), 14);
 				panel.add(lblDisciplinaRes);
 				
-				JLabel lblProfessorRes = new JLabel(cturma.getHorario().getProfessor().getNome());
-				lblProfessorRes.setBounds(78, 62, 7*cturma.getHorario().getProfessor().getNome().length(), 14);
+				JLabel lblProfessorRes = new JLabel(this.cIdentificaTurma.getHorarioSelected().getProfessor().getNome());
+				lblProfessorRes.setBounds(78, 62, 7*this.cIdentificaTurma.getHorarioSelected().getProfessor().getNome().length(), 14);
 				panel.add(lblProfessorRes);
 				
 				JLabel lblDiaRes = new JLabel("");
@@ -194,6 +197,11 @@ public class VTurma extends JFrame implements ActionListener {
 				
 				lblHoraRes.setBounds(66, 112, 77, 14);
 				panel.add(lblHoraRes);
+				
+				this.btnCadastrar = new JButton("Registrar");
+				btnCadastrar.setBounds(32, 553, 100, 50);
+				panel.add(btnCadastrar);
+				this.btnCadastrar.addActionListener(this);
 				
 				JScrollPane scrollPane = new JScrollPane();
 				scrollPane.setBounds(190, 23, 1144, 679);
@@ -251,11 +259,6 @@ public class VTurma extends JFrame implements ActionListener {
 					panel_1.add(panelChamada);
 					
 				}
-				
-				this.btnCadastrar = new JButton("Salvar");
-				this.btnCadastrar.setBounds(1300, 700, 100, 50);
-				this.btnCadastrar.addActionListener(this);
-				this.contentPane.add(btnCadastrar);
 				
 				iniciaRelogio();
 				
@@ -363,14 +366,8 @@ public class VTurma extends JFrame implements ActionListener {
 		}.start();
 	}
 	
-	private void enviarEmails(Turma turma, Disciplina disciplina, Calendar data) {
-		// TODO Auto-generated method stub
-		new ThreadEnviarEmail(turma, disciplina, data).start();
-	}
-	
 	private void cadastrar(){
 		Session session = HibernateUtil.getSession();
-		Horario obHorario = new Horario();
 		try{
 			session.getTransaction().begin();
 			CChamada chamada = new CChamada();
@@ -379,13 +376,15 @@ public class VTurma extends JFrame implements ActionListener {
 				Component componente = this.panel_1.getComponent(i);
 				if(componente instanceof PanelAlunoChamadaNota){
 					PanelAlunoChamadaNota panel = (PanelAlunoChamadaNota)componente;
+					Horario obHorario = new Horario();
 					
-					chamada.cadastrarChamada(panel.geIdAluno(), Disciplina.getDisciplina(obHorario.horarioAtualTurma(cturma.getTurma())).getId(), panel.getValorChamada(), data,panel.getObsAluno(), session);
+					chamada.cadastrarChamada(panel.geIdAluno(), this.cIdentificaTurma.getDisciplinaSelected().getId(), panel.getValorChamada(), data,panel.getObsAluno(), session);
 				}
 			}
 			session.getTransaction().commit();
-			this.enviarEmails(this.cturma.getTurma(), Disciplina.getDisciplina(obHorario.horarioAtualTurma(cturma.getTurma())), data);
+			JOptionPane.showMessageDialog(null, "Chamada Realizada com sucesso");
 			this.dispose();
+			//this.dispose();
 		}catch(Exception ex){
 			
 			ex.printStackTrace();

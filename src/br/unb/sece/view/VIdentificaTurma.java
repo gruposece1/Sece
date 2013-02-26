@@ -12,6 +12,7 @@ import javax.swing.JButton;
 
 import br.unb.sece.control.CIdentificaTurma;
 import br.unb.sece.control.CTurma;
+import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Turma;
 
 
@@ -27,6 +28,9 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 	private Turma turma;
 	private JButton btnSelecionar;
 	private int op;
+	private CIdentificaTurma cidentificaTurma = new CIdentificaTurma();
+	private JComboBox comboBox_1;
+	private JComboBox comboBox_2;
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +56,7 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 		setResizable(false);
 		setTitle("SECE - Sistema Escolar de Chamada Eletr\u00F4nica");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 357, 198);
+		setBounds(100, 100, 357, 222);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,23 +66,36 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 		lblTurma.setBounds(10, 47, 46, 14);
 		contentPane.add(lblTurma);
 		
-		comboBox = new JComboBox();
-		comboBox.setBounds(66, 44, 240, 20);
-		
-		
-		String []turmas = cturma.getAllTurmas();
-		
-		for(int i=0; i<turmas.length; i++){
-			comboBox.addItem(turmas[i]);
+		comboBox = new JComboBox(this.cidentificaTurma.getModelCBTurma());
+		comboBox.setBounds(66, 44, 240, 20);		
+		if(op == 1){
+			comboBox.addActionListener(this);
 		}
-		
 		contentPane.add(comboBox);
-		
 		btnSelecionar = new JButton("Selecionar");
 		btnSelecionar.addActionListener(this);
-		btnSelecionar.setBounds(116, 110, 123, 23);
+		btnSelecionar.setBounds(124, 147, 123, 23);
 		contentPane.add(btnSelecionar);
 		
+		if(op == 1) {
+			
+			JLabel labelDisciplina = new JLabel("Disciplina:");
+			labelDisciplina.setBounds(10, 82, 59, 14);
+			contentPane.add(labelDisciplina);
+			
+			comboBox_1 = new JComboBox();
+			comboBox_1.setBounds(66, 79, 240, 20);
+			comboBox_1.addActionListener(this);
+			contentPane.add(comboBox_1);
+			
+			JLabel lblHorario = new JLabel("Horario:");
+			lblHorario.setBounds(10, 119, 59, 14);
+			contentPane.add(lblHorario);
+			
+			comboBox_2 = new JComboBox();
+			comboBox_2.setBounds(66, 116, 240, 20);
+			contentPane.add(comboBox_2);
+		}
 		
 	
 		
@@ -86,16 +103,21 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		if(arg0.getSource().equals(this.comboBox)){
+			this.alterarTurma();
+		}
+		if(arg0.getSource().equals(this.comboBox_1)){
+			this.alterarDisciplina();
+		}
 		// TODO Auto-generated method stub
 		if(arg0.getSource().equals(this.btnSelecionar) && op == 1){
-			String result = comboBox.getSelectedItem().toString();
-			turma = cturma.selectTurma(result);
+			turma = (Turma)this.cidentificaTurma.getTurmaSelected();
 			this.setVisible(false);
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
 						cturma.setTurma(turma);
-						VTurma frame = new VTurma(cturma);
+						VTurma frame = new VTurma(cturma,cidentificaTurma);
 						
 						frame.setVisible(true);
 						frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -107,8 +129,7 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 				} 
 			});
 		}else if(arg0.getSource().equals(this.btnSelecionar) && op == 2){
-			String result = comboBox.getSelectedItem().toString();
-			turma = cturma.selectTurma(result);
+			turma = (Turma)this.cidentificaTurma.getTurmaSelected();
 			this.setVisible(false);
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
@@ -126,5 +147,16 @@ public class VIdentificaTurma extends JFrame implements ActionListener {
 				} 
 			});
 		}
+	}
+	
+	private void alterarTurma(){
+		Turma turma = this.cidentificaTurma.getTurmaSelected();
+		this.comboBox_1.setModel(this.cidentificaTurma.getModelCBDisciplinas(turma));
+	}
+	
+	private void alterarDisciplina(){
+		Turma turma = (Turma)this.cidentificaTurma.getTurmaSelected();
+		Disciplina disciplina = (Disciplina)this.cidentificaTurma.getDisciplinaSelected();
+		this.comboBox_2.setModel(this.cidentificaTurma.getModelCBHorario(turma, disciplina));
 	}
 }

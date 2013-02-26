@@ -17,7 +17,7 @@ import br.unb.sece.view.VResponsavel;
 
 public class TesteInterfaceResponsavel {
 
-	private FrameFixture window;
+	/*private FrameFixture window;
 	
 	@Before
 	public void setUp() {
@@ -26,7 +26,7 @@ public class TesteInterfaceResponsavel {
 	        protected VLogin executeInEDT() {
 	          return new VLogin();  
 	        }
-	    });*/
+	    });
 		
 		//panel.criarPainel();
 		
@@ -127,7 +127,7 @@ public class TesteInterfaceResponsavel {
 	
 	@After public void tearDown() {
 	    window.cleanUp();
-	}
+	}*/
 
 
 }

@@ -52,7 +52,7 @@ public class Pesquisa extends javax.swing.JFrame {
         initComponents();
         this.dadosTabela = this.dados(lista, camposTabela);
         this.titulos = this.titulos(camposTabela);
-        this.dadosTabela = this.ordenarDados();
+       // this.dadosTabela = this.ordenarDados();
         this.dados.setModel(new javax.swing.table.DefaultTableModel(this.dadosTabela,this.titulos));
     }
     
@@ -65,8 +65,9 @@ public class Pesquisa extends javax.swing.JFrame {
         initComponents();
         this.dadosTabela = this.dados(lista, camposTabela);
         this.titulos = this.titulos(camposTabela);
-        this.dadosTabela = this.ordenarDados();
+        //this.dadosTabela = this.ordenarDados();
         this.dados.setModel(new javax.swing.table.DefaultTableModel(this.dadosTabela,this.titulos));
+        
     }
     
     private void pesquisar(String busca){
@@ -101,7 +102,7 @@ public class Pesquisa extends javax.swing.JFrame {
 
     public void setCampoOrdenacao(String campoOrdenacao) {
         this.campoOrdenacao = campoOrdenacao;
-        this.dadosTabela = this.ordenarDados();
+        //this.dadosTabela = this.ordenarDados();
         this.dados.setModel(new javax.swing.table.DefaultTableModel(this.dadosTabela,this.titulos));
     }
 
@@ -111,7 +112,7 @@ public class Pesquisa extends javax.swing.JFrame {
 
     public void setOrdem(char ordem) {
         this.ordem = ordem;
-        this.dadosTabela = this.ordenarDados();
+       // this.dadosTabela = this.ordenarDados();
         this.dados.setModel(new javax.swing.table.DefaultTableModel(this.dadosTabela,this.titulos));
     }
     
@@ -138,7 +139,11 @@ public class Pesquisa extends javax.swing.JFrame {
             }
         }
         if(this.ordem == this.K_ORDEM_CRESCENTE){
-            Collections.sort(ordenar); 
+            try{
+            	Collections.sort(ordenar);
+            }catch(Exception ex){
+            	ex.printStackTrace();
+            }
         }else if(this.ordem == this.K_ORDEM_DECRESCENTE){
             Collections.sort(ordenar);
             ArrayList ordenarNovo = new ArrayList();
@@ -320,6 +325,10 @@ public class Pesquisa extends javax.swing.JFrame {
         btnOrdemCrescente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        btnOrdemCrescente.setVisible(false);
+        btnOrdemDecrescente.setVisible(false);
+        jTextField1.setVisible(false);
+        jLabel1.setVisible(false);
         
         this.btnOK.setName("btnOk");
         this.setName("Pesquisa");
@@ -454,7 +463,7 @@ public class Pesquisa extends javax.swing.JFrame {
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         // TODO add your handling code here:
         if(this.jTextField1.getText().isEmpty()){
-            this.dadosTabela = this.ordenarDados();
+            //this.dadosTabela = this.ordenarDados();
             this.dados.setModel(new javax.swing.table.DefaultTableModel(this.dadosTabela,this.titulos));
         }else{
             String busca = this.jTextField1.getText();

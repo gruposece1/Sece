@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.unb.sece.control.CTurma;
+import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.exceptions.TurnoHrInicioMaiorHrFimException;
 import br.unb.sece.model.Aluno;
 import br.unb.sece.model.Disciplina;
@@ -90,79 +91,68 @@ public class TestarControleTurma {
 		
 	}
 	
-	@Test
-	public void testarGetAllTurmas(){
-		
-		try
-		{
-			obCTurma.getAllTurmas();	
-		}
-		catch(Exception e)
-		{
-			fail("Ocorreu um erro");
+	
+	@Test (expected= NullPointerException.class)
+	public void testSerieSelectedNull(){
+		CTurma cturma = new CTurma();
+		cturma.getModelSerie();
+		cturma.getSerieSelected();
+	}
+	
+	@Test (expected= NullPointerException.class)
+	public void testTurnoSelectedNull(){
+		CTurma cturma = new CTurma();
+		cturma.getModelTurnos();
+		cturma.getTurnoSelected();
+	}
+	
+	@Test 
+	public void testSerieSelected(){
+		CTurma cturma = new CTurma();
+		ModelComboBox model = cturma.getModelSerie();
+		model.setSelectedItem("1 - 7ª");
+		try{
+			cturma.getSerieSelected();
+		}catch(NullPointerException e){
+			fail("Erro");
 		}
 	}
 	
-	/*@Test
-	public void testarAddAlunos(){
-		
-		ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();
-		
-		listaAlunos.add(aluno);
-		
-		try
-		{
-			obCTurma.addAlunos(listaAlunos);
-		}
-		catch(Exception e)
-		{
-			fail("Ocorreu um erro");
-		}
-	}*/
-	
-	@Test
-	public void testarSelectTurma()
-	{
-		String nomeTurma = "Teste";
-		
-		try
-		{
-			obCTurma.selectTurma(nomeTurma);
-		}
-		catch(Exception e)
-		{
-			fail("Ocorreu um erro");
+	@Test 
+	public void testTurnoSelected(){
+		CTurma cturma = new CTurma();
+		ModelComboBox model = cturma.getModelTurnos();
+		model.setSelectedItem("1 - Manha");
+		try{
+			cturma.getTurnoSelected();
+		}catch(NullPointerException e){
+			fail("Erro");
 		}
 	}
 	
-	@Test
-	public void testarSelectTurmaErrado(){
 	
-		String nomeTurma = "Errado";
-		
-		Turma turma =obCTurma.selectTurma(nomeTurma);
-		
-		assertNull(turma);
-		
+	@Test 
+	public void testSetGetTurma(){
+		Turma turma = new Turma();
+		CTurma cturma = new CTurma();
+		cturma.setTurma(turma);
+		cturma.getTurma();
+		cturma.getTitulosGrade(6);
 	}
 	
 	@Test
-	public void testarReceberDados()
-	{
-		String objeto ="3 - 5";
-		
-		
-		this.modelSerie.setSelectedItem(objeto);
-		
-		try
-		{
-			obCTurma.receberDados(panel);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			//fail("Ocorreu um erro");
+	public void testModelSerieLabel(){
+		CTurma cturma = new CTurma();
+		ModelComboBox model = cturma.getModelSerie();
+		model.setSelectedItem("1 - 7ª");
+		try{
+			Serie serie = cturma.getSerieSelected();
+			cturma.gerarLabel(serie);
+		}catch(NullPointerException e){
+			fail("Erro");
 		}
 	}
+	
+	
 
 }

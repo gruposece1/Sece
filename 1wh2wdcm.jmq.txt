@@ -1,0 +1,40 @@
+Merge branch 'sprint1' of https://github.com/gruposece1/Sece into sprint1
+
+Conflicts:
+	bin/br/unb/sece/view/VPreencherNota.class
+	bin/br/unb/sece/view/VTurma$1.class
+	bin/br/unb/sece/view/VTurma$2.class
+	bin/br/unb/sece/view/VTurma.class
+	src/br/unb/sece/view/VResponsavel.java
+	src/br/unb/sece/view/VTurma.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch sprint1
+# Your branch and 'origin/sprint1' have diverged,
+# and have 12 and 1 different commit each, respectively.
+#
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	modified:   bin/br/unb/sece/view/VIdentificaTurma$2.class
+#	modified:   bin/br/unb/sece/view/VIdentificaTurma$3.class
+#	modified:   bin/br/unb/sece/view/VIdentificaTurma.class
+#	modified:   bin/br/unb/sece/view/VPreencherNota.class
+#	modified:   bin/br/unb/sece/view/VTurma$1.class
+#	modified:   bin/br/unb/sece/view/VTurma$2.class
+#	modified:   bin/br/unb/sece/view/VTurma.class
+#	modified:   src/br/unb/sece/view/VIdentificaTurma.java
+#	modified:   src/br/unb/sece/view/VPreencherNota.java
+#	modified:   src/br/unb/sece/view/VResponsavel.java
+#	modified:   src/br/unb/sece/view/VTurma.java
+#
+

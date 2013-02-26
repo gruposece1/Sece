@@ -81,7 +81,19 @@ public class HorarioDAO extends Persistencia {
 	}
 
 	
-
+	public List<Horario> getHorariosTurmaDisciplina(Long idTurma, Long idDisciplina){
+		String sql = 
+						" select "+
+						"  h.* "+
+						" from "+
+						"  horario h "+
+						"  inner join turmadisciplina td "+
+						"  on td.idTurmaDisciplina = h.idTurmaDisciplina "+
+						" where "+
+						"  td.idDisciplina =  "+ idDisciplina + " " +
+						"  and td.idTurma = "+idTurma + " " ;
+		return (List<Horario>)this.objSession.createSQLQuery(sql).addEntity(Horario.class).list();
+	}
 
 	
 

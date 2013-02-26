@@ -165,6 +165,11 @@ public class VPreencherNota extends JFrame implements ActionListener {
 				lblHoraRes.setBounds(66, 112, 77, 14);
 				panel.add(lblHoraRes);
 				
+				this.btnCadastrar = new JButton("Salvar");
+				btnCadastrar.setBounds(32, 595, 100, 50);
+				panel.add(btnCadastrar);
+				this.btnCadastrar.addActionListener(this);
+				
 				JScrollPane scrollPane = new JScrollPane();
 				scrollPane.setBounds(190, 23, 1144, 679);
 				contentPane.add(scrollPane);
@@ -224,11 +229,6 @@ public class VPreencherNota extends JFrame implements ActionListener {
 					panel_1.add(panelChamada);
 					
 				}
-				
-				this.btnCadastrar = new JButton("Salvar");
-				this.btnCadastrar.setBounds(1300, 700, 100, 50);
-				this.btnCadastrar.addActionListener(this);
-				this.contentPane.add(btnCadastrar);
 				
 				iniciaRelogio();
 				

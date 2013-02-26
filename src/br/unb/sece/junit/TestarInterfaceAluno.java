@@ -119,7 +119,7 @@ public class TestarInterfaceAluno {
 	public void testarExcluirDado()
 	{
 		
-			window.table().selectCell(TableCell.row(2).column(0));
+			window.table().selectCell(TableCell.row(6).column(0));
 			window.button("Excluir").click();
 			
 			try {

@@ -1,0 +1,71 @@
+﻿Merge branch 'sprint1' of https://github.com/gruposece1/Sece into sprint1
+
+Conflicts:
+	bin/br/unb/sece/view/VPreencherNota.class
+	bin/br/unb/sece/view/VTurma$1.class
+	bin/br/unb/sece/view/VTurma$2.class
+	bin/br/unb/sece/view/VTurma.class
+	src/br/unb/sece/view/VResponsavel.java
+	src/br/unb/sece/view/VTurma.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch sprint1
+# Your branch and 'origin/sprint1' have diverged,
+# and have 12 and 1 different commit each, respectively.
+#
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	new file:   1wh2wdcm.jmq.txt
+#	modified:   bin/br/unb/sece/control/CIdentificaTurma.class
+#	modified:   bin/br/unb/sece/control/CTurma.class
+#	modified:   bin/br/unb/sece/junit/TestarControleHorario.class
+#	modified:   bin/br/unb/sece/junit/TestarControleTurma.class
+#	modified:   bin/br/unb/sece/junit/TestarInterfaceAluno.class
+#	modified:   bin/br/unb/sece/junit/TestarModelComboBox.class
+#	modified:   bin/br/unb/sece/junit/TesteInterfaceResponsavel.class
+#	modified:   bin/br/unb/sece/model/DAO/HorarioDAO.class
+#	modified:   bin/br/unb/sece/model/Horario.class
+#	modified:   bin/br/unb/sece/util/Pesquisa$1.class
+#	modified:   bin/br/unb/sece/util/Pesquisa$2.class
+#	modified:   bin/br/unb/sece/util/Pesquisa$3.class
+#	modified:   bin/br/unb/sece/util/Pesquisa$4.class
+#	modified:   bin/br/unb/sece/util/Pesquisa.class
+#	modified:   bin/br/unb/sece/view/VIdentificaTurma$1.class
+#	modified:   bin/br/unb/sece/view/VIdentificaTurma$2.class
+#	modified:   bin/br/unb/sece/view/VIdentificaTurma$3.class
+#	modified:   bin/br/unb/sece/view/VIdentificaTurma.class
+#	modified:   bin/br/unb/sece/view/VLogin.class
+#	modified:   bin/br/unb/sece/view/VPreencherNota.class
+#	modified:   bin/br/unb/sece/view/VResponsavel.class
+#	modified:   bin/br/unb/sece/view/VTurma$1.class
+#	modified:   bin/br/unb/sece/view/VTurma$2.class
+#	modified:   bin/br/unb/sece/view/VTurma.class
+#	modified:   bin/hibernate.properties
+#	modified:   src/br/unb/sece/control/CIdentificaTurma.java
+#	modified:   src/br/unb/sece/control/CTurma.java
+#	modified:   src/br/unb/sece/junit/TestarControleHorario.java
+#	modified:   src/br/unb/sece/junit/TestarControleTurma.java
+#	modified:   src/br/unb/sece/junit/TestarInterfaceAluno.java
+#	modified:   src/br/unb/sece/junit/TestarModelComboBox.java
+#	modified:   src/br/unb/sece/junit/TesteInterfaceResponsavel.java
+#	modified:   src/br/unb/sece/model/DAO/HorarioDAO.java
+#	modified:   src/br/unb/sece/model/Horario.java
+#	modified:   src/br/unb/sece/util/Pesquisa.java
+#	modified:   src/br/unb/sece/view/VIdentificaTurma.java
+#	modified:   src/br/unb/sece/view/VLogin.java
+#	modified:   src/br/unb/sece/view/VPreencherNota.java
+#	modified:   src/br/unb/sece/view/VResponsavel.java
+#	modified:   src/br/unb/sece/view/VTurma.java
+#	modified:   src/hibernate.properties
+#
+

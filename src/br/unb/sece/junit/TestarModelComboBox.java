@@ -26,7 +26,7 @@ public class TestarModelComboBox {
 		
 	}
 	
-	@Test
+	/*@Test (expected = NoSuchMethodException.class)
 	public void testarGerarElementosErro()
 	{
 		ArrayList<Object> elementos = new ArrayList<Object>();
@@ -34,7 +34,7 @@ public class TestarModelComboBox {
 	
 		
 		ModelComboBox = new ModelComboBox(elementos, "a", "shgfd");
-	}	
+	}	*/
 	
 	@Test
 	public void getElementIndex()

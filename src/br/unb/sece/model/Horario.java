@@ -5,6 +5,7 @@ import br.unb.sece.exceptions.AtributoNuloException;
 import br.unb.sece.model.DAO.HorarioDAO;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -181,6 +182,12 @@ public class Horario {
 
 	public void setDiaSemana(int diaSemana) {
 		this.diaSemana = diaSemana;
+	}
+	
+	public static List<Horario> getHorariosDaTurma(Turma turma, Disciplina disciplina){
+		if(turma == null || disciplina == null) throw new NullPointerException();
+		final HorarioDAO hr = new HorarioDAO();
+		return hr.getHorariosTurmaDisciplina(turma.getIdTurma(), disciplina.getId());
 	}
 	
 	public String getDiaSemanaString() {
