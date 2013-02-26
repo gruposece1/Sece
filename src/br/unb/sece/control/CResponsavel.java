@@ -19,12 +19,12 @@ public class CResponsavel extends CPadrao{
 	
 	
 	public  void definirTitulosEMetodos(){
-		final Object[] titulos = {"Nome","Cpf","Sexo","Endereco","Email","Telefone","Cep",};
+		final Object[] titulos = {"Nome","Cpf","Sexo","Email"};
 		
 		
 		this.titulos = titulos;
 		
-		final Object [] metodos = {"getNome","getCpf","getSexo","getEndereco","getEmail","getTelefone","getCpf"};
+		final Object [] metodos = {"getNome","getCpf","getSexo","getEmail"};
 		
 		this.metodos = metodos;
 	}
@@ -83,6 +83,7 @@ public class CResponsavel extends CPadrao{
 			
 			this.responsavel.setNome(panel.getTextField().getText());
 			this.responsavel.setCpf(panel.getTextField_1().getText());
+			this.responsavel.setSexo(panel.getSexo());
 			this.responsavel.setEndereco(panel.getTextField_2().getText());
 			this.responsavel.setEmail(panel.getTextField_3().getText());
 			this.responsavel.setTelefone(panel.getTextField_4().getText());
@@ -96,7 +97,7 @@ public class CResponsavel extends CPadrao{
 			panel.getTextField_3().setText("");
 			panel.getTextField_4().setText("");
 			panel.getTextField_5().setText("");
-	
+			panel.limparJRadioButton();
 			
 			break;
 
@@ -117,7 +118,7 @@ public class CResponsavel extends CPadrao{
 			panel.getTextField_3().setText("");
 			panel.getTextField_4().setText("");
 			panel.getTextField_5().setText("");
-
+			panel.limparJRadioButton();
 		
 			
 			break;

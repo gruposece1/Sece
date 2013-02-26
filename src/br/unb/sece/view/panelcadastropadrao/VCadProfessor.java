@@ -3,6 +3,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 
 import br.unb.sece.control.CProfessor;
 
@@ -26,12 +27,22 @@ public class VCadProfessor extends VCadFuncionario {
 	
 		
 		list_1 = new JList(CProfessor.getListDisciplinas());
-		list_1.setBounds(81, 165, 126, 58);
-		add(list_1);
+		//list_1.setBounds(81, 165, 126, 58);
+		//add(list_1);
+		
+		JScrollPane jScrollPane = new JScrollPane();  
+		jScrollPane.setViewportView(list_1);
+		jScrollPane.setBounds(81, 165, 126, 58);
+		add(jScrollPane);
 		
 		list_2 = new JList(new DefaultListModel());
-		list_2.setBounds(290, 165, 126, 58);
-		add(list_2);
+		//list_2.setBounds(290, 165, 126, 58);
+		//add(list_2);
+		
+		JScrollPane jScrollPane2 = new JScrollPane();  
+		jScrollPane2.setViewportView(list_2);
+		jScrollPane2.setBounds(290, 165, 126, 58);
+		add(jScrollPane2);
 		
 		this.btnNewButton = new JButton(">>");
 		btnNewButton.addActionListener(this);
@@ -74,6 +85,11 @@ public class VCadProfessor extends VCadFuncionario {
 		return this.list_2;
 	}
 	
+	
+	public JList getList_1() {
+		return list_1;
+	}
+
 	public List getDisciplinasParaCadastrar (){
 		
 		ArrayList listDisciplinas = new ArrayList();

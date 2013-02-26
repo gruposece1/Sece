@@ -12,6 +12,12 @@ public class VResponsavel extends VPadrao{
 
 	
 
+	public VResponsavel() {
+		super();
+		// TODO Auto-generated constructor stub
+		this.setTitle("Cadastro de Responsável");
+	}
+
 	@Override
 	public void criarControle() {
 		// TODO Auto-generated method stub
@@ -33,7 +39,7 @@ public class VResponsavel extends VPadrao{
 		  
 		  vc.getTextField().setText(responsavel.getNome());
 		  vc.getTextField_1().setText(responsavel.getCpf());
-		  vc.getTextField_2().setToolTipText(responsavel.getSexo());
+		  vc.setSexo(responsavel.getSexo());
 		  vc.getTextField_3().setText(responsavel.getEmail());
 		  vc.getTextField_4().setText(responsavel.getTelefone());
 		  vc.getTextField_5().setText(responsavel.getCEP());

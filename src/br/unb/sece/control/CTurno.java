@@ -114,13 +114,13 @@ public class CTurno extends CPadrao {
 				
 				try
 				{
-					turno.setInicio(Integer.parseInt(panel.getTxtInicio().getText()));
-					turno.setFim(Integer.parseInt(panel.getTxtFim().getText()));
+					turno.setInicio(Float.parseFloat(panel.getTxtInicio().getText()));
+					turno.setFim(Float.parseFloat(panel.getTxtFim().getText()));
 					turno.setTurno(String.valueOf(panel.getCBTipo().getSelectedItem()));
 				}
 				catch(NumberFormatException e)
 				{
-					throw new AtributoNuloException();
+					throw new AtributoInvalidoException();
 				}
 				
 				this.verificarDados();

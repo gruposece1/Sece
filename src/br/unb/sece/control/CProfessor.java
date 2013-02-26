@@ -1,9 +1,14 @@
 package br.unb.sece.control;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Iterator;
+
 
 import javax.swing.DefaultListModel;
+
+
 
 
 import br.unb.sece.exceptions.AtributoInvalidoException;
@@ -125,6 +130,8 @@ public class CProfessor extends CFuncionario{
 			panel.getTxtNome().setText("");
 			panel.getTxtSenha().setText("");
 			panel.getTxtTelefone().setText("");
+			panel.getList_2().setModel(new DefaultListModel());
+			panel.getList_1().setModel(CProfessor.getListDisciplinas());
 			
 			break;
 
@@ -144,6 +151,8 @@ public class CProfessor extends CFuncionario{
 			panel.getTxtNome().setText("");
 			panel.getTxtSenha().setText("");
 			panel.getTxtTelefone().setText("");
+			panel.getList_2().setModel(new DefaultListModel());
+			panel.getList_1().setModel(CProfessor.getListDisciplinas());
 			
 			
 			break;
@@ -157,20 +166,29 @@ public class CProfessor extends CFuncionario{
 		Disciplina obDisciplina = new Disciplina();
 		List disciplinas = obDisciplina.getAll();
 		
-		DefaultListModel disciplinaListModel = new DefaultListModel();
 		
-		for (int i=0; i<disciplinas.size();i++){
-			
-		Disciplina obDisciplina2 = (Disciplina) disciplinas.get(i);
-		disciplinaListModel.addElement(obDisciplina2.getId()+" "+ obDisciplina2.getNome());
-		 
-			
-		}
-		return disciplinaListModel;
+		return CProfessor.getDefaultListModel(disciplinas);
 		
 	}
 	
-		public void setProfessor(Professor professor) {
+	public static DefaultListModel getDefaultListModel(Collection disciplinas){
+		DefaultListModel disciplinaListModel = new DefaultListModel();
+		Iterator inDisciplinas = disciplinas.iterator();
+		while(inDisciplinas.hasNext()){
+			Disciplina obDisciplina = (Disciplina)inDisciplinas.next();
+			disciplinaListModel.addElement(obDisciplina.getId()+" "+ obDisciplina.getNome());
+		}
+		return disciplinaListModel;
+	}
+	
+	public static DefaultListModel getDefaultListModelDisciplinasMenosADoProfessor(Collection disciplinasProfessor){
+		Disciplina obDisciplina = new Disciplina();
+		List disciplinas = obDisciplina.getAll();
+		disciplinas.removeAll(disciplinasProfessor);
+		return CProfessor.getDefaultListModel(disciplinas);
+	}
+	
+	public void setProfessor(Professor professor) {
 		this.professor = professor;
 		
 	}
