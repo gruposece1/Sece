@@ -44,7 +44,8 @@ public class VProfessor extends VPadrao {
 		else
 			vf.getRdbtMasculino().setSelected(true);
 		
-		
+		vf.getList_2().setModel(CProfessor.getDefaultListModel(professor.getDisciplinas()));
+		vf.getList_1().setModel(CProfessor.getDefaultListModelDisciplinasMenosADoProfessor(professor.getDisciplinas()));
 		//falta fazer
 		try {
 			this.controle.receberObjetoAlterar(professor);

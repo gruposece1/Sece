@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
@@ -24,7 +25,7 @@ public class VCadFuncionario extends JPanel implements ActionListener{
 	private JRadioButton rdbtFeminino; 
 	private JTextField txtCPF;
 	private JTextField txtTelefone;
-	private JTextField txtSenha;
+	private JPasswordField  txtSenha;
 	protected  JComboBox CBCargo;
 	protected JLabel lblCargo;
 
@@ -88,7 +89,7 @@ public class VCadFuncionario extends JPanel implements ActionListener{
         lblSenha.setBounds(10, 121, 46, 14);
         add(lblSenha);
         
-        txtSenha = new JTextField();
+        txtSenha = new JPasswordField();
         txtSenha.setBounds(81, 118, 126, 20);
         add(txtSenha);
         txtSenha.setColumns(10);
@@ -196,6 +197,14 @@ public class VCadFuncionario extends JPanel implements ActionListener{
 	}
 
 
+
+
+	public void setTxtSenha(JPasswordField  txtSenha) {
+		this.txtSenha = txtSenha;
+	}
+
+
+
 	public String getCargo()
 	{
 		return CBCargo.getSelectedItem().toString();
@@ -218,6 +227,11 @@ public class VCadFuncionario extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void limarJRadionButtons(){
+		this.rdbtFeminino.setSelected(false);
+		this.rdbtMasculino.setSelected(false);
 	}
 	
 	

@@ -109,6 +109,7 @@ public class CFuncionario extends CPadrao {
 				panel.getTxtNome().setText("");
 				panel.getTxtSenha().setText("");
 				panel.getTxtTelefone().setText("");
+				panel.limarJRadionButtons();
 				
 				break;
 	
@@ -128,7 +129,7 @@ public class CFuncionario extends CPadrao {
 				panel.getTxtNome().setText("");
 				panel.getTxtSenha().setText("");
 				panel.getTxtTelefone().setText("");
-				
+				panel.limarJRadionButtons();
 				
 				break;
 		}

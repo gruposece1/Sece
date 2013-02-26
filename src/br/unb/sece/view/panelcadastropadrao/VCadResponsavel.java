@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import br.unb.sece.control.CResponsavel;
+import br.unb.sece.control.CTurno;
 import br.unb.sece.model.Pessoa;
 
 import java.awt.event.ActionListener;
@@ -33,9 +34,11 @@ public class VCadResponsavel extends JPanel{
 	private JTextField rbrMasculino;
 	private JTextField rbrFeminino;
 	private JTextField textField_5;
+
 	private JTextField txtNome;
 	private JRadioButton rdbtMasculino;
 	private JRadioButton rdbtFeminino ;
+
 	
 	public JTextField getRbrMasculino() {
 		return rbrMasculino;
@@ -129,13 +132,7 @@ public class VCadResponsavel extends JPanel{
 		textField_5.setColumns(10);
 	}
 
-	public String getSexo(){
-		if(this.rdbtMasculino.isSelected())
-			return Pessoa.MASCULINO;
-		else
-			return Pessoa.FEMININO;
-					
-	}
+	
 
 	public JTextField getTextField() {
 		return textField;
@@ -151,7 +148,7 @@ public class VCadResponsavel extends JPanel{
 
 
 	public JTextField getTextField_1() {
-		return textField_1;
+		return textField_1; 
 	}
 
 	public void setTextField_1(JTextField textField_1) {
@@ -250,6 +247,29 @@ public class VCadResponsavel extends JPanel{
 	public Object getRdbtFeminino() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setSexo(String sexo){
+		if(sexo.equals(Pessoa.FEMININO)){
+			this.rdbtFeminino.setSelected(true);
+		}else if(sexo.equals(Pessoa.MASCULINO)){
+			this.rdbtMasculino.setSelected(true);
+		}
+	}
+	
+	public String getSexo(){
+		if(this.rdbtMasculino.isSelected()){
+			return Pessoa.MASCULINO;
+		}else if(this.rdbtFeminino.isSelected()){
+			return Pessoa.FEMININO;
+		}else{
+			return "";
+		}
+	}
+	
+	public void limparJRadioButton(){
+		this.rdbtFeminino.setSelected(false);
+		this.rdbtMasculino.setSelected(false);
 	}
 	
 }

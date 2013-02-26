@@ -83,6 +83,7 @@ public class CResponsavel extends CPadrao{
 			
 			this.responsavel.setNome(panel.getTextField().getText());
 			this.responsavel.setCpf(panel.getTextField_1().getText());
+			this.responsavel.setSexo(panel.getSexo());
 			this.responsavel.setEndereco(panel.getTextField_2().getText());
 			this.responsavel.setEmail(panel.getTextField_3().getText());
 			this.responsavel.setTelefone(panel.getTextField_4().getText());
@@ -97,7 +98,7 @@ public class CResponsavel extends CPadrao{
 			panel.getTextField_3().setText("");
 			panel.getTextField_4().setText("");
 			panel.getTextField_5().setText("");
-	
+			panel.limparJRadioButton();
 			
 			break;
 
@@ -118,7 +119,7 @@ public class CResponsavel extends CPadrao{
 			panel.getTextField_3().setText("");
 			panel.getTextField_4().setText("");
 			panel.getTextField_5().setText("");
-
+			panel.limparJRadioButton();
 		
 			
 			break;
