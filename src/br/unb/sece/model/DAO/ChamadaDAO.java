@@ -53,7 +53,7 @@ public class ChamadaDAO extends Persistencia {
 		
 		
 		if(idTurma == null || idDisciplina == null || data == null){
-			throw new NullPointerException();
+			throw new NullPointerException("Metodo: GetAlunosVerificacaoChamada");
 		}
 		
 		String sql =

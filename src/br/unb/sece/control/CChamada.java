@@ -8,6 +8,7 @@ import br.unb.sece.model.Disciplina;
 import br.unb.sece.model.Responsavel;
 import br.unb.sece.model.Turma;
 import br.unb.sece.util.MandarEmail;
+import br.unb.sece.util.ThreadEnviarEmail;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -42,7 +43,16 @@ public class CChamada {
 	}
 	
 	
-	
+	public void dispararEmails(Turma turma, Disciplina disciplina, Calendar data){
+		try{
+			ThreadEnviarEmail thread = new ThreadEnviarEmail(turma, disciplina, data);
+			thread.start();
+		}catch(NullPointerException ex){
+			ex.printStackTrace();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
 	
 	public void enviarEmail(Aluno aluno, Disciplina disciplina, Calendar data) throws MalformedURLException,EmailException {
 		final Collection responsaveis =  aluno.getResponsaveis();
@@ -58,28 +68,36 @@ public class CChamada {
 	}
 	
 	public void enviarEmails(Turma turma, Disciplina disciplina, Calendar data){
-		List<Aluno> alunos = Chamada.getAlunosVerificacaoChamada(turma, disciplina, data, Chamada.ALUNO_AUSENTE);
-		Iterator<Aluno> inAlunos = alunos.iterator();
-		while(inAlunos.hasNext()){
-			Aluno obAluno = inAlunos.next();
-			try {
-				this.enviarEmail(obAluno, disciplina, data);
-				List<Chamada> listaChamada = Chamada.getChamadaChamada(turma, disciplina, obAluno, data,Chamada.ALUNO_AUSENTE);
-				Iterator<Chamada> inChamada = listaChamada.iterator();
-				while(inChamada.hasNext()){
-					Chamada obChamada = inChamada.next();
-					obChamada.setVerificacaoEmail(true);
-					obChamada.alterar();
+		System.out.println("Ao menos passou aqui.");
+		try{
+			List<Aluno> alunos = Chamada.getAlunosVerificacaoChamada(turma, disciplina, data, Chamada.ALUNO_AUSENTE);
+			
+			Iterator<Aluno> inAlunos = alunos.iterator();
+			while(inAlunos.hasNext()){
+				Aluno obAluno = inAlunos.next();
+				try {
+					this.enviarEmail(obAluno, disciplina, data);
+					List<Chamada> listaChamada = Chamada.getChamadaChamada(turma, disciplina, obAluno, data,Chamada.ALUNO_AUSENTE);
+					Iterator<Chamada> inChamada = listaChamada.iterator();
+					while(inChamada.hasNext()){
+						Chamada obChamada = inChamada.next();
+						obChamada.setVerificacaoEmail(true);
+						obChamada.alterar();
+					}
+					
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (EmailException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}catch(Exception ex){
+					ex.printStackTrace();
 				}
 				
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (EmailException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-			
+		}catch(Exception ex){
+			ex.printStackTrace();
 		}
 	}
 

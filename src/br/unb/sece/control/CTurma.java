@@ -33,7 +33,6 @@ import br.unb.sece.util.ModelComboBox;
 import br.unb.sece.util.gradehoraria.GradeHoraria;
 import br.unb.sece.view.VCadTurma;
 
-import teste.Colecoes;
 
 
 public class CTurma {

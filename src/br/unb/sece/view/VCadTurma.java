@@ -19,7 +19,6 @@ import javax.swing.JButton;
 import javax.swing.DefaultCellEditor;
 
 
-import teste.Colecoes;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -42,7 +41,6 @@ public class VCadTurma extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField txtNome;
-	private Colecoes colecao;
 	private JTable table;
 	private CTurma CTurma;
 	private JComboBox CBTurno;
@@ -73,7 +71,6 @@ public class VCadTurma extends JFrame implements ActionListener {
 	 */
 	public VCadTurma() {
 		
-		colecao = new Colecoes();
 		CTurma = new CTurma();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

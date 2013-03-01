@@ -71,7 +71,7 @@ public class MandarEmail {
     	SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
     	Date data = this.data.getTime();
     	String texto =
-    			this.responsavael.getPronomeTratamento()+this.responsavael.getNome()+", o "+this.aluno.getPronomePossessivo()+" filho(a) "+ this.aluno.getNome()+
+    			this.responsavael.getPronomeTratamento()+this.responsavael.getNome()+", o(a) "+this.aluno.getPronomePossessivo()+" filho(a) "+ this.aluno.getNome()+
     			" não esteve presente na aula do dia: "+formatador.format(data) + "  da displina de: "+this.disciplina.getNome()+". \nAtt, Grupo Sece. ";
     	return texto;
     }

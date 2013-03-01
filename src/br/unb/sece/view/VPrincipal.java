@@ -16,7 +16,6 @@ import javax.swing.JMenuBar;
 import java.awt.Panel;
 import javax.swing.ImageIcon;
 
-import teste.InserirAlunos;
 
 import java.awt.Color;
 import java.awt.Frame;

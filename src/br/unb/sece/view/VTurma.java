@@ -46,6 +46,7 @@ import br.unb.sece.model.Horario;
 import br.unb.sece.model.Pessoa;
 import br.unb.sece.model.Turma;
 import br.unb.sece.util.HibernateUtil;
+import br.unb.sece.util.ThreadEnviarEmail;
 import br.unb.sece.view.util.PanelAlunoChamadaNota;
 
 import java.awt.Scrollbar;
@@ -250,7 +251,6 @@ public class VTurma extends JFrame implements ActionListener {
 				
 				
 				ArrayList<Aluno> lista = new ArrayList<Aluno>(cturma.getTurma().getAluno());
-				System.out.println("VTurma a qtde na turma : " + lista.size());
 				PanelAlunoChamadaNota panelChamada;
 				int tamanho = 34;
 				for(int i=0; i< lista.size(); i++){
@@ -264,88 +264,7 @@ public class VTurma extends JFrame implements ActionListener {
 				
 	}
 
-	private JPanel[] addPanelAluno(){
-		
-
-		
-		//Pegar antes a quantidade de alunos
-		final int QNT_ALUNOS=cturma.getTurma().getAluno().size();
-		JPanel []panelChamadaEstrutura = new JPanel[QNT_ALUNOS];
-		
-		System.out.println("A qtde alunos: "+QNT_ALUNOS);
-		final int tamanho = 34;
-		int j=0, tam = 679;
-		for(int i=0; i<QNT_ALUNOS; i++){
-			
-			if(j>=679)
-			{
-				panel_1.setBounds(190, 23, 1144, tam=tam+34);
-				panel_1.setPreferredSize(new Dimension(1144,tam=tam+34));
-			}
-				
-			panelChamadaEstrutura[i] = new JPanel();
-			j=j+tamanho;
-			panelChamadaEstrutura[i].setBounds(10, j, 1103, 33);
-			panelChamadaEstrutura[i].setLayout(null);
-			System.out.println("A qtde de alunos: " + cturma.getTurma().getAluno().size());
-			Collection c = cturma.getTurma().getAluno();
-			ArrayList<Aluno> alunos = new ArrayList<Aluno>(c);
-			Aluno a = alunos.get(i);
-			//for(Object obj: c){
-				// a = (Aluno)obj;
-			//}
-			//ArrayList alunos = (ArrayList)c;
 	
-			//Aluno a = (Aluno) alunos.get(i);
-			JLabel lblMatNomeAluno = new JLabel(a.getNome());
-			//lblMatNomeAluno.setText("AAAA");
-			lblMatNomeAluno.setBounds(10, 11, 272, 14);
-			panelChamadaEstrutura[i].add(lblMatNomeAluno);
-			
-			ButtonGroup chamadaGroup = new ButtonGroup();
-			
-			JRadioButton radioPresente = new JRadioButton("");
-			radioPresente.setBounds(267, 7, 21, 23);
-			
-			JRadioButton radioFalta = new JRadioButton("");
-			radioFalta.setBounds(317, 7, 21, 23);
-			radioFalta.setName(String.valueOf(i));
-			//radioFalta.addActionListener(this);
-			//chamada = new CChamada(a);
-			/*
-			radioFalta.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					
-					chamada.enviarEmail();
-				
-				}
-					});
-			
-			*/
-			
-			JRadioButton radioAtrasado = new JRadioButton("");
-			radioAtrasado.setBounds(366, 7, 21, 23);
-			
-			chamadaGroup.add(radioPresente);
-			chamadaGroup.add(radioFalta);
-			chamadaGroup.add(radioAtrasado);
-			panelChamadaEstrutura[i].add(radioPresente);
-			panelChamadaEstrutura[i].add(radioFalta);
-			panelChamadaEstrutura[i].add(radioAtrasado);
-			
-			textFieldAnotation = new JTextField();
-			textFieldAnotation.setBounds(427, 8, 666, 20);
-			panelChamadaEstrutura[i].add(textFieldAnotation);
-			textFieldAnotation.setColumns(10);
-			
-		}
-		
-		
-		
-		
-
-		return panelChamadaEstrutura;
-	}
 	
 	
 	private void iniciaRelogio() {
@@ -368,10 +287,10 @@ public class VTurma extends JFrame implements ActionListener {
 	
 	private void cadastrar(){
 		Session session = HibernateUtil.getSession();
+		Calendar data = Calendar.getInstance();
+		CChamada chamada = new CChamada();
 		try{
 			session.getTransaction().begin();
-			CChamada chamada = new CChamada();
-			Calendar data = Calendar.getInstance();
 			for(int i =0; i < this.panel_1.getComponentCount(); i++){
 				Component componente = this.panel_1.getComponent(i);
 				if(componente instanceof PanelAlunoChamadaNota){
@@ -382,6 +301,7 @@ public class VTurma extends JFrame implements ActionListener {
 				}
 			}
 			session.getTransaction().commit();
+			//chamada.enviarEmails(this.cIdentificaTurma.getTurmaSelected(), this.cIdentificaTurma.getDisciplinaSelected(), data);
 			JOptionPane.showMessageDialog(null, "Chamada Realizada com sucesso");
 			this.dispose();
 			//this.dispose();
@@ -390,6 +310,8 @@ public class VTurma extends JFrame implements ActionListener {
 			ex.printStackTrace();
 			session.getTransaction().rollback();
 		}
+		
+		chamada.dispararEmails(this.cIdentificaTurma.getTurmaSelected(), this.cIdentificaTurma.getDisciplinaSelected(), data);
 		
 	}
 

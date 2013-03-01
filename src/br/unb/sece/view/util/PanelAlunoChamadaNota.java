@@ -87,7 +87,6 @@ public class PanelAlunoChamadaNota extends JPanel {
 	}
 	
 	private void constrututorChamada(){
-		System.out.println("Aqui passou");
 		ButtonGroup chamadaGroup = new ButtonGroup();
 		
 		this.radioPresente = new JRadioButton("");

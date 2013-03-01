@@ -99,7 +99,6 @@ public class ModelComboBox extends AbstractListModel implements ComboBoxModel {
 	public Object getSelectedItem() {
 		// TODO Auto-generated method stub
 		if(this.selectedItem != null){
-			System.out.println(this.selectedItem.toString());
 			return this.getTextObject(this.selectedItem);
 		}else{
 			return null;
